@@ -1,4 +1,7 @@
 # logweb
+
+[![Build Status](https://travis-ci.org/pchudzik/logweb.svg?branch=master)](https://travis-ci.org/pchudzik/logweb)
+
 Tail of log files in your browser.
 
 * Supports merging multiple streams into single input source (logs from multiple machines can be viewed as one)
