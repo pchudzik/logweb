@@ -18,7 +18,7 @@
   "author": "Pawel Chudzik",
   "license": "MIT",
   "homepage": "https://github.com/pchudzik/logweb",
-  "reposiotry": {
+  "repository": {
     "type": "git",
     "url": "git://github.com:pchudzik/logweb.git"
   },
