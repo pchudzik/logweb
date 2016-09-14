@@ -3,5 +3,5 @@
 	"quotmark": "single",
 	"mocha": true,
 	"expr": true,
-	"esversion": 6
+	"esnext": true
 }
