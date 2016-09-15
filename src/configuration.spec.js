@@ -90,7 +90,7 @@ describe('configurationParser.spec.js', () => {
 		mockConfig(config);
 		return proxyquire('./configuration', {
 			fs: fsMock
-		});
+		}).default;
 	}
 
 	function mockConfig(configObject) {

@@ -5,7 +5,10 @@ import _ from 'lodash';
 
 const config = JSON.parse(fs.readFileSync(process.argv[2] || 'logweb.json', 'utf8'));
 
-export {getInputs, getPort};
+export default {
+	getInputs: getInputs,
+	getPort: getPort
+};
 
 function getPort() {
 	return config.port || 8008;
