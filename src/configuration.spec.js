@@ -67,6 +67,25 @@ describe('configurationParser.spec.js', () => {
 		});
 	});
 
+	describe('port spec', function() {
+		it('should return default port when not set', function () {
+			//when
+			const configuration = createConfigurationWithConfig({});
+
+			//then
+			expect(configuration.getPort()).to.eql(8008);
+		});
+
+		it('should use configuration port when provided', function () {
+			//when
+			const configuration = createConfigurationWithConfig({port: 1234});
+
+			//then
+			expect(configuration.getPort()).to.eql(1234);
+		});
+	});
+
+
 	function createConfigurationWithConfig(config) {
 		mockConfig(config);
 		return proxyquire('./configuration', {

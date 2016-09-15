@@ -3,11 +3,13 @@
 import fs from 'fs';
 import _ from 'lodash';
 
-const configurationFile = process.argv[2] || 'logweb.json';
-const content = fs.readFileSync(configurationFile, 'utf8');
-const config = JSON.parse(content);
+const config = JSON.parse(fs.readFileSync(process.argv[2] || 'logweb.json', 'utf8'));
 
-export {getInputs};
+export {getInputs, getPort};
+
+function getPort() {
+	return config.port || 8008;
+}
 
 function getInputs() {
 	return _.map(config.inputs, singleInput => {
