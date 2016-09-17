@@ -30,7 +30,7 @@ describe('configurationParser.spec.js', () => {
 			//then
 			expect(inputs).to.eql([{
 				name: undefined,
-				cmd: ['/bin/sh', '-c', cmd]
+				providers: [{cmd: ['/bin/sh', '-c', cmd]}]
 			}]);
 		});
 
@@ -44,15 +44,18 @@ describe('configurationParser.spec.js', () => {
 
 			//when
 			const inputs = configuration.getInputs();
-			expect(inputs[0].cmd[0]).to.eql('cmd');
-			expect(inputs[0].cmd[1]).to.eql('/c');
+
+			//then
+			console.log(inputs.providers);
+			expect(inputs[0].providers[0].cmd[0]).to.eql('cmd');
+			expect(inputs[0].providers[0].cmd[1]).to.eql('/c');
 		});
 
 		it('should parse all inputs', () => {
 			const configuration = createConfigurationWithConfig({
 				inputs: [
-					{cmd: 'echo 1',name:'first'},
-					{cmd: 'echo 2', name:'second'}
+					{cmd: 'echo 1', name: 'first'},
+					{cmd: 'echo 2', name: 'second'}
 				]
 			});
 
@@ -61,13 +64,45 @@ describe('configurationParser.spec.js', () => {
 
 			//then
 			expect(inputs).to.eql([
-				{cmd: ['/bin/sh', '-c', 'echo 1'], name: 'first'},
-				{cmd: ['/bin/sh', '-c', 'echo 2'], name: 'second'}
+				{
+					name: 'first',
+					providers: [{cmd: ['/bin/sh', '-c', 'echo 1']}]
+				},
+				{
+					name: 'second',
+					providers: [{cmd: ['/bin/sh', '-c', 'echo 2']}]
+				}
+			]);
+		});
+
+		it('should parse input with multiple providers fully configured', () => {
+			const configuration = createConfigurationWithConfig({
+				inputs: [{
+					name: 'multi',
+					providers: [
+						{cmd: 'echo 1', name: 'echo'},
+						{cmd: ['/bin/bash', '-c', 'echo 2'], name: 'bash'}
+					]
+				}]
+			});
+
+			//when
+			const inputs = configuration.getInputs();
+
+			//then
+			expect(inputs).to.eql([
+				{
+					name: 'multi',
+					providers: [
+						{name: 'echo', cmd: ['/bin/sh', '-c', 'echo 1']},
+						{name: 'bash', cmd: ['/bin/bash', '-c', 'echo 2']}
+					]
+				}
 			]);
 		});
 	});
 
-	describe('port spec', function() {
+	describe('port spec', function () {
 		it('should return default port when not set', function () {
 			//when
 			const configuration = createConfigurationWithConfig({});
