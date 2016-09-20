@@ -1,8 +1,8 @@
 'use strict';
 
-import respawn from "respawn";
-import InputEvent from "./InputEvent";
-import {Subject} from "rxjs";
+import respawn from 'respawn';
+import InputEvent from './InputEvent';
+import {Subject} from 'rxjs';
 
 function Input(provider) {
 	const dataObservable = new Subject();
