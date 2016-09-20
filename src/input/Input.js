@@ -1,36 +1,35 @@
 'use strict';
 
-import _ from 'lodash';
-import respawn from 'respawn';
-import InputEvent from './InputEvent';
-import {Observable} from 'rxjs';
+import respawn from "respawn";
+import InputEvent from "./InputEvent";
+import {Subject} from "rxjs";
 
 function Input(provider) {
+	const dataObservable = new Subject();
 	const processMonitor = respawn(provider.cmd, {
 		sleep: provider.restartTimeout || 100
 	});
+	processMonitor.on('stdout', processInput);
 
-	const dataObservable = Observable.create(
-		observe => processMonitor.on('stdout', _.partial(processInput, observe))
-	);
+	this.data = {
+		stdout: dataObservable
+	};
 
 	processMonitor.on('stderr', data => console.log('err', data.toString()));
 
 	this.start = function startProcessMonitor() {
 		processMonitor.start();
-		return {
-			data: dataObservable
-		};
 	};
 
 	this.stop = function stopProcessMonitor() {
 		processMonitor.stop();
+		dataObservable.complete();
 	};
 
-	function processInput(observe, rawInputDataBuffer) {
+	function processInput(rawInputDataBuffer) {
 		const input = rawInputDataBuffer.toString();
 		const inputEvent = new InputEvent(provider.name, input);
-		observe.next(inputEvent);
+		dataObservable.next(inputEvent);
 	}
 }
 

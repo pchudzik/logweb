@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import {expect} from 'chai';
 import proxyquire from 'proxyquire';
 import EventEmitter from 'events';
@@ -20,17 +21,17 @@ describe('Input.spec.js', () => {
 		).default;
 	});
 
-	it('should send event to data listener', (done) => {
+	it('should send event to data listener', done => {
 		//given
 		const processResult = 'process result';
 		const providerName = 'provider 1';
 		const input = new Input({name: providerName});
 
 		//when
-		input.start()
+		input.start();
 
 		//then
-			.data
+		input.data.stdout
 			.subscribe(inputEvent => {
 				expect(inputEvent.timestamp).to.be.number;
 				expect(inputEvent.data).to.eql(processResult);
@@ -41,8 +42,23 @@ describe('Input.spec.js', () => {
 		respawnMock.emit('stdout', processResult);
 	});
 
+	it('should complete observable on process stop', done => {
+		//given
+		const input = new Input({name: 'any provider'});
+
+		//when
+		input.stop();
+
+		//then
+		input.data.stdout
+			.subscribe(_.noop, _.noop, done);
+	});
+
 	class RespawnMock extends EventEmitter {
 		start() {
+		}
+
+		stop() {
 		}
 	}
 });
