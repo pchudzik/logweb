@@ -2,7 +2,7 @@
 	"inputs": [
 		{
 			"name": "syslog",
-			"provider": "tail -f /var/log/syslog",
+			"provider": "tail -f /var/lcog/syslog",
 			"buffer":"5000"
 		},
 		{
@@ -15,7 +15,7 @@
 					},
 					{
 						"name": "node2",
-						"cmd": "./random.sh \"node2 logger\""
+						"cmd": "node fake-input.js"
 					}
 
 				]
