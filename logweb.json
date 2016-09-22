@@ -1,24 +1,30 @@
 {
+	"port": 8008,
+	"defaultShell": [
+		"sh",
+		"-c"
+	],
 	"inputs": [
 		{
 			"name": "syslog",
-			"provider": "tail -f /var/lcog/syslog",
-			"buffer":"5000"
+			"cmd": "tail -f /var/log/syslog",
+			"buffer": "5000"
 		},
 		{
 			"name": "example",
-			"provider": 
-				[
-					{
-						"name": "node1", 
-						"cmd":"./random.sh \"node1 logger\""
-					},
-					{
-						"name": "node2",
-						"cmd": "node fake-input.js"
-					}
-
-				]
+			"providers": [
+				{
+					"name": "node1",
+					"cmd": [
+						"./random.sh",
+						"node1 logger"
+					]
+				},
+				{
+					"name": "node2",
+					"cmd": "node fake-input.js"
+				}
+			]
 		}
 	]
 }
