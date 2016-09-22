@@ -25,10 +25,10 @@ $.ajax('/api/inputs')
 			var $li = $(document.createElement('li'));
 			var $link = $(document.createElement('a'))
 				.click(function() {
-					startWatching(input);
+					startWatching(input.name);
 				})
 				.attr('href', '#')
-				.text(input);
+				.text(input.name);
 			$li.append($link);
 			$inputs.append($li);
 		});
@@ -38,7 +38,7 @@ $.ajax('/api/inputs')
 function startWatching(eventSource) {
 	stopWatching();
 	logContainer().innerHTML = '';
-    webSocket = new WebSocket('ws://' + host + ':8080/' + eventSource);
+    webSocket = new WebSocket('ws://' + host + ':' + (window.location.port || 80) + '/' + eventSource);
     webSocket.onmessage = function(event) {
       appendToLog(event.data);
     };
@@ -58,9 +58,7 @@ function isWatching() {
 
 function appendToLog(eventsJSON) {
     var events = JSON.parse(eventsJSON);
-    logContainer().append(_.map(events, function(event) {
-    	return printEvent(event);
-    }));
+    logContainer().append(printEvent(events));
 	scrollToBottom(200 * events.length);
 };
 
