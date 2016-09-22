@@ -14,6 +14,15 @@
 			"name": "example",
 			"providers": [
 				{
+					"name": "node2",
+					"cmd": "node fake-input.js"
+				}
+			]
+		},
+		{
+			"name": "two-nodes",
+			"providers": [
+				{
 					"name": "node1",
 					"cmd": [
 						"./random.sh",
@@ -22,7 +31,10 @@
 				},
 				{
 					"name": "node2",
-					"cmd": "node fake-input.js"
+					"cmd": [
+						"./random.sh",
+						"node2 logger"
+					]
 				}
 			]
 		}
