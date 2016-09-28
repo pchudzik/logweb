@@ -1,12 +1,7 @@
-class Hello {
-	constructor() {
-		console.log('hello');
-	}
+import React from "react"
+import ReactDOM from 'react-dom'
+import SampleComponent from './SampleComponent'
 
-	message() {
-		alert('hello world');
-	}
-}
-
-let hello = new Hello()
-alert(hello.message())
+ReactDOM.render(
+	<SampleComponent msg='react application'/>,
+	document.getElementById('app'))

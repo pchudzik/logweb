@@ -5,18 +5,21 @@ var path = require('path');
 
 module.exports = {
 	context: path.join(__dirname, 'src'),
-	devtool: debug ? 'inline-sourcemap': null,
+	devtool: debug ? 'inline-sourcemap' : null,
 	entry: './app.jsx',
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 	module: {
-		loader: {
-			test: /\.jsx$/,
+		loaders: [{
+			test: /\.jsx?$/,
 			exclude: /node_modules/,
-			loader: 'babel',
+			loader: 'babel-loader',
 			query: {
-				presets:['es2015','stage-0', 'react'],
-				plugins: ['react-html-attrs','transform-class-properties', 'transform-decorators-legacy']
+				presets: ['react', 'es2015', 'stage-0'],
+				plugins: ['transform-class-properties', 'transform-decorators-legacy']
 			}
-		}
+		}]
 	},
 	output: {
 		path: __dirname + '/build/',
@@ -25,6 +28,6 @@ module.exports = {
 	plugins: debug ? [
 		new HtmlWebpackPlugin({template: 'index.html.template'}),
 		new webpack.optimize.DedupePlugin(),
-    	new webpack.optimize.OccurenceOrderPlugin()
-    ]: []
+		new webpack.optimize.OccurenceOrderPlugin()
+	] : []
 }
