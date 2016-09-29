@@ -4,12 +4,11 @@ node_js:
   - '6.6.0'
 
 install:
-  - 'cd backend'
-  - 'npm install'
+  - '( cd backend && npm install )'
 
 script:
-  - 'cd backend && npm run dist'
+  - '( cd backend && npm run dist )'
 
 cache:
   directories:
-    - node_modules
+    - backend/node_modules
