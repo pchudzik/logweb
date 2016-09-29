@@ -9,7 +9,7 @@ install:
 
 script:
   - '( cd backend && npm run dist )'
-  - '( cd frontend && npm test )'
+  - '( cd frontend && npm run dist )'
 
 cache:
   directories:
