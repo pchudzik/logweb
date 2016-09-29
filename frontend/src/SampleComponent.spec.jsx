@@ -4,11 +4,11 @@ import { shallow, mount } from 'enzyme';
 import SampleComponent from './SampleComponent';
 
 describe('SampleComponent.spec.jsx', function() {
-	it("shallow test", function() {
+	it('shallow test', function() {
 		expect(shallow(<SampleComponent />).find('h1')).to.have.text('Hello World!');
 	});
 
-	it("mount test", function() {
+	it('mount test', function() {
 		//given
 		const message = 'any message';
 
