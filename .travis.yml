@@ -3,8 +3,12 @@ language: node_js
 node_js:
   - '6.6.0'
 
+install:
+  - 'cd backend'
+  - 'npm install'
+g
 script:
-  - 'npm run dist'
+  - 'cd backend && npm run dist'
 
 cache:
   directories:
