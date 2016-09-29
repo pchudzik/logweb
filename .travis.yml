@@ -15,8 +15,3 @@ cache:
   directories:
     - backend/node_modules
     - frontend/node_modules
-
-notifications:
-  webhooks:
-    # trigger Buildtime Trend Service to parse Travis CI log
-    - https://buildtimetrend.herokuapp.com/travis
