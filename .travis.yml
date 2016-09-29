@@ -6,7 +6,7 @@ node_js:
 install:
   - 'cd backend'
   - 'npm install'
-g
+
 script:
   - 'cd backend && npm run dist'
 
