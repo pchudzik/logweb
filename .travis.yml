@@ -5,13 +5,16 @@ node_js:
 
 install:
   - '( cd backend && npm install )'
+  - '( cd frontend && npm install )'
 
 script:
   - '( cd backend && npm run dist )'
+  - '( cd frontend && npm test )'
 
 cache:
   directories:
     - backend/node_modules
+    - frontend/node_modules
 
 notifications:
   webhooks:
