@@ -1,12 +1,10 @@
-import React from 'react';
+import React from "react";
 
-export default class SampleComponent extends React.Component {
-	render() {
-		return (
-			<div>
-				<h1>Hello World!</h1>
-				<p id='message'>Message is "{this.props.msg}"</p>
-			</div>
-		);
-	}
+export default function SampleComponent() {
+	return (
+		<div>
+			<h1>Hello World!</h1>
+			<p id="message">Message is &quote;{this.props.msg}&quote;</p>
+		</div>
+	);
 }

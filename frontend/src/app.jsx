@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SampleComponent from './SampleComponent';
+import React from "react";
+import ReactDOM from "react-dom";
+import SampleComponent from "./SampleComponent";
 
 ReactDOM.render(
-	<SampleComponent msg='react application'/>,
-	document.getElementById('app'));
+	<SampleComponent msg="react application" />,
+	document.getElementById("app"));
