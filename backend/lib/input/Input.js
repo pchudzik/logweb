@@ -1,21 +1,19 @@
-'use strict';
-
-const respawn = require('respawn');
-const InputEvent = require('./InputEvent');
-const Subject = require('rxjs').Subject;
+const respawn = require("respawn");
+const InputEvent = require("./InputEvent");
+const Subject = require("rxjs").Subject;
 
 module.exports = function Input(provider) {
 	const dataObservable = new Subject();
 	const processMonitor = respawn(provider.cmd, {
-		sleep: provider.restartTimeout || 100
+		sleep: provider.restartTimeout || 100,
 	});
-	processMonitor.on('stdout', processInput);
+	processMonitor.on("stdout", processInput);
 
 	this.data = {
-		stdout: dataObservable
+		stdout: dataObservable,
 	};
 
-	processMonitor.on('stderr', data => console.log('err', data.toString()));
+	processMonitor.on("stderr", data => console.log("err", data.toString()));
 
 	this.start = function startProcessMonitor() {
 		processMonitor.start();

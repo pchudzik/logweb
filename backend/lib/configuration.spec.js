@@ -1,125 +1,123 @@
-'use strict';
+const proxyquire = require("proxyquire");
+const td = require("testdouble");
+const expect = require("chai").expect;
 
-const proxyquire = require('proxyquire');
-const td = require('testdouble');
-const expect = require('chai').expect;
-
-describe('configurationParser.spec.js', () => {
+describe("configurationParser.spec.js", () => {
 	let fsMock;
 
 	beforeEach(() => {
 		fsMock = {
-			mock: 'my mock',
-			readFileSync: td.function()
+			mock: "my mock",
+			readFileSync: td.function(),
 		};
 	});
 
-	describe('provider inputs spec', () => {
-		it('should execute user command with /bin/sh as default shell when passed as string', () => {
-			//given
-			const cmd = 'echo hello';
+	describe("provider inputs spec", () => {
+		it("should execute user command with /bin/sh as default shell when passed as string", () => {
+			// given
+			const cmd = "echo hello";
 			const configuration = createConfigurationWithConfig({
 				inputs: [{
-					cmd: cmd
-				}]
+					cmd,
+				}],
 			});
 
-			//when
+			// when
 			const inputs = configuration.getInputs();
 
-			//then
+			// then
 			expect(inputs).to.eql([{
 				name: undefined,
 				bufferSize: 100,
-				providers: [{cmd: ['/bin/sh', '-c', cmd]}]
+				providers: [{ cmd: ["/bin/sh", "-c", cmd] }],
 			}]);
 		});
 
-		it('should use config shell when provided', () => {
-			const cmd = 'echo hello';
-			const shell = ['cmd', '/c'];
+		it("should use config shell when provided", () => {
+			const cmd = "echo hello";
+			const shell = ["cmd", "/c"];
 			const configuration = createConfigurationWithConfig({
-				shell: shell,
-				inputs: [{cmd: cmd}]
+				shell,
+				inputs: [{ cmd }],
 			});
 
-			//when
+			// when
 			const inputs = configuration.getInputs();
 
-			//then
-			expect(inputs[0].providers[0].cmd[0]).to.eql('cmd');
-			expect(inputs[0].providers[0].cmd[1]).to.eql('/c');
+			// then
+			expect(inputs[0].providers[0].cmd[0]).to.eql("cmd");
+			expect(inputs[0].providers[0].cmd[1]).to.eql("/c");
 		});
 
-		it('should parse all inputs', () => {
+		it("should parse all inputs", () => {
 			const configuration = createConfigurationWithConfig({
 				inputs: [
-					{cmd: 'echo 1', name: 'first'},
-					{cmd: 'echo 2', name: 'second'}
-				]
+					{ cmd: "echo 1", name: "first" },
+					{ cmd: "echo 2", name: "second" },
+				],
 			});
 
-			//when
+			// when
 			const inputs = configuration.getInputs();
 
-			//then
+			// then
 			expect(inputs).to.eql([
 				{
-					name: 'first',
+					name: "first",
 					bufferSize: 100,
-					providers: [{cmd: ['/bin/sh', '-c', 'echo 1']}]
+					providers: [{ cmd: ["/bin/sh", "-c", "echo 1"] }],
 				},
 				{
-					name: 'second',
+					name: "second",
 					bufferSize: 100,
-					providers: [{cmd: ['/bin/sh', '-c', 'echo 2']}]
-				}
+					providers: [{ cmd: ["/bin/sh", "-c", "echo 2"] }],
+				},
 			]);
 		});
 
-		it('should parse input with multiple providers fully configured', () => {
+		it("should parse input with multiple providers fully configured", () => {
 			const configuration = createConfigurationWithConfig({
 				inputs: [{
-					name: 'multi',
+					name: "multi",
 					bufferSize: 123,
 					providers: [
-						{cmd: 'echo 1', name: 'echo'},
-						{cmd: ['/bin/bash', '-c', 'echo 2'], name: 'bash'}
-					]
-				}]
+						{ cmd: "echo 1", name: "echo" },
+						{ cmd: ["/bin/bash", "-c", "echo 2"], name: "bash" },
+					],
+				}],
 			});
 
-			//when
+			// when
 			const inputs = configuration.getInputs();
 
-			//then
+			// then
 			expect(inputs).to.eql([
 				{
-					name: 'multi',
+					name: "multi",
 					bufferSize: 123,
 					providers: [
-						{name: 'echo', cmd: ['/bin/sh', '-c', 'echo 1']},
-						{name: 'bash', cmd: ['/bin/bash', '-c', 'echo 2']}
-					]
-				}
+						{ name: "echo", cmd: ["/bin/sh", "-c", "echo 1"] },
+						{ name: "bash", cmd: ["/bin/bash", "-c", "echo 2"] },
+					],
+				},
 			]);
 		});
 	});
 
-	describe('port spec', function () {
-		it('should return default port when not set', function () {
-			//when
+	describe("port spec", () => {
+		it("should return default port when not set", () => {
+			// when
 			const configuration = createConfigurationWithConfig({});
 
-			//then
+			// then
 			expect(configuration.getPort()).to.eql(8008);
 		});
 
-		it('should use configuration port when provided', function () {
-			//when
-			const configuration = createConfigurationWithConfig({port: 1234});
+		it("should use configuration port when provided", () => {
+			// when
+			const configuration = createConfigurationWithConfig({ port: 1234 });
 
-			//then
+			// then
 			expect(configuration.getPort()).to.eql(1234);
 		});
 	});
@@ -127,13 +125,13 @@ describe('configurationParser.spec.js', () => {
 
 	function createConfigurationWithConfig(config) {
 		mockConfig(config);
-		return proxyquire('./configuration', {
-			fs: fsMock
+		return proxyquire("./configuration", {
+			fs: fsMock,
 		});
 	}
 
 	function mockConfig(configObject) {
 		const configString = JSON.stringify(configObject);
-		td.when(fsMock.readFileSync(), {ignoreExtraArgs: true}).thenReturn(configString);
+		td.when(fsMock.readFileSync(), { ignoreExtraArgs: true }).thenReturn(configString);
 	}
 });

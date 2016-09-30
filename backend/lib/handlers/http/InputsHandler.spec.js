@@ -1,24 +1,22 @@
-'use strict';
+const express = require("express");
+const _ = require("lodash");
 
-const express = require('express');
-const _ = require('lodash');
+const td = require("testdouble");
+const proxyquire = require("proxyquire");
+const request = require("supertest");
 
-const td = require('testdouble');
-const proxyquire = require('proxyquire');
-const request = require('supertest');
-
-describe('InputsHandler.spec.js', () => {
+describe("InputsHandler.spec.js", () => {
 	const configurationMock = {
-		'@noCallThru': true,
-		getInputs: td.function()
+		"@noCallThru": true,
+		getInputs: td.function(),
 	};
 
 	let app;
 
 	before(() => {
 		const InputsHandler = proxyquire(
-			'./InputsHandler',
-			{'../../configuration': configurationMock}
+			"./InputsHandler",
+			{ "../../configuration": configurationMock }
 		);
 		const inputsHandler = new InputsHandler();
 		app = express();
@@ -27,21 +25,21 @@ describe('InputsHandler.spec.js', () => {
 
 	beforeEach(td.reset);
 
-	it('should list all inputs', (done) => {
-		//given
+	it("should list all inputs", (done) => {
+		// given
 		configurationMock.getInputs = _.constant([
-			{name: 'first input', otherProperty: 'value'},
-			{name: 'second input', otherProperty: 'value'},
+			{ name: "first input", otherProperty: "value" },
+			{ name: "second input", otherProperty: "value" },
 		]);
 
-		//when
-		request(app).get('/api/inputs')
+		// when
+		request(app).get("/api/inputs")
 
-		//then
-			.expect('Content-Type', /json/)
+		// then
+			.expect("Content-Type", /json/)
 			.expect(200, [
-				{name: 'first input'},
-				{name: 'second input'}
+				{ name: "first input" },
+				{ name: "second input" },
 			])
 			.end(done);
 	});

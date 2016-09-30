@@ -1,7 +1,5 @@
-'use strict';
-
-const _ = require('lodash');
-const ws = require('ws');
+const _ = require("lodash");
+const ws = require("ws");
 
 module.exports = function websocketFactory(socketServerOptions, input) {
 	return ws.createServer(
@@ -10,12 +8,12 @@ module.exports = function websocketFactory(socketServerOptions, input) {
 };
 
 function subscribeClientToObservable(client, input) {
-	const subscription = input.createDataObservable().subscribe(event => {
+	const subscription = input.createDataObservable().subscribe((event) => {
 		if (client.readyState !== ws.OPEN) {
 			return subscription.unsubscribe();
 		}
 
-		sendEventsToClient(client, event);
+		return sendEventsToClient(client, event);
 	});
 }
 
@@ -29,7 +27,7 @@ function sendEvent(client, event) {
 }
 
 function ackError(err) {
-	if(err) {
-		console.log('Can not send event to client', err);
+	if (err) {
+		console.log("Can not send event to client", err);
 	}
 }

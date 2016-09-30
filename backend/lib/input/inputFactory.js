@@ -1,8 +1,6 @@
-'use strict';
-
-const Observable = require('rxjs').Observable;
-const BufferedObservable = require('./BufferingObservable');
-const Input = require('./Input');
+const Observable = require("rxjs").Observable;
+const BufferedObservable = require("./BufferingObservable");
+const Input = require("./Input");
 
 module.exports = function inputFactory(inputConfiguration) {
 	const providers = inputConfiguration.providers.map(provider => new Input(provider));
@@ -11,7 +9,7 @@ module.exports = function inputFactory(inputConfiguration) {
 		name: inputConfiguration.name,
 		start: startAll,
 		stop: stopAll,
-		createDataObservable: createObservable(providers)
+		createDataObservable: createObservable(providers),
 	};
 
 	function startAll() {
@@ -22,11 +20,14 @@ module.exports = function inputFactory(inputConfiguration) {
 		providers.forEach(provider => provider.stop());
 	}
 
-	function createObservable(providers) {
-		const mergedObservable = providers.reduce(
+	function createObservable(inputProviders) {
+		const mergedObservable = inputProviders.reduce(
 			(result, provider) => result.merge(provider.data.stdout),
 			Observable.empty());
-		const bufferedObservable = new BufferedObservable(mergedObservable, inputConfiguration.bufferSize);
+
+		const bufferedObservable = new BufferedObservable(
+			mergedObservable,
+			inputConfiguration.bufferSize);
 
 		return bufferedObservable.createObservable;
 	}

@@ -1,11 +1,17 @@
-'use strict';
+const _ = require("lodash");
+const expect = require("chai").expect;
+const proxyquire = require("proxyquire");
+const EventEmitter = require("events");
 
-const _ = require('lodash');
-const expect = require('chai').expect;
-const proxyquire = require('proxyquire');
-const EventEmitter = require('events');
+class RespawnMock extends EventEmitter {
+	start() {
+	}
 
-describe('Input.spec.js', () => {
+	stop() {
+	}
+}
+
+describe("Input.spec.js", () => {
 	let respawnMock;
 
 	let Input;
@@ -13,52 +19,44 @@ describe('Input.spec.js', () => {
 	beforeEach(() => {
 		respawnMock = new RespawnMock();
 
-		Input = proxyquire('./Input', {
-				respawn: function () {
-					return respawnMock;
-				}
-			}
+		Input = proxyquire("./Input", {
+			respawn() {
+				return respawnMock;
+			},
+		}
 		);
 	});
 
-	it('should send event to data listener', done => {
-		//given
-		const processResult = 'process result';
-		const providerName = 'provider 1';
-		const input = new Input({name: providerName});
+	it("should send event to data listener", (done) => {
+		// given
+		const processResult = "process result";
+		const providerName = "provider 1";
+		const input = new Input({ name: providerName });
 
-		//when
+		// when
 		input.start();
 
-		//then
+		// then
 		input.data.stdout
-			.subscribe(inputEvent => {
-				expect(inputEvent.timestamp).to.be.number;
+			.subscribe((inputEvent) => {
+				expect(inputEvent.timestamp).to.be.number;	// eslint-disable-line no-unused-expressions
 				expect(inputEvent.data).to.eql(processResult);
 				expect(inputEvent.providerName).to.eql(providerName);
 				done();
 			});
 
-		respawnMock.emit('stdout', processResult);
+		respawnMock.emit("stdout", processResult);
 	});
 
-	it('should complete observable on process stop', done => {
-		//given
-		const input = new Input({name: 'any provider'});
+	it("should complete observable on process stop", (done) => {
+		// given
+		const input = new Input({ name: "any provider" });
 
-		//when
+		// when
 		input.stop();
 
-		//then
+		// then
 		input.data.stdout
 			.subscribe(_.noop, _.noop, done);
 	});
-
-	class RespawnMock extends EventEmitter {
-		start() {
-		}
-
-		stop() {
-		}
-	}
 });

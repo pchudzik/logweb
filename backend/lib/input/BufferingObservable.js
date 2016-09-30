@@ -1,8 +1,6 @@
-'use strict';
-
-const CBuffer = require('CBuffer');
-const Observable = require('rxjs').Observable;
-const Subject = require('rxjs').Subject;
+const CBuffer = require("CBuffer");
+const Observable = require("rxjs").Observable;
+const Subject = require("rxjs").Subject;
 
 module.exports = function BufferingObservable(observable, bufferSize) {
 	const buffer = new CBuffer(bufferSize);
@@ -10,7 +8,7 @@ module.exports = function BufferingObservable(observable, bufferSize) {
 
 	this.createObservable = createObservable;
 
-	observable.subscribe(event => {
+	observable.subscribe((event) => {
 		buffer.push(event);
 		forwardingObservable.next(event);
 	});

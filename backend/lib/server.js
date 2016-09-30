@@ -1,11 +1,9 @@
-'use strict';
-
-const http = require('http');
-const express = require('express');
-const configuration = require('./configuration');
-const setupHttpHandlers = require('./handlers/setupHttpHandlers');
-const setupStaticContentHandlers = require('./handlers/setupStaticContentHandlers');
-const setupWebSocketsHandlers = require('./handlers/setupWebsocketHandlers');
+const http = require("http");
+const express = require("express");
+const configuration = require("./configuration");
+const setupHttpHandlers = require("./handlers/setupHttpHandlers");
+const setupStaticContentHandlers = require("./handlers/setupStaticContentHandlers");
+const setupWebSocketsHandlers = require("./handlers/setupWebsocketHandlers");
 
 const expressApp = express();
 const httpServer = http.createServer(expressApp);
@@ -15,7 +13,7 @@ setupStaticContentHandlers(expressApp);
 setupWebSocketsHandlers(httpServer);
 
 module.exports = {
-	start: function () {
+	start() {
 		httpServer.listen(configuration.getPort());
-	}
+	},
 };
