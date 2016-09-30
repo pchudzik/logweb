@@ -15,6 +15,7 @@ module.exports = {
 
 		"quotes": ["error", "double"],
 		"indent": ["error", "tab"],
+		"comma-dangle": ["error", "never"],
 
 		"import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
 	}

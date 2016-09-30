@@ -1,10 +1,19 @@
 import React from "react";
 
-export default function SampleComponent() {
-	return (
+const SampleComponent = props => (
+	(
 		<div>
 			<h1>Hello World!</h1>
-			<p id="message">Message is &quote;{this.props.msg}&quote;</p>
+			<p id="message">Message is &quot;{props.msg}&quot;</p>
 		</div>
-	);
-}
+	));
+
+SampleComponent.propTypes = {
+	msg: React.PropTypes.string
+};
+
+SampleComponent.defaultProps = {
+	msg: "default message"
+};
+
+export default SampleComponent;

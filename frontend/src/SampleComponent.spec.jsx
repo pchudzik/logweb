@@ -15,4 +15,8 @@ describe("SampleComponent.spec.jsx", () => {
 		// expect
 		expect(mount(<SampleComponent msg="any message" />).find("#message")).to.contain.text(`"${message}"`);
 	});
+
+	it("should render default message", () => {
+		expect(shallow(<SampleComponent />).find("#message")).to.have.text("Message is \"default message\"");
+	});
 });
