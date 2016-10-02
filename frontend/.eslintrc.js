@@ -12,6 +12,7 @@ module.exports = {
 	"rules": {
 		"no-tabs": "off",
 		"prefer-template": "off",
+		"consistent-return": "off",
 		"react/jsx-indent": "off",
 		"react/jsx-space-before-closing": "off",
 		"react/jsx-indent-props": "off",

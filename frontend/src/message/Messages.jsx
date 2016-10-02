@@ -1,22 +1,22 @@
 import React from "react";
 import {connect} from "react-redux";
-import ErrorItem from "./Message";
+import Message from "./Message";
 import {removeMessage} from "./messageActions";
 
-class MessageContainer extends React.Component {
+export class Messages extends React.Component {
 	constructor() {
 		super();
 		this.closeMessage = this.closeMessage.bind(this);
 	}
 
-	closeMessage(error) {
-		this.props.dispatch(removeMessage(error));
+	closeMessage(message) {
+		this.props.dispatch(removeMessage(message));
 	}
 
 	render() {
 		const errorMessages = this.props.messages
 			.map(error => (
-				<ErrorItem
+				<Message
 					key={error.id}
 					type={error.type}
 					message={error.message}
@@ -31,7 +31,7 @@ class MessageContainer extends React.Component {
 	}
 }
 
-MessageContainer.propTypes = {
+Messages.propTypes = {
 	dispatch: React.PropTypes.func,
 	messages: React.PropTypes.arrayOf(React.PropTypes.shape({
 		/* eslint-disable react/no-unused-prop-types */
@@ -43,7 +43,6 @@ MessageContainer.propTypes = {
 };
 
 function stateMapper(state) {
-	const {messages} = state;
-	return {messages};
+	return {messages: state.messages};
 }
-export default connect(stateMapper)(MessageContainer);
+export default connect(stateMapper)(Messages);
