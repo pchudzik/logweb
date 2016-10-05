@@ -2,10 +2,19 @@ import React from "react";
 import {expect} from "chai";
 import {shallow} from "enzyme";
 import td from "testdouble";
-import {Messages} from "./Messages";
-import {removeMessage} from "./messageActions";
+import {
+	Messages,
+	__RewireAPI__ as MessagesRewireAPI
+} from "./Messages";
 
 describe("Messages.spec.jsx", () => {
+	let removeMessageMock;
+
+	beforeEach(() => {
+		removeMessageMock = td.function();
+		MessagesRewireAPI.__Rewire__("removeMessage", removeMessageMock);
+	});
+
 	it("should render nothing when not messages", () => {
 		// given
 		const messages = createMessagesElement();
@@ -28,19 +37,22 @@ describe("Messages.spec.jsx", () => {
 
 	it("should close selected message", () => {
 		// given
+		const removeMessageAction = "remove message acction";
 		const dispatch = td.function();
 		const messages = [createMessage(1)];
 		const messagesElement = createMessagesElement({dispatch, messages});
+		td.when(removeMessageMock(messages[0])).thenReturn(removeMessageAction);
 
 		// when
 		messagesElement.find("MessageItem").prop("dismiss")();
 
 		// then
-		td.verify(dispatch(removeMessage(messages[0])));
+		td.verify(dispatch(removeMessageAction));
 	});
 
 	function createMessagesElement(options = {}) {
-		const noop = () => {};
+		const noop = () => {
+		};
 		return shallow(
 			<Messages
 				dispatch={options.dispatch || noop}

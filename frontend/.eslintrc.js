@@ -13,6 +13,7 @@ module.exports = {
 		"no-tabs": "off",
 		"prefer-template": "off",
 		"consistent-return": "off",
+		"no-underscore-dangle": "off",
 		"react/jsx-indent": "off",
 		"react/jsx-space-before-closing": "off",
 		"react/jsx-indent-props": "off",
