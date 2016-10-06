@@ -17,7 +17,9 @@ module.exports = {
 		"react/jsx-indent": "off",
 		"react/jsx-space-before-closing": "off",
 		"react/jsx-indent-props": "off",
+
 		"react/jsx-closing-bracket-location": ["error", "after-props"],
+		"react/no-unused-prop-types": ["error", {"skipShapeProps": true}],
 
 		"arrow-parens": ["error", "as-needed"],
 		"object-curly-spacing": ["error", "never"],

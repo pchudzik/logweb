@@ -5,9 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "lint": "eslint src/**/*.jsx test/**/*.jsx",
+    "lint": "eslint \"src/**/*.jsx\" \"test/**/*.jsx\"",
     "pretest": "npm run lint",
-    "test": "mocha test-setup.js src/**/*.spec.jsx",
+    "test": "mocha test-setup.js \"src/**/*.spec.jsx\"",
     "dev": "webpack-dev-server --content-base build --port 9000 --inline --hot",
     "dist": "npm run test"
   },
