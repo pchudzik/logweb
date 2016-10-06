@@ -11,7 +11,7 @@ export function fetchProviders() {
 		dispatch({type: FETCH_PROVIDERS_PENDING});
 
 		return axios
-			.get("http://example.com/api/inputs")
+			.get("/api/inputs")
 			.then(response => dispatch({type: FETCH_PROVIDERS_FULFILLED, payload: response.data}))
 			.catch(error => {
 				dispatchErrorMessage(dispatch, error);

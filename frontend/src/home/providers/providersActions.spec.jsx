@@ -38,7 +38,7 @@ describe("providersActions.spec.jsx", () => {
 	it(`should dispatch ${FETCH_PROVIDERS_FULFILLED} action when providers list fetched`, done => {
 		// given
 		const responsePayload = [{name: "first"}, {name: "second"}];
-		moxios.stubRequest("http://example.com/api/inputs", {
+		moxios.stubRequest("/api/inputs", {
 			status: 200,
 			response: responsePayload
 		});
@@ -60,7 +60,7 @@ describe("providersActions.spec.jsx", () => {
 		const errorMessage = "Internal server error";
 		const errorStatus = 500;
 
-		beforeEach(() => moxios.stubRequest("http://example.com/api/inputs", {
+		beforeEach(() => moxios.stubRequest("/api/inputs", {
 			status: 500,
 			responseText: "Internal server error"
 		}));
