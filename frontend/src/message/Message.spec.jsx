@@ -2,6 +2,7 @@ import React from "react";
 import {expect} from "chai";
 import {shallow} from "enzyme";
 import td from "testdouble";
+import {noop} from "../../test/testHelper";
 import Message from "./Message";
 
 describe("Message.spec.jsx", () => {
@@ -42,8 +43,6 @@ describe("Message.spec.jsx", () => {
 	});
 
 	function createMessageElement(options) {
-		const noop = () => {
-		};
 		return shallow(
 			<Message
 				type={options.messageType || "success"}
