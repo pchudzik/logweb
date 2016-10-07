@@ -3,15 +3,14 @@ import ReactDOM from "react-dom";
 import {Router, Route, IndexRoute, hashHistory} from "react-router";
 import Layout from "./Layout";
 import HomePage from "./home/HomePage";
-
-const Log = () => (<h1>Log page!</h1>);
+import LogView from "./log/Log";
 
 ReactDOM.render(
 	(
 		<Router history={hashHistory}>
 			<Route path="/" component={Layout}>
 				<IndexRoute component={HomePage} />
-				<Route path="log/:logName" name="log" component={Log} />
+				<Route path="log/:logName" name="log" component={LogView} />
 			</Route>
 		</Router>
 	),

@@ -12,7 +12,18 @@ describe("Provider.spec.jsx", () => {
 		const element = createProviderElement(provider);
 
 		// then
-		expect(element.find(".provider-name")).to.have.text(provider.name);
+		expect(element.find("Link").html()).to.eql(`<a>${provider.name}</a>`);	// .text() doesn't work
+	});
+
+	it("should go to log following page on click", () => {
+		// given
+		const provider = createProvider("provider-name");
+
+		// when
+		const element = createProviderElement(provider);
+
+		// then
+		expect(element.find("Link")).to.have.prop("to", `/log/${provider.name}`);
 	});
 
 	function createProviderElement(provider) {
