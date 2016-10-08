@@ -9,17 +9,53 @@ import {
 } from "./Log";
 
 describe("Log.spec.jsx", () => {
+	let scroll;
 	let startFollowing;
 	let stopFollowing;
 	let dispatch;
 
 	beforeEach(() => {
+		scroll = td.function();
 		dispatch = td.function();
 		startFollowing = td.function();
 		stopFollowing = td.function();
 
 		LogRewireAPI.__Rewire__("startFollowing", startFollowing);
 		LogRewireAPI.__Rewire__("stopFollowing", stopFollowing);
+		LogRewireAPI.__Rewire__("scroll", {
+			animateScroll: {
+				scrollToBottom: scroll
+			}
+		});
+	});
+
+	describe("log following toggle", () => {
+		it("should follow toggle by default", () => {
+			// given
+			const options = {events: []};
+			const element = createElement(options);
+
+			// when
+			element.setProps({events: [createEvent("first")]});
+
+			// then
+			td.verify(scroll(), {ignoreExtraArgs: true});
+			expect(element.find("button")).to.have.className("active");
+		});
+
+		it("should stop scrolling to bottom when follow is disabled", () => {
+			// given
+			const options = {events: []};
+			const element = createElement(options);
+
+			// when
+			element.find("button").simulate("click");
+			element.setProps({events: [createEvent("first")]});
+
+			// then
+			td.verify(scroll(), {ignoreExtraArgs: true, times: 0});
+			expect(element.find("button")).not.to.have.className("active");
+		});
 	});
 
 	it("should dispatch start watching event on component mount", () => {
@@ -38,7 +74,7 @@ describe("Log.spec.jsx", () => {
 	it("should dispatch stop watching event on component unmount", () => {
 		// given
 		const logName = "following log name";
-		const webSocket = "websocket to stop";
+		const webSocket = {ws: "websocket to stop"};
 		const stopFollowingAction = "stop following action";
 		td.when(stopFollowing(logName, webSocket)).thenReturn(stopFollowingAction);
 		const element = createElement({dispatch, logName, webSocket});
@@ -52,8 +88,8 @@ describe("Log.spec.jsx", () => {
 
 	it("should render all log events", () => {
 		// given
-		const event1 = {timestamp: 1, data: "msg1"};
-		const event2 = {timestamp: 2, data: "msg2"};
+		const event1 = createEvent("msg1");
+		const event2 = createEvent("msg2");
 
 		// when
 		const element = createElement({events: [event1, event2]});
@@ -74,8 +110,15 @@ describe("Log.spec.jsx", () => {
 			<Log
 				dispatch={options.dispatch || noop}
 				events={options.events || []}
-				webSocket={options.webSocket || "any websocket"}
-				params={params} />
+				webSocket={options.webSocket || {ws: "any websocket"}}
+				params={params}/>, {lifecycleExperimental: true}
 		);
+	}
+
+	function createEvent(data) {
+		return {
+			timestamp: new Date().getTime(),
+			data
+		};
 	}
 });

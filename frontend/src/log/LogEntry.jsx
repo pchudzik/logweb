@@ -1,4 +1,5 @@
 import React from "react";
+import "./logEntry.scss";
 
 export default LogEntry;
 
