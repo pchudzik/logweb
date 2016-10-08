@@ -38,9 +38,10 @@ describe("Log.spec.jsx", () => {
 	it("should dispatch stop watching event on component unmount", () => {
 		// given
 		const logName = "following log name";
+		const webSocket = "websocket to stop";
 		const stopFollowingAction = "stop following action";
-		td.when(stopFollowing(logName)).thenReturn(stopFollowingAction);
-		const element = createElement({dispatch, logName});
+		td.when(stopFollowing(logName, webSocket)).thenReturn(stopFollowingAction);
+		const element = createElement({dispatch, logName, webSocket});
 
 		// when
 		element.unmount();
@@ -73,6 +74,7 @@ describe("Log.spec.jsx", () => {
 			<Log
 				dispatch={options.dispatch || noop}
 				events={options.events || []}
+				webSocket={options.webSocket || "any websocket"}
 				params={params} />
 		);
 	}

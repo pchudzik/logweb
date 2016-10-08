@@ -14,16 +14,20 @@ export class Log extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.props.dispatch(stopFollowing(this.getLogName()));
+		this.props.dispatch(stopFollowing(this.getLogName(), this.getWebSocket()));
 	}
 
 	getLogName() {
 		return this.props.params.logName;
 	}
 
+	getWebSocket() {
+		return this.props.webSocket;
+	}
+
 	render() {
 		const events = this.props.events
-			.map(event => <LogEntry key={event.timestamp} logMessage={event.data}/>);
+			.map((event, index) => <LogEntry key={`${event.timestamp}-${index}`} logMessage={event.data}/>);
 		return (
 			<div>
 				{events}
@@ -40,7 +44,8 @@ Log.propTypes = {
 		data: React.PropTypes.string,
 		timestamp: React.PropTypes.number,
 		providerName: React.PropTypes.string
-	}))
+	})),
+	webSocket: React.PropTypes.object 		// eslint-disable-line react/forbid-prop-types
 };
 
 export default connect(state => state.log)(Log);
