@@ -1,7 +1,8 @@
 import {expect} from "chai";
 import {
 	START_FOLLOWING,
-	STOP_FOLLOWING
+	STOP_FOLLOWING,
+	LOG_EVENT
 } from "./logActions";
 import logReducer from "./logReducer";
 
@@ -14,14 +15,16 @@ describe("logreducer.spec.jsx", () => {
 			)
 		).to.eql(
 			{
-				logName: null
+				logName: null,
+				webSocket: null,
+				events: []
 			}
 		);
 	});
 
 	it("should return input state on unknown event", () => {
 		// given
-		const inputState = {logName: "any log name"};
+		const inputState = {logName: "any log name", webSocket: "any websocket", events: [1, 2, 3]};
 
 		// expect
 		expect(
@@ -37,15 +40,26 @@ describe("logreducer.spec.jsx", () => {
 	it(`should start following on ${START_FOLLOWING}`, () => {
 		// given
 		const logName = "start following logxx";
+		const webSocket = "log websocket";
 
 		// expect
 		expect(
 			logReducer(
 				{logName: null},
-				{type: START_FOLLOWING, payload: logName}
+				{
+					type: START_FOLLOWING,
+					payload: {
+						logName,
+						webSocket
+					}
+				}
 			)
 		).to.eql(
-			{logName}
+			{
+				events: [],
+				logName,
+				webSocket
+			}
 		);
 	});
 
@@ -53,14 +67,44 @@ describe("logreducer.spec.jsx", () => {
 		// given
 		const logName = "following log";
 
-		// epxect
+		// expect
 		expect(
 			logReducer(
-				{logName},
-				{type: STOP_FOLLOWING, payload: logName}
+				{logName, webSocket: "any websocket"},
+				{
+					type: STOP_FOLLOWING,
+					payload: {
+						logName,
+						webSocket: null
+					}
+				}
 			)
 		).to.eql(
-			{logName: null}
+			{
+				logName: null,
+				webSocket: null,
+				events: []
+			}
 		);
+	});
+
+	it(`should add new event on ${LOG_EVENT}`, () => {
+		// given
+		const logName = "any log name";
+		const webSocket = "any web socket";
+		const existingEvent = [{timestamp: 1234, message: "msg1"}];
+		const event = {timestamp: 4566, message: "msg2"};
+
+		// expect
+		expect(
+			logReducer(
+				{logName, webSocket, events: [existingEvent]},
+				{type: LOG_EVENT, payload: {data: JSON.stringify(event)}}
+			)
+		).to.eql({
+			logName,
+			webSocket,
+			events: [existingEvent, event]
+		});
 	});
 });
