@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router";
+import "./navigation.scss";
 
 export function Navigation(props) {
 	const logName = props.logName;
@@ -16,8 +17,8 @@ export function Navigation(props) {
 				<div className="collapse navbar-collapse">
 					{logNameText}
 					<div className="nav navbar-nav navbar-right">
-						<a className="navbar-brand logo" href="https://github.com/pchudzik/logweb" target="_blank" rel="noopener noreferrer">
-							github
+						<a className="navbar-brand logo github-link" href="https://github.com/pchudzik/logweb" target="_blank" rel="noopener noreferrer">
+							<i className="fa fa-2x fa-github" />
 						</a>
 					</div>
 				</div>

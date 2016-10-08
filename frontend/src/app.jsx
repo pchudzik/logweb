@@ -4,6 +4,7 @@ import {Router, Route, IndexRoute, hashHistory} from "react-router";
 import Layout from "./Layout";
 import HomePage from "./home/HomePage";
 import LogView from "./log/Log";
+import "./app.scss";
 
 ReactDOM.render(
 	(

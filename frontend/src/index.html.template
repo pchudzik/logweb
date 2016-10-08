@@ -3,17 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Logweb</title>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-		<style>
-			body {
-				padding-top: 60px;
-			}
-		</style>
 	</head>
 	<body>
 		<div id='app'></div>
-
 	</body>
 </html>

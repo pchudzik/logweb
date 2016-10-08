@@ -11,14 +11,40 @@ module.exports = {
 		extensions: ["", ".js", ".jsx"]
 	},
 	module: {
-		loaders: [{
-			test: /\.jsx?$/,
-			exclude: /node_modules/,
-			loader: "babel-loader"
-		}]
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loader: "babel-loader"
+			},
+			{
+				test: /\.scss$/,
+				loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+			},
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				loader: "url?name=fonts/[name].[ext]"
+			},
+			{
+				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+				loader: "url?name=fonts/[name].[ext]"
+			},
+			{
+				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+				loader: "url?name=fonts/[name].[ext]"
+			},
+			{
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				loader: "url?name=fonts/[name].[ext]"
+			},
+			{
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				loader: "url?name=fonts/[name].[ext]"
+			}
+		]
 	},
 	output: {
-		path: path.join(__dirname, "/build/"),
+		path: path.join(__dirname, "/build"),
 		filename: "app.min.js"
 	},
 	plugins: debug ? [
@@ -33,4 +59,5 @@ module.exports = {
 			}
 		}
 	}
-};
+}
+;
