@@ -34,7 +34,7 @@ function startWatching(eventSource) {
 	stopWatching();
 	logContainer().show();
 	logContainer().html('');
-	webSocket = new WebSocket('ws://' + host + ':' + (window.location.port || 80) + '/' + eventSource);
+	webSocket = new WebSocket('ws://' + host + ':' + (window.location.port || 80) + '/api/ws/' + eventSource);
 	webSocket.onmessage = function (event) {
 		appendToLog(event.data);
 	};

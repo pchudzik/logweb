@@ -22,10 +22,8 @@ export function stopFollowing(logName, webSocket) {
 export function startFollowing(logName) {
 	return dispatch => {
 		const host = resolveHost(window);
-		// TODO fixme configure webpack dev server to proxy ws requests - https://github.com/pchudzik/logweb/issues/21
-		// const port = resolvePort(window);
-		const port = 8008;
-		const webSocket = new window.WebSocket(`ws://${host}:${port}/${logName}`);
+		const port = resolveBackendPort();
+		const webSocket = new window.WebSocket(`ws://${host}:${port}/api/ws/${logName}`);
 
 		dispatch({
 			type: START_FOLLOWING,
@@ -40,4 +38,12 @@ export function startFollowing(logName) {
 			payload: event
 		});
 	};
+}
+
+function resolveBackendPort() {
+	if (process.env.BACKEND_PORT) {
+		return parseInt(process.env.BACKEND_PORT, 10);
+	}
+
+	return resolvePort(window);
 }

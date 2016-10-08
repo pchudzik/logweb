@@ -49,6 +49,9 @@ module.exports = {
 	},
 	plugins: debug ? [
 		new HtmlWebpackPlugin({template: "index.html.template"}),
+		new webpack.DefinePlugin({
+			"process.env.BACKEND_PORT": JSON.stringify(process.env.BACKEND_PORT)
+		}),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin()
 	] : [],

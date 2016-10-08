@@ -51,7 +51,7 @@ describe("logActions.spec.jsx", () => {
 		td.verify(dispatch(td.matchers.argThat(action => {
 			const webSocoket = action.payload.webSocket;
 			expect(action.type).to.eql(START_FOLLOWING);
-			expect(webSocoket.url).to.eql(`ws://${resolveHost()}:${resolvePort()}/${logName}`);
+			expect(webSocoket.url).to.eql(`ws://${resolveHost()}:${resolvePort()}/api/ws/${logName}`);
 			return true;
 		})));
 	});
