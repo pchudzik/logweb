@@ -7,7 +7,6 @@
     "lint": "node_modules/.bin/eslint lib",
     "pretest": "npm run lint",
     "test": "node_modules/.bin/mocha \"lib/**/*.spec.js\"",
-    "dist": "npm run test",
     "start": "node index.js"
   },
   "author": "Pawel Chudzik",
