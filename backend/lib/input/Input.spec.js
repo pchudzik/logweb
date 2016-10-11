@@ -22,7 +22,7 @@ describe("Input.spec.js", () => {
 		Input = proxyquire("./Input", {
 			respawn() {
 				return respawnMock;
-			},
+			}
 		}
 		);
 	});

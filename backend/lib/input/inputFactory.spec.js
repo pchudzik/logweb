@@ -13,7 +13,7 @@ describe("inputFactory.spec.js", () => {
 		InputMock["@noCallThru"] = true;
 
 		inputFactory = proxyquire("./inputFactory", {
-			"./Input": InputMock,
+			"./Input": InputMock
 		});
 	});
 
@@ -25,7 +25,7 @@ describe("inputFactory.spec.js", () => {
 			mockInputWithObservable(provider, observable);
 			const inputConfiguration = {
 				bufferSize: 3,
-				providers: [provider],
+				providers: [provider]
 			};
 
 			// when
@@ -48,7 +48,7 @@ describe("inputFactory.spec.js", () => {
 			mockInputWithObservable(numbersProvider, Observable.of(1, 2, 3));
 			const inputConfiguration = {
 				bufferSize: 1000,
-				providers: [lettersProvider, numbersProvider],
+				providers: [lettersProvider, numbersProvider]
 			};
 
 			// when
@@ -69,7 +69,7 @@ describe("inputFactory.spec.js", () => {
 			mockInputWithObservable(numbersProvider, numbersObservable);
 			const inputConfiguration = {
 				bufferSize: 1000,
-				providers: [lettersProvider, numbersProvider],
+				providers: [lettersProvider, numbersProvider]
 			};
 
 			// when
@@ -133,14 +133,14 @@ describe("inputFactory.spec.js", () => {
 			start: td.function(),
 			stop: td.function(),
 			data: {
-				stdout: observable,
-			},
+				stdout: observable
+			}
 		};
 	}
 
 	function createProvider(name) {
 		return {
-			name,
+			name
 		};
 	}
 });

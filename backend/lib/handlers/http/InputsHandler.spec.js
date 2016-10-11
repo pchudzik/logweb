@@ -8,7 +8,7 @@ const request = require("supertest");
 describe("InputsHandler.spec.js", () => {
 	const configurationMock = {
 		"@noCallThru": true,
-		getInputs: td.function(),
+		getInputs: td.function()
 	};
 
 	let app;
@@ -29,7 +29,7 @@ describe("InputsHandler.spec.js", () => {
 		// given
 		configurationMock.getInputs = _.constant([
 			{ name: "first input", otherProperty: "value" },
-			{ name: "second input", otherProperty: "value" },
+			{ name: "second input", otherProperty: "value" }
 		]);
 
 		// when
@@ -39,7 +39,7 @@ describe("InputsHandler.spec.js", () => {
 			.expect("Content-Type", /json/)
 			.expect(200, [
 				{ name: "first input" },
-				{ name: "second input" },
+				{ name: "second input" }
 			])
 			.end(done);
 	});

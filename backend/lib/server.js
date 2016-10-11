@@ -15,5 +15,5 @@ setupWebSocketsHandlers(httpServer);
 module.exports = {
 	start() {
 		httpServer.listen(configuration.getPort());
-	},
+	}
 };

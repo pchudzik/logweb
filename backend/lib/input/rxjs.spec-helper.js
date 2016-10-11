@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 
 module.exports = {
-	waitForEventsInOrder,
+	waitForEventsInOrder
 };
 
 function waitForEventsInOrder(done, observable, ...expectedEvents) {

@@ -5,7 +5,7 @@ const config = JSON.parse(fs.readFileSync(process.argv[2] || "logweb.json", "utf
 
 module.exports = {
 	getInputs,
-	getPort,
+	getPort
 };
 
 function getPort() {
@@ -16,21 +16,21 @@ function getInputs() {
 	return _.map(config.inputs, singleInput => ({
 		name: singleInput.name,
 		bufferSize: parseInt(singleInput.bufferSize, 10) || 100,
-		providers: resolveProviders(singleInput),
+		providers: resolveProviders(singleInput)
 	}));
 }
 
 function resolveProviders(singleInput) {
 	if (singleInput.cmd) {
 		return [{
-			cmd: resolveInputCmd(singleInput.cmd),
+			cmd: resolveInputCmd(singleInput.cmd)
 		}];
 	}
 
 	const providers = _.flatten([singleInput.providers]);
 	return providers.map(provider => ({
 		name: provider.name,
-		cmd: resolveInputCmd(provider.cmd),
+		cmd: resolveInputCmd(provider.cmd)
 	}));
 }
 

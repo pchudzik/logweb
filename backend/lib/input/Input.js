@@ -5,12 +5,12 @@ const Subject = require("rxjs").Subject;
 module.exports = function Input(provider) {
 	const dataObservable = new Subject();
 	const processMonitor = respawn(provider.cmd, {
-		sleep: provider.restartTimeout || 100,
+		sleep: provider.restartTimeout || 100
 	});
 	processMonitor.on("stdout", processInput);
 
 	this.data = {
-		stdout: dataObservable,
+		stdout: dataObservable
 	};
 
 	processMonitor.on("stderr", data => console.log("err", data.toString()));

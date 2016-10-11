@@ -8,7 +8,7 @@ describe("configurationParser.spec.js", () => {
 	beforeEach(() => {
 		fsMock = {
 			mock: "my mock",
-			readFileSync: td.function(),
+			readFileSync: td.function()
 		};
 	});
 
@@ -18,8 +18,8 @@ describe("configurationParser.spec.js", () => {
 			const cmd = "echo hello";
 			const configuration = createConfigurationWithConfig({
 				inputs: [{
-					cmd,
-				}],
+					cmd
+				}]
 			});
 
 			// when
@@ -29,7 +29,7 @@ describe("configurationParser.spec.js", () => {
 			expect(inputs).to.eql([{
 				name: undefined,
 				bufferSize: 100,
-				providers: [{ cmd: ["/bin/sh", "-c", cmd] }],
+				providers: [{ cmd: ["/bin/sh", "-c", cmd] }]
 			}]);
 		});
 
@@ -38,7 +38,7 @@ describe("configurationParser.spec.js", () => {
 			const shell = ["cmd", "/c"];
 			const configuration = createConfigurationWithConfig({
 				shell,
-				inputs: [{ cmd }],
+				inputs: [{ cmd }]
 			});
 
 			// when
@@ -53,8 +53,8 @@ describe("configurationParser.spec.js", () => {
 			const configuration = createConfigurationWithConfig({
 				inputs: [
 					{ cmd: "echo 1", name: "first" },
-					{ cmd: "echo 2", name: "second" },
-				],
+					{ cmd: "echo 2", name: "second" }
+				]
 			});
 
 			// when
@@ -65,13 +65,13 @@ describe("configurationParser.spec.js", () => {
 				{
 					name: "first",
 					bufferSize: 100,
-					providers: [{ cmd: ["/bin/sh", "-c", "echo 1"] }],
+					providers: [{ cmd: ["/bin/sh", "-c", "echo 1"] }]
 				},
 				{
 					name: "second",
 					bufferSize: 100,
-					providers: [{ cmd: ["/bin/sh", "-c", "echo 2"] }],
-				},
+					providers: [{ cmd: ["/bin/sh", "-c", "echo 2"] }]
+				}
 			]);
 		});
 
@@ -82,9 +82,9 @@ describe("configurationParser.spec.js", () => {
 					bufferSize: 123,
 					providers: [
 						{ cmd: "echo 1", name: "echo" },
-						{ cmd: ["/bin/bash", "-c", "echo 2"], name: "bash" },
-					],
-				}],
+						{ cmd: ["/bin/bash", "-c", "echo 2"], name: "bash" }
+					]
+				}]
 			});
 
 			// when
@@ -97,9 +97,9 @@ describe("configurationParser.spec.js", () => {
 					bufferSize: 123,
 					providers: [
 						{ name: "echo", cmd: ["/bin/sh", "-c", "echo 1"] },
-						{ name: "bash", cmd: ["/bin/bash", "-c", "echo 2"] },
-					],
-				},
+						{ name: "bash", cmd: ["/bin/bash", "-c", "echo 2"] }
+					]
+				}
 			]);
 		});
 	});
@@ -126,7 +126,7 @@ describe("configurationParser.spec.js", () => {
 	function createConfigurationWithConfig(config) {
 		mockConfig(config);
 		return proxyquire("./configuration", {
-			fs: fsMock,
+			fs: fsMock
 		});
 	}
 

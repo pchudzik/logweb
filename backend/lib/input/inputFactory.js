@@ -9,7 +9,7 @@ module.exports = function inputFactory(inputConfiguration) {
 		name: inputConfiguration.name,
 		start: startAll,
 		stop: stopAll,
-		createDataObservable: createObservable(providers),
+		createDataObservable: createObservable(providers)
 	};
 
 	function startAll() {
