@@ -1,17 +1,7 @@
 const proxyquire = require("proxyquire");
-const td = require("testdouble");
 const expect = require("chai").expect;
 
 describe("configurationParser.spec.js", () => {
-	let fsMock;
-
-	beforeEach(() => {
-		fsMock = {
-			mock: "my mock",
-			readFileSync: td.function()
-		};
-	});
-
 	describe("provider inputs spec", () => {
 		it("should execute user command with /bin/sh as default shell when passed as string", () => {
 			// given
@@ -122,16 +112,9 @@ describe("configurationParser.spec.js", () => {
 		});
 	});
 
-
 	function createConfigurationWithConfig(config) {
-		mockConfig(config);
 		return proxyquire("./configuration", {
-			fs: fsMock
+			"../logweb": config
 		});
-	}
-
-	function mockConfig(configObject) {
-		const configString = JSON.stringify(configObject);
-		td.when(fsMock.readFileSync(), { ignoreExtraArgs: true }).thenReturn(configString);
 	}
 });

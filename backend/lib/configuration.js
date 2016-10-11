@@ -1,7 +1,6 @@
-const fs = require("fs");
 const _ = require("lodash");
 
-const config = JSON.parse(fs.readFileSync(process.argv[2] || "logweb.json", "utf8"));
+const config = require("../logweb");
 
 module.exports = {
 	getInputs,
