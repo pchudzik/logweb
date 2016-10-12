@@ -8,7 +8,7 @@ module.exports = function BufferingObservable(observable, bufferSize) {
 
 	this.createObservable = createObservable;
 
-	observable.subscribe((event) => {
+	observable.subscribe(event => {
 		buffer.push(event);
 		forwardingObservable.next(event);
 	});

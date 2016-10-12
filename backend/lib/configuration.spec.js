@@ -19,7 +19,7 @@ describe("configurationParser.spec.js", () => {
 			expect(inputs).to.eql([{
 				name: undefined,
 				bufferSize: 100,
-				providers: [{ cmd: ["/bin/sh", "-c", cmd] }]
+				providers: [{cmd: ["/bin/sh", "-c", cmd]}]
 			}]);
 		});
 
@@ -28,7 +28,7 @@ describe("configurationParser.spec.js", () => {
 			const shell = ["cmd", "/c"];
 			const configuration = createConfigurationWithConfig({
 				shell,
-				inputs: [{ cmd }]
+				inputs: [{cmd}]
 			});
 
 			// when
@@ -42,8 +42,8 @@ describe("configurationParser.spec.js", () => {
 		it("should parse all inputs", () => {
 			const configuration = createConfigurationWithConfig({
 				inputs: [
-					{ cmd: "echo 1", name: "first" },
-					{ cmd: "echo 2", name: "second" }
+					{cmd: "echo 1", name: "first"},
+					{cmd: "echo 2", name: "second"}
 				]
 			});
 
@@ -55,12 +55,12 @@ describe("configurationParser.spec.js", () => {
 				{
 					name: "first",
 					bufferSize: 100,
-					providers: [{ cmd: ["/bin/sh", "-c", "echo 1"] }]
+					providers: [{cmd: ["/bin/sh", "-c", "echo 1"]}]
 				},
 				{
 					name: "second",
 					bufferSize: 100,
-					providers: [{ cmd: ["/bin/sh", "-c", "echo 2"] }]
+					providers: [{cmd: ["/bin/sh", "-c", "echo 2"]}]
 				}
 			]);
 		});
@@ -71,8 +71,8 @@ describe("configurationParser.spec.js", () => {
 					name: "multi",
 					bufferSize: 123,
 					providers: [
-						{ cmd: "echo 1", name: "echo" },
-						{ cmd: ["/bin/bash", "-c", "echo 2"], name: "bash" }
+						{cmd: "echo 1", name: "echo"},
+						{cmd: ["/bin/bash", "-c", "echo 2"], name: "bash"}
 					]
 				}]
 			});
@@ -86,8 +86,8 @@ describe("configurationParser.spec.js", () => {
 					name: "multi",
 					bufferSize: 123,
 					providers: [
-						{ name: "echo", cmd: ["/bin/sh", "-c", "echo 1"] },
-						{ name: "bash", cmd: ["/bin/bash", "-c", "echo 2"] }
+						{name: "echo", cmd: ["/bin/sh", "-c", "echo 1"]},
+						{name: "bash", cmd: ["/bin/bash", "-c", "echo 2"]}
 					]
 				}
 			]);
@@ -105,7 +105,7 @@ describe("configurationParser.spec.js", () => {
 
 		it("should use configuration port when provided", () => {
 			// when
-			const configuration = createConfigurationWithConfig({ port: 1234 });
+			const configuration = createConfigurationWithConfig({port: 1234});
 
 			// then
 			expect(configuration.getPort()).to.eql(1234);

@@ -16,7 +16,7 @@ describe("InputsHandler.spec.js", () => {
 	before(() => {
 		const InputsHandler = proxyquire(
 			"./InputsHandler",
-			{ "../../configuration": configurationMock }
+			{"../../configuration": configurationMock}
 		);
 		const inputsHandler = new InputsHandler();
 		app = express();
@@ -25,11 +25,11 @@ describe("InputsHandler.spec.js", () => {
 
 	beforeEach(td.reset);
 
-	it("should list all inputs", (done) => {
+	it("should list all inputs", done => {
 		// given
 		configurationMock.getInputs = _.constant([
-			{ name: "first input", otherProperty: "value" },
-			{ name: "second input", otherProperty: "value" }
+			{name: "first input", otherProperty: "value"},
+			{name: "second input", otherProperty: "value"}
 		]);
 
 		// when
@@ -38,24 +38,24 @@ describe("InputsHandler.spec.js", () => {
 		// then
 			.expect("Content-Type", /json/)
 			.expect(200, [
-				{ name: "first input" },
-				{ name: "second input" }
+				{name: "first input"},
+				{name: "second input"}
 			])
 			.end(done);
 	});
 
-	it("should get input details", (done) => {
+	it("should get input details", done => {
 		// given
 		const inputName = "input-to-find";
 		const otherProperty = "otherProperty";
 		configurationMock.getInputs = _.constant([
-			{ name: "other" },
+			{name: "other"},
 			{
 				name: inputName,
 				otherProperty,
 				providers: [
-					{ name: "provider1", otherProperty },
-					{ name: "provider2", otherProperty }
+					{name: "provider1", otherProperty},
+					{name: "provider2", otherProperty}
 				]
 			}
 		]);
@@ -68,14 +68,14 @@ describe("InputsHandler.spec.js", () => {
 			.expect(200, {
 				name: inputName,
 				providers: [
-					{ name: "provider1" },
-					{ name: "provider2" }
+					{name: "provider1"},
+					{name: "provider2"}
 				]
 			})
 			.end(done);
 	});
 
-	it("should return 404 status when input not found", (done) => {
+	it("should return 404 status when input not found", done => {
 		// given
 		const nonExistingInput = "non-existing-input";
 		configurationMock.getInputs = () => [];

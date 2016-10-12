@@ -18,7 +18,7 @@ describe("inputFactory.spec.js", () => {
 	});
 
 	describe("input events spec", () => {
-		it("should keep old events history in history buffer", (done) => {
+		it("should keep old events history in history buffer", done => {
 			// given
 			const provider = createProvider("any provider");
 			const observable = new Subject();
@@ -40,7 +40,7 @@ describe("inputFactory.spec.js", () => {
 			rxHelper.waitForEventsInOrder(done, input.createDataObservable(), 1, 2, 3);
 		});
 
-		it("should merge events from multiple streams into single observable", (done) => {
+		it("should merge events from multiple streams into single observable", done => {
 			// given
 			const lettersProvider = createProvider("letters");
 			const numbersProvider = createProvider("numbers");
@@ -60,7 +60,7 @@ describe("inputFactory.spec.js", () => {
 				1, 2, 3);
 		});
 
-		it("should merge envets in order they occure", (done) => {
+		it("should merge envets in order they occure", done => {
 			const lettersProvider = createProvider("letters");
 			const numbersProvider = createProvider("numbers");
 			const lettersObservable = new Subject();
@@ -98,7 +98,7 @@ describe("inputFactory.spec.js", () => {
 			provider2 = createProvider("2");
 			inputProcess1 = mockInputWithObservable(provider1, Observable.empty());
 			inputProcess2 = mockInputWithObservable(provider2, Observable.empty());
-			input = inputFactory({ providers: [provider1, provider2] });
+			input = inputFactory({providers: [provider1, provider2]});
 		});
 
 		it("should start all process monitors", () => {
@@ -106,8 +106,8 @@ describe("inputFactory.spec.js", () => {
 			input.start();
 
 			// then
-			td.verify(inputProcess1.start(), { times: 1 });
-			td.verify(inputProcess2.start(), { times: 1 });
+			td.verify(inputProcess1.start(), {times: 1});
+			td.verify(inputProcess2.start(), {times: 1});
 		});
 
 		it("should stop all process monitors", () => {
@@ -115,8 +115,8 @@ describe("inputFactory.spec.js", () => {
 			input.stop();
 
 			// then
-			td.verify(inputProcess1.stop(), { times: 1 });
-			td.verify(inputProcess2.stop(), { times: 1 });
+			td.verify(inputProcess1.stop(), {times: 1});
+			td.verify(inputProcess2.stop(), {times: 1});
 		});
 	});
 

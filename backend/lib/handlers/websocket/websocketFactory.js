@@ -8,7 +8,7 @@ module.exports = function websocketFactory(socketServerOptions, input) {
 };
 
 function subscribeClientToObservable(client, input) {
-	const subscription = input.createDataObservable().subscribe((event) => {
+	const subscription = input.createDataObservable().subscribe(event => {
 		if (client.readyState !== ws.OPEN) {
 			return subscription.unsubscribe();
 		}

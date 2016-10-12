@@ -20,7 +20,7 @@ describe("websocketFactory.spec.js", () => {
 	let websocketClient;
 	let websocketServer;
 
-	before((done) => {
+	before(done => {
 		httpServer = http.createServer();
 		httpServer.listen();
 		httpServer.on("listening", () => {
@@ -29,7 +29,7 @@ describe("websocketFactory.spec.js", () => {
 		});
 	});
 
-	after((done) => {
+	after(done => {
 		httpServer.close(done);
 	});
 
@@ -38,7 +38,7 @@ describe("websocketFactory.spec.js", () => {
 		websocketServer.close();
 	});
 
-	it("should send all events to new client", (done) => {
+	it("should send all events to new client", done => {
 		// given
 		const observable = Observable.of(
 			new InputEvent("first1", "provider1"),
@@ -47,8 +47,8 @@ describe("websocketFactory.spec.js", () => {
 			new InputEvent("second2", "provider2"));
 
 		websocketServer = websocketFactory(
-			{ server: httpServer, path: "/ws" },
-			{ createDataObservable: _.constant(observable) });
+			{server: httpServer, path: "/ws"},
+			{createDataObservable: _.constant(observable)});
 
 		// when
 		websocketClient = ws.createConnection(`ws://localhost:${serverPort}/ws`);
@@ -61,12 +61,12 @@ describe("websocketFactory.spec.js", () => {
 			"{\"data\":\"second2\",\"providerName\":\"provider2\"}");
 	});
 
-	it("should not fail when clients disconnects", (done) => {
+	it("should not fail when clients disconnects", done => {
 		// given
 		const subject = new Subject();
 		websocketServer = websocketFactory(
-			{ server: httpServer, path: "/ws" },
-			{ createDataObservable: _.constant(subject) });
+			{server: httpServer, path: "/ws"},
+			{createDataObservable: _.constant(subject)});
 
 		websocketClient = ws.createConnection(`ws://localhost:${serverPort}/ws`, () => {
 			// when
@@ -80,13 +80,13 @@ describe("websocketFactory.spec.js", () => {
 		});
 	});
 
-	it("should send update events to client", (done) => {
+	it("should send update events to client", done => {
 		// given
 		const observable = new Subject();
 
 		websocketServer = websocketFactory(
-			{ server: httpServer, path: "/ws" },
-			{ createDataObservable: _.constant(observable) });
+			{server: httpServer, path: "/ws"},
+			{createDataObservable: _.constant(observable)});
 
 		// when
 		websocketClient = ws.createConnection(`ws://localhost:${serverPort}/ws`, () => {
@@ -102,7 +102,7 @@ describe("websocketFactory.spec.js", () => {
 	});
 
 	function expectEvents(client, done, ...events) {
-		client.on("message", (event) => {
+		client.on("message", event => {
 			const expectedEvent = events.splice(0, 1)[0];
 			expect(event).to.eql(expectedEvent);
 			if (events.length === 0) {

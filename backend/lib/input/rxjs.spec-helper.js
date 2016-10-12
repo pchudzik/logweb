@@ -5,7 +5,7 @@ module.exports = {
 };
 
 function waitForEventsInOrder(done, observable, ...expectedEvents) {
-	return observable.subscribe((event) => {
+	return observable.subscribe(event => {
 		const expectedEvent = expectedEvents.splice(0, 1)[0];
 		expect(event).to.eql(expectedEvent);
 		if (expectedEvents.length === 0) {

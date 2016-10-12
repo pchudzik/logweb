@@ -4,10 +4,10 @@ const proxyquire = require("proxyquire");
 const EventEmitter = require("events");
 
 class RespawnMock extends EventEmitter {
-	start() {
+	static start() {
 	}
 
-	stop() {
+	static stop() {
 	}
 }
 
@@ -27,18 +27,18 @@ describe("Input.spec.js", () => {
 		);
 	});
 
-	it("should send event to data listener", (done) => {
+	it("should send event to data listener", done => {
 		// given
 		const processResult = "process result";
 		const providerName = "provider 1";
-		const input = new Input({ name: providerName });
+		const input = new Input({name: providerName});
 
 		// when
 		input.start();
 
 		// then
 		input.data.stdout
-			.subscribe((inputEvent) => {
+			.subscribe(inputEvent => {
 				expect(inputEvent.timestamp).to.be.number;	// eslint-disable-line no-unused-expressions
 				expect(inputEvent.data).to.eql(processResult);
 				expect(inputEvent.providerName).to.eql(providerName);
@@ -48,9 +48,9 @@ describe("Input.spec.js", () => {
 		respawnMock.emit("stdout", processResult);
 	});
 
-	it("should complete observable on process stop", (done) => {
+	it("should complete observable on process stop", done => {
 		// given
-		const input = new Input({ name: "any provider" });
+		const input = new Input({name: "any provider"});
 
 		// when
 		input.stop();
