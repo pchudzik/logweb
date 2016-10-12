@@ -4,10 +4,10 @@ const proxyquire = require("proxyquire");
 const EventEmitter = require("events");
 
 class RespawnMock extends EventEmitter {
-	static start() {
+	start() {
 	}
 
-	static stop() {
+	stop() {
 	}
 }
 

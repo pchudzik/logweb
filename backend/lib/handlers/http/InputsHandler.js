@@ -6,13 +6,13 @@ module.exports = class InputsHandler {
 		expressApp.get("/api/inputs/:inputName", this.getInput);
 	}
 
-	static listInputs(req, resp) {
+	listInputs(req, resp) {
 		resp.json(configuration
 			.getInputs()
 			.map(pickName));
 	}
 
-	static getInput(req, resp) {
+	getInput(req, resp) {
 		const event = configuration
 			.getInputs()
 			.filter(input => input.name === req.params.inputName)
