@@ -1,24 +1,24 @@
 import React from "react";
 import {Link} from "react-router";
 
-export default ProviderItem;
+export default InputItem;
 
-function ProviderItem(props) {
-	const providerName = props.provider.name;
-	const providerUrl = `/log/${providerName}`;
+function InputItem(props) {
+	const inputName = props.input.name;
+	const inputUrl = `/log/${inputName}`;
 	return (
 		<tr>
-			<td className="provider-name">
-				<Link to={providerUrl}>
-					{providerName}
+			<td className="input-name">
+				<Link to={inputUrl}>
+					{inputName}
 				</Link>
 			</td>
 		</tr>
 	);
 }
 
-ProviderItem.propTypes = {
-	provider: React.PropTypes.shape({
+InputItem.propTypes = {
+	input: React.PropTypes.shape({
 		name: React.PropTypes.string
 	})
 };

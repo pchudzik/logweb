@@ -1,38 +1,38 @@
 import React from "react";
 import {expect} from "chai";
 import {shallow} from "enzyme";
-import Provider from "./Input";
+import Input from "./Input";
 
 describe("Input.spec.jsx", () => {
-	it("should render provider name in first column", () => {
+	it("should render input name in first column", () => {
 		// given
-		const provider = createProvider("provider name");
+		const input = createInput("input name");
 
 		// when
-		const element = createProviderElement(provider);
+		const element = createInputElement(input);
 
 		// then
-		expect(element.find("Link").html()).to.eql(`<a>${provider.name}</a>`);	// .text() doesn't work
+		expect(element.find("Link").html()).to.eql(`<a>${input.name}</a>`);	// .text() doesn't work
 	});
 
 	it("should go to log following page on click", () => {
 		// given
-		const provider = createProvider("provider-name");
+		const input = createInput("input-name");
 
 		// when
-		const element = createProviderElement(provider);
+		const element = createInputElement(input);
 
 		// then
-		expect(element.find("Link")).to.have.prop("to", `/log/${provider.name}`);
+		expect(element.find("Link")).to.have.prop("to", `/log/${input.name}`);
 	});
 
-	function createProviderElement(provider) {
+	function createInputElement(input) {
 		return shallow(
-			<Provider provider={provider} />
+			<Input input={input} />
 		);
 	}
 
-	function createProvider(name) {
+	function createInput(name) {
 		return {name};
 	}
 });

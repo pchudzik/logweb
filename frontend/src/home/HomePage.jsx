@@ -1,6 +1,6 @@
 import React from "react";
-import ProvidersTable from "./Inputs";
+import InputsTable from "./Inputs";
 
 export default () => (
-	<ProvidersTable />
+	<InputsTable />
 );

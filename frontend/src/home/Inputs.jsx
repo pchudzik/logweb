@@ -1,26 +1,26 @@
 import React from "react";
 import {connect} from "react-redux";
-import {fetchProviders} from "../input/inputActions";
-import ProvidersHeader from "./InputsHeader";
-import ProviderItem from "./Input";
+import {fetchInputs} from "../input/inputActions";
+import InputsHeader from "./InputsHeader";
+import InputItem from "./Input";
 
-export class Providers extends React.Component {
+export class Inputs extends React.Component {
 	componentWillMount() {
-		this.props.dispatch(fetchProviders());
+		this.props.dispatch(fetchInputs());
 	}
 
 	render() {
-		const allProviders = this.props.providers
-			.map(provider => <ProviderItem key={provider.name} provider={provider}/>);
+		const allInputs = this.props.inputs
+			.map(input => <InputItem key={input.name} input={input}/>);
 
 		return (
 			<div className="container-fluid">
 				<table className="table table-hover table-condensed">
 					<thead>
-						<ProvidersHeader />
+						<InputsHeader />
 					</thead>
 					<tbody>
-						{allProviders}
+						{allInputs}
 					</tbody>
 				</table>
 			</div>
@@ -28,15 +28,15 @@ export class Providers extends React.Component {
 	}
 }
 
-Providers.propTypes = {
+Inputs.propTypes = {
 	dispatch: React.PropTypes.func,
-	providers: React.PropTypes.arrayOf(React.PropTypes.shape({
+	inputs: React.PropTypes.arrayOf(React.PropTypes.shape({
 		name: React.PropTypes.string
 	}))
 };
 
-function providersMapper(state) {
-	return state.providers;
+function inputsMapper(state) {
+	return {inputs: state.inputs.inputs};
 }
 
-export default connect(providersMapper)(Providers);
+export default connect(inputsMapper)(Inputs);

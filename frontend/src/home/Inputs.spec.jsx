@@ -4,18 +4,18 @@ import td from "testdouble";
 import {expect} from "chai";
 import {noop} from "../../test/testHelper";
 import {
-	Providers,
-	__RewireAPI__ as ProvidersRewireAPI
+	Inputs,
+	__RewireAPI__ as InputsRewireAPI
 } from "./Inputs";
 
 describe("Inputs.spec.jsx", () => {
-	const fetchProvidersMock = () => "fetch providers action";
+	const fetchInputsMock = () => "fetch inputs action";
 
 	beforeEach(() => {
-		ProvidersRewireAPI.__Rewire__("fetchProviders", fetchProvidersMock);
+		InputsRewireAPI.__Rewire__("fetchInputs", fetchInputsMock);
 	});
 
-	it("should dispatch fetch providers action on mount", () => {
+	it("should dispatch fetch inputs action on mount", () => {
 		// given
 		const dispatch = td.function();
 
@@ -23,32 +23,32 @@ describe("Inputs.spec.jsx", () => {
 		createElement({dispatch});
 
 		// then
-		td.verify(dispatch(fetchProvidersMock()));
+		td.verify(dispatch(fetchInputsMock()));
 	});
 
-	it("should render all providers", () => {
+	it("should render all inputs", () => {
 		// given
-		const providers = [createProvider("first"), createProvider("second")];
+		const inputs = [createInput("first"), createInput("second")];
 
 		// when
-		const element = createElement({providers});
+		const element = createElement({inputs});
 
 		// then
-		const allProviders = element.find("ProviderItem");
-		expect(allProviders).to.have.length(2);
-		expect(allProviders.at(0)).to.have.prop("provider", providers[0]);
-		expect(allProviders.at(1)).to.have.prop("provider", providers[1]);
+		const allInputs = element.find("InputItem");
+		expect(allInputs).to.have.length(2);
+		expect(allInputs.at(0)).to.have.prop("input", inputs[0]);
+		expect(allInputs.at(1)).to.have.prop("input", inputs[1]);
 	});
 
 	function createElement(options) {
 		return shallow(
-			<Providers
+			<Inputs
 				dispatch={options.dispatch || noop}
-				providers={options.providers || []}/>
+				inputs={options.inputs || []}/>
 		);
 	}
 
-	function createProvider(name) {
+	function createInput(name) {
 		return {name};
 	}
 });

@@ -1,11 +1,11 @@
 import moxios from "moxios";
 import td from "testdouble";
 import {
-	__RewireAPI__ as ProvidersActionsRewireAPI,
-	fetchProviders,
-	FETCH_PROVIDERS_PENDING,
-	FETCH_PROVIDERS_FULFILLED,
-	FETCH_PROVIDERS_REJECTED
+	__RewireAPI__ as InputActionsRewireAPI,
+	fetchInputs,
+	FETCH_INPUTS_PENDING,
+	FETCH_INPUTS_FULFILLED,
+	FETCH_INPUTS_REJECTED
 } from "./inputActions";
 
 describe("inputActions.spec.jsx", () => {
@@ -16,7 +16,7 @@ describe("inputActions.spec.jsx", () => {
 		dispatchMock = td.function("dispatch mock");
 		addMessageMock = td.function("add message mock");
 
-		ProvidersActionsRewireAPI.__Rewire__("addMessage", addMessageMock);
+		InputActionsRewireAPI.__Rewire__("addMessage", addMessageMock);
 
 		moxios.install();
 	});
@@ -25,17 +25,17 @@ describe("inputActions.spec.jsx", () => {
 		moxios.uninstall();
 	});
 
-	it(`should dispatch ${FETCH_PROVIDERS_PENDING} before list is fetched`, () => {
+	it(`should dispatch ${FETCH_INPUTS_PENDING} before list is fetched`, () => {
 		// when
-		fetchProviders()(dispatchMock);
+		fetchInputs()(dispatchMock);
 
 		// then
 		td.verify(dispatchMock({
-			type: FETCH_PROVIDERS_PENDING
+			type: FETCH_INPUTS_PENDING
 		}));
 	});
 
-	it(`should dispatch ${FETCH_PROVIDERS_FULFILLED} action when providers list fetched`, done => {
+	it(`should dispatch ${FETCH_INPUTS_FULFILLED} action when inputs list fetched`, done => {
 		// given
 		const responsePayload = [{name: "first"}, {name: "second"}];
 		moxios.stubRequest("/api/inputs", {
@@ -44,12 +44,12 @@ describe("inputActions.spec.jsx", () => {
 		});
 
 		// when
-		fetchProviders()(dispatchMock);
+		fetchInputs()(dispatchMock);
 
 		// then
 		moxios.wait(() => {
 			td.verify(dispatchMock({
-				type: FETCH_PROVIDERS_FULFILLED,
+				type: FETCH_INPUTS_FULFILLED,
 				payload: responsePayload
 			}));
 			done();
@@ -67,12 +67,12 @@ describe("inputActions.spec.jsx", () => {
 
 		it("should dispatch promise rejection event on fetch failure", done => {
 			// when
-			fetchProviders()(dispatchMock);
+			fetchInputs()(dispatchMock);
 
 			// then
 			moxios.wait(() => {
 				td.verify(dispatchMock(td.matchers.contains({
-					type: FETCH_PROVIDERS_REJECTED,
+					type: FETCH_INPUTS_REJECTED,
 					payload: {
 						response: {
 							status: errorStatus,
@@ -86,7 +86,7 @@ describe("inputActions.spec.jsx", () => {
 
 		it("should call addMessage on promise fetch failure", done => {
 			// when
-			fetchProviders()(dispatchMock);
+			fetchInputs()(dispatchMock);
 
 			// then
 			moxios.wait(() => {

@@ -1,17 +1,17 @@
 import {expect} from "chai";
-import providersReducer from "./inputReducer";
+import inputReducer from "./inputReducer";
 import {
-	FETCH_PROVIDERS_PENDING,
-	FETCH_PROVIDERS_FULFILLED,
-	FETCH_PROVIDERS_REJECTED
+	FETCH_INPUTS_PENDING,
+	FETCH_INPUTS_FULFILLED,
+	FETCH_INPUTS_REJECTED
 } from "./inputActions";
 
 describe("inputReducer.spec.js", () => {
-	const oldProviders = ["old", "providers", "collection"];
+	const oldInputs = ["old", "inputReducer", "collection"];
 
 	it("should return default state", () => {
-		expect(providersReducer(undefined, "unknown action")).to.eql({
-			providers: [],
+		expect(inputReducer(undefined, "unknown action")).to.eql({
+			inputs: [],
 			request: {
 				fetching: false,
 				fetched: false,
@@ -20,19 +20,19 @@ describe("inputReducer.spec.js", () => {
 		});
 	});
 
-	it(`should handle ${FETCH_PROVIDERS_PENDING} action`, () => {
+	it(`should handle ${FETCH_INPUTS_PENDING} action`, () => {
 		expect(
-			providersReducer({
-				providers: oldProviders,
+			inputReducer({
+				inputs: oldInputs,
 				request: {
 					fetching: false,
 					fetched: true,
 					error: "any error"
 				}
-			}, {type: FETCH_PROVIDERS_PENDING})
+			}, {type: FETCH_INPUTS_PENDING})
 		).to.eql(
 			{
-				providers: oldProviders,
+				inputs: oldInputs,
 				request: {
 					fetching: true,
 					fetched: false,
@@ -42,23 +42,23 @@ describe("inputReducer.spec.js", () => {
 		);
 	});
 
-	it(`should handle ${FETCH_PROVIDERS_FULFILLED} action`, () => {
+	it(`should handle ${FETCH_INPUTS_FULFILLED} action`, () => {
 		// given
-		const newProviders = ["new", "providers", "collection"];
+		const newInputs = ["new", "inputReducer", "collection"];
 
 		// expect
 		expect(
-			providersReducer({
-				providers: oldProviders,
+			inputReducer({
+				inputs: oldInputs,
 				request: {
 					fetching: true,
 					fetched: false,
 					error: "any error"
 				}
-			}, {type: FETCH_PROVIDERS_FULFILLED, payload: newProviders})
+			}, {type: FETCH_INPUTS_FULFILLED, payload: newInputs})
 		).to.eql(
 			{
-				providers: newProviders,
+				inputs: newInputs,
 				request: {
 					fetching: false,
 					fetched: true,
@@ -68,23 +68,23 @@ describe("inputReducer.spec.js", () => {
 		);
 	});
 
-	it(`should handle ${FETCH_PROVIDERS_REJECTED} action`, () => {
+	it(`should handle ${FETCH_INPUTS_REJECTED} action`, () => {
 		// given
-		const error = "fetch providers failure!";
+		const error = "fetch inputs failure!";
 
 		// expect
 		expect(
-			providersReducer({
-				providers: oldProviders,
+			inputReducer({
+				inputs: oldInputs,
 				request: {
 					fetching: false,
 					fetched: true,
 					error: null
 				}
-			}, {type: FETCH_PROVIDERS_REJECTED, payload: error})
+			}, {type: FETCH_INPUTS_REJECTED, payload: error})
 		).to.eql(
 			{
-				providers: oldProviders,
+				inputs: oldInputs,
 				request: {
 					error,
 					fetching: false,
