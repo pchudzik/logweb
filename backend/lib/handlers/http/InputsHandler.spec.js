@@ -43,4 +43,51 @@ describe("InputsHandler.spec.js", () => {
 			])
 			.end(done);
 	});
+
+	it("should get input details", (done) => {
+		// given
+		const inputName = "input-to-find";
+		const otherProperty = "otherProperty";
+		configurationMock.getInputs = _.constant([
+			{ name: "other" },
+			{
+				name: inputName,
+				otherProperty,
+				providers: [
+					{ name: "provider1", otherProperty },
+					{ name: "provider2", otherProperty }
+				]
+			}
+		]);
+
+		// when
+		request(app).get(`/api/inputs/${inputName}`)
+
+		// then
+			.expect("Content-Type", /json/)
+			.expect(200, {
+				name: inputName,
+				providers: [
+					{ name: "provider1" },
+					{ name: "provider2" }
+				]
+			})
+			.end(done);
+	});
+
+	it("should return 404 status when input not found", (done) => {
+		// given
+		const nonExistingInput = "non-existing-input";
+		configurationMock.getInputs = () => [];
+
+		// when
+		request(app).get(`/api/inputs/${nonExistingInput}`)
+
+		// then
+			.expect("Content-Type", /json/)
+			.expect(404, {
+				error: `No input with name ${nonExistingInput}`
+			})
+			.end(done);
+	});
 });
