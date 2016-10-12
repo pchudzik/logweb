@@ -4,6 +4,7 @@ import classnames from "classnames";
 import scroll from "react-scroll";
 import LogEntry from "./LogEntry";
 import {startFollowing, stopFollowing} from "./logActions";
+import filterEvents from "./eventsFilter";
 import "./log.scss";
 
 export class Log extends React.Component {
@@ -81,4 +82,11 @@ Log.propTypes = {
 	webSocket: React.PropTypes.object 		// eslint-disable-line react/forbid-prop-types
 };
 
-export default connect(state => state.log)(Log);
+export function mapToStateProps(state) {
+	return {
+		...state.log,
+		events: filterEvents(state.log.events, state.log.filter)
+	};
+}
+
+export default connect(mapToStateProps)(Log);

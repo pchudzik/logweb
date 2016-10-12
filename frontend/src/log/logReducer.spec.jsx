@@ -7,6 +7,11 @@ import {
 import logReducer from "./logReducer";
 
 describe("logreducer.spec.jsx", () => {
+	const emptyFilter = {providers: []};
+	const anyFilter = {
+		providers: ["filter"]
+	};
+
 	it("should empty initial state", () => {
 		expect(
 			logReducer(
@@ -17,14 +22,20 @@ describe("logreducer.spec.jsx", () => {
 			{
 				logName: null,
 				webSocket: null,
-				events: []
+				events: [],
+				filter: emptyFilter
 			}
 		);
 	});
 
 	it("should return input state on unknown event", () => {
 		// given
-		const inputState = {logName: "any log name", webSocket: "any websocket", events: [1, 2, 3]};
+		const inputState = {
+			logName: "any log name",
+			webSocket: "any websocket",
+			events: [1, 2, 3],
+			filter: anyFilter
+		};
 
 		// expect
 		expect(
@@ -50,7 +61,8 @@ describe("logreducer.spec.jsx", () => {
 					type: START_FOLLOWING,
 					payload: {
 						logName,
-						webSocket
+						webSocket,
+						filter: anyFilter
 					}
 				}
 			)
@@ -58,7 +70,8 @@ describe("logreducer.spec.jsx", () => {
 			{
 				events: [],
 				logName,
-				webSocket
+				webSocket,
+				filter: emptyFilter
 			}
 		);
 	});
@@ -75,7 +88,8 @@ describe("logreducer.spec.jsx", () => {
 					type: STOP_FOLLOWING,
 					payload: {
 						logName,
-						webSocket: null
+						webSocket: null,
+						filter: anyFilter
 					}
 				}
 			)
@@ -83,7 +97,8 @@ describe("logreducer.spec.jsx", () => {
 			{
 				logName: null,
 				webSocket: null,
-				events: []
+				events: [],
+				filter: emptyFilter
 			}
 		);
 	});
@@ -98,13 +113,22 @@ describe("logreducer.spec.jsx", () => {
 		// expect
 		expect(
 			logReducer(
-				{logName, webSocket, events: [existingEvent]},
-				{type: LOG_EVENT, payload: {data: JSON.stringify(event)}}
+				{
+					logName,
+					webSocket,
+					events: [existingEvent],
+					filter: anyFilter
+				},
+				{
+					type: LOG_EVENT,
+					payload: {data: JSON.stringify(event)}
+				}
 			)
 		).to.eql({
 			logName,
 			webSocket,
-			events: [existingEvent, event]
+			events: [existingEvent, event],
+			filter: anyFilter
 		});
 	});
 });

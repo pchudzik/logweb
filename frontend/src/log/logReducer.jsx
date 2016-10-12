@@ -4,10 +4,14 @@ import {
 	LOG_EVENT
 } from "./logActions";
 
+const emptyFilter = {
+	providers: []
+};
 const defaultLog = {
 	logName: null,
 	webSocket: null,
-	events: []
+	events: [],
+	filter: emptyFilter
 };
 
 export default function logReducer(state = defaultLog, action) {
@@ -16,13 +20,15 @@ export default function logReducer(state = defaultLog, action) {
 			return {
 				events: [],
 				logName: action.payload.logName,
-				webSocket: action.payload.webSocket
+				webSocket: action.payload.webSocket,
+				filter: emptyFilter
 			};
 		case STOP_FOLLOWING:
 			return {
 				events: [],
 				logName: null,
-				webSocket: null
+				webSocket: null,
+				filter: emptyFilter
 			};
 		case LOG_EVENT: {
 			return {
