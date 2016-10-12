@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import messages from "../message/messageReducer";
-import providers from "../home/providers/providersReducer";
+import providers from "../input/inputReducer";
 import log from "../log/logReducer";
 
 export default combineReducers({

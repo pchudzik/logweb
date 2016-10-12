@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {fetchProviders} from "./providersActions";
-import ProvidersHeader from "./ProvidersHeader";
-import ProviderItem from "./Provider";
+import {fetchProviders} from "../input/inputActions";
+import ProvidersHeader from "./InputsHeader";
+import ProviderItem from "./Input";
 
 export class Providers extends React.Component {
 	componentWillMount() {

@@ -2,13 +2,13 @@ import React from "react";
 import {shallow} from "enzyme";
 import td from "testdouble";
 import {expect} from "chai";
-import {noop} from "../../../test/testHelper";
+import {noop} from "../../test/testHelper";
 import {
 	Providers,
 	__RewireAPI__ as ProvidersRewireAPI
-} from "./Providers";
+} from "./Inputs";
 
-describe("Providers.spec.jsx", () => {
+describe("Inputs.spec.jsx", () => {
 	const fetchProvidersMock = () => "fetch providers action";
 
 	beforeEach(() => {

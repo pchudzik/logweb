@@ -6,9 +6,9 @@ import {
 	FETCH_PROVIDERS_PENDING,
 	FETCH_PROVIDERS_FULFILLED,
 	FETCH_PROVIDERS_REJECTED
-} from "./providersActions";
+} from "./inputActions";
 
-describe("providersActions.spec.jsx", () => {
+describe("inputActions.spec.jsx", () => {
 	let dispatchMock;
 	let addMessageMock;
 

@@ -2,7 +2,7 @@ import {
 	FETCH_PROVIDERS_PENDING,
 	FETCH_PROVIDERS_FULFILLED,
 	FETCH_PROVIDERS_REJECTED
-} from "./providersActions";
+} from "./inputActions";
 
 const defaultProvidersState = {
 	providers: [],

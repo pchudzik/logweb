@@ -1,12 +1,12 @@
 import {expect} from "chai";
-import providersReducer from "./providersReducer";
+import providersReducer from "./inputReducer";
 import {
 	FETCH_PROVIDERS_PENDING,
 	FETCH_PROVIDERS_FULFILLED,
 	FETCH_PROVIDERS_REJECTED
-} from "./providersActions";
+} from "./inputActions";
 
-describe("providersReducer.spec.js", () => {
+describe("inputReducer.spec.js", () => {
 	const oldProviders = ["old", "providers", "collection"];
 
 	it("should return default state", () => {

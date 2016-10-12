@@ -1,5 +1,5 @@
 import axios from "axios";
-import {addMessage} from "../../message/messageActions";
+import {addMessage} from "../message/messageActions";
 
 const FETCH_PROVIDERS = "FETCH_PROVIDERS";
 export const FETCH_PROVIDERS_PENDING = FETCH_PROVIDERS + "_PENDING";

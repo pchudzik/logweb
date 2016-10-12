@@ -1,9 +1,9 @@
 import React from "react";
 import {expect} from "chai";
 import {shallow} from "enzyme";
-import Provider from "./Provider";
+import Provider from "./Input";
 
-describe("Provider.spec.jsx", () => {
+describe("Input.spec.jsx", () => {
 	it("should render provider name in first column", () => {
 		// given
 		const provider = createProvider("provider name");
