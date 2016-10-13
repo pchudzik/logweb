@@ -3,7 +3,11 @@ import {connect} from "react-redux";
 import classnames from "classnames";
 import scroll from "react-scroll";
 import LogEntry from "./LogEntry";
-import {startFollowing, stopFollowing} from "./logActions";
+import {
+	startFollowing,
+	stopFollowing,
+	fetchInputDetails
+} from "./logActions";
 import filterEvents from "./eventsFilter";
 import "./log.scss";
 
@@ -18,6 +22,7 @@ export class Log extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(startFollowing(this.getLogName()));
+		this.props.dispatch(fetchInputDetails(this.getLogName()));
 	}
 
 	componentDidUpdate() {

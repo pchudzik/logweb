@@ -3,14 +3,16 @@ import {
 	FETCH_INPUTS_FULFILLED,
 	FETCH_INPUTS_REJECTED
 } from "./inputActions";
+import {
+	emptyRequest,
+	errorRequest,
+	fulfilledRequest,
+	pendingRequest
+} from "./requestState";
 
 const defaultInputsState = {
 	inputs: [],
-	request: {
-		fetching: false,
-		fetched: false,
-		error: null
-	}
+	request: emptyRequest()
 };
 
 export default function inputReducer(state = defaultInputsState, action) {
@@ -18,30 +20,18 @@ export default function inputReducer(state = defaultInputsState, action) {
 		case FETCH_INPUTS_PENDING:
 			return {
 				...state,
-				request: {
-					fetching: true,
-					fetched: false,
-					error: null
-				}
+				request: pendingRequest()
 			};
 		case FETCH_INPUTS_FULFILLED:
 			return {
 				...state,
 				inputs: action.payload,
-				request: {
-					fetching: false,
-					fetched: true,
-					error: null
-				}
+				request: fulfilledRequest()
 			};
 		case FETCH_INPUTS_REJECTED:
 			return {
 				...state,
-				request: {
-					fetching: false,
-					fetched: false,
-					error: action.payload
-				}
+				request: errorRequest(action.payload)
 			};
 		default:
 			return state;

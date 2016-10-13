@@ -10,11 +10,13 @@ import {
 
 describe("Log.spec.jsx", () => {
 	let scroll;
+	let fetchInputDetails;
 	let startFollowing;
 	let stopFollowing;
 	let dispatch;
 
 	beforeEach(() => {
+		fetchInputDetails = td.function();
 		scroll = td.function();
 		dispatch = td.function();
 		startFollowing = td.function();
@@ -22,6 +24,7 @@ describe("Log.spec.jsx", () => {
 
 		LogRewireAPI.__Rewire__("startFollowing", startFollowing);
 		LogRewireAPI.__Rewire__("stopFollowing", stopFollowing);
+		LogRewireAPI.__Rewire__("fetchInputDetails", fetchInputDetails);
 		LogRewireAPI.__Rewire__("scroll", {
 			animateScroll: {
 				scrollToBottom: scroll
@@ -69,6 +72,19 @@ describe("Log.spec.jsx", () => {
 
 		// then
 		td.verify(dispatch(startFollowingAction));
+	});
+
+	it("should fetch input details on component mount", () => {
+		// given
+		const logName = "log-to-follow";
+		const fetchInputDetailsActions = "fetch input details";
+		td.when(fetchInputDetails(logName)).thenReturn(fetchInputDetailsActions);
+
+		// when
+		createElement({dispatch, logName});
+
+		// then
+		td.verify(dispatch(fetchInputDetailsActions));
 	});
 
 	it("should dispatch stop watching event on component unmount", () => {

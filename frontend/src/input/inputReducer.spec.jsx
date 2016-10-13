@@ -10,7 +10,12 @@ describe("inputReducer.spec.js", () => {
 	const oldInputs = ["old", "inputReducer", "collection"];
 
 	it("should return default state", () => {
-		expect(inputReducer(undefined, "unknown action")).to.eql({
+		expect(
+			inputReducer(
+				undefined,
+				"unknown action"
+			)
+		).to.eql({
 			inputs: [],
 			request: {
 				fetching: false,
