@@ -10,13 +10,16 @@ import {
 
 describe("inputActions.spec.jsx", () => {
 	let dispatchMock;
-	let addMessageMock;
+	let dispatchErrorMessageMock;
+	let httpErrormessageMock;
 
 	beforeEach(() => {
+		httpErrormessageMock = td.function("httpErrorMessage");
 		dispatchMock = td.function("dispatch mock");
-		addMessageMock = td.function("add message mock");
+		dispatchErrorMessageMock = td.function("dispatch error message mock");
 
-		InputActionsRewireAPI.__Rewire__("addMessage", addMessageMock);
+		InputActionsRewireAPI.__Rewire__("dispatchErrorMessage", dispatchErrorMessageMock);
+		InputActionsRewireAPI.__Rewire__("httpErrorMessage", httpErrormessageMock);
 
 		moxios.install();
 	});
@@ -84,16 +87,16 @@ describe("inputActions.spec.jsx", () => {
 			});
 		});
 
-		it("should call addMessage on promise fetch failure", done => {
+		it("should dispatch error message on promise fetch failure", done => {
+			// given
+			td.when(httpErrormessageMock(), {ignoreExtraArgs: true}).thenReturn(errorMessage);
+
 			// when
 			fetchInputs()(dispatchMock);
 
 			// then
 			moxios.wait(() => {
-				td.verify(addMessageMock({
-					type: "danger",
-					message: `${errorStatus} - ${errorMessage}`
-				}));
+				td.verify(dispatchErrorMessageMock(dispatchMock, errorMessage));
 				done();
 			});
 		});

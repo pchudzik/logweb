@@ -1,5 +1,8 @@
 import axios from "axios";
-import {addMessage} from "../message/messageActions";
+import {
+	dispatchErrorMessage,
+	httpErrorMessage
+} from "../message/dispatchMessage";
 
 const FETCH_INPUTS = "FETCH_INPUTS";
 export const FETCH_INPUTS_PENDING = FETCH_INPUTS + "_PENDING";
@@ -14,7 +17,7 @@ export function fetchInputs() {
 			.get("/api/inputs")
 			.then(response => dispatch({type: FETCH_INPUTS_FULFILLED, payload: response.data}))
 			.catch(error => {
-				dispatchErrorMessage(dispatch, error);
+				dispatchErrorMessage(dispatch, httpErrorMessage(error));
 				dispatchPromiseRejection(dispatch, error);
 			});
 	};
@@ -22,10 +25,4 @@ export function fetchInputs() {
 
 function dispatchPromiseRejection(dispatch, error) {
 	dispatch({type: FETCH_INPUTS_REJECTED, payload: error});
-}
-function dispatchErrorMessage(dispatch, error) {
-	dispatch(addMessage({
-		type: "danger",
-		message: `${error.response.status} - ${error.response.data}`
-	}));
 }
