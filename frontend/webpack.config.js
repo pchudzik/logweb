@@ -33,7 +33,7 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, "../backend/public"),
-		filename: "[name].js"
+		filename: "[name].[hash].js"
 	},
 	devServer: {
 		proxy: {
