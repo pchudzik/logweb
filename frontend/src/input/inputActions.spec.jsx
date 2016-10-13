@@ -11,15 +11,15 @@ import {
 describe("inputActions.spec.jsx", () => {
 	let dispatchMock;
 	let dispatchErrorMessageMock;
-	let httpErrormessageMock;
+	let httpErrorMessageMock;
 
 	beforeEach(() => {
-		httpErrormessageMock = td.function("httpErrorMessage");
+		httpErrorMessageMock = td.function("httpErrorMessage");
 		dispatchMock = td.function("dispatch mock");
 		dispatchErrorMessageMock = td.function("dispatch error message mock");
 
 		InputActionsRewireAPI.__Rewire__("dispatchErrorMessage", dispatchErrorMessageMock);
-		InputActionsRewireAPI.__Rewire__("httpErrorMessage", httpErrormessageMock);
+		InputActionsRewireAPI.__Rewire__("httpErrorMessage", httpErrorMessageMock);
 
 		moxios.install();
 	});
@@ -89,7 +89,7 @@ describe("inputActions.spec.jsx", () => {
 
 		it("should dispatch error message on promise fetch failure", done => {
 			// given
-			td.when(httpErrormessageMock(), {ignoreExtraArgs: true}).thenReturn(errorMessage);
+			td.when(httpErrorMessageMock(), {ignoreExtraArgs: true}).thenReturn(errorMessage);
 
 			// when
 			fetchInputs()(dispatchMock);

@@ -19,14 +19,14 @@ class WebSocketMock {
 describe("logActions.spec.jsx", () => {
 	const resolveHost = () => "example.com";
 	const resolvePort = () => 8008;
-	let dispatch;
+	let dispatchMock;
 	let windowMock;
 	let windowBak;
 
 	beforeEach(() => {
 		windowBak = global.window;
 
-		dispatch = td.function("dispatch mock");
+		dispatchMock = td.function("dispatch mock");
 		windowMock = {
 			WebSocket: WebSocketMock
 		};
@@ -45,10 +45,10 @@ describe("logActions.spec.jsx", () => {
 		const logName = "log-to-follow";
 
 		// when
-		startFollowing(logName)(dispatch);
+		startFollowing(logName)(dispatchMock);
 
 		// then
-		td.verify(dispatch(td.matchers.argThat(action => {
+		td.verify(dispatchMock(td.matchers.argThat(action => {
 			const webSocoket = action.payload.webSocket;
 			expect(action.type).to.eql(START_FOLLOWING);
 			expect(webSocoket.url).to.eql(`ws://${resolveHost()}:${resolvePort()}/api/ws/${logName}`);
@@ -62,17 +62,17 @@ describe("logActions.spec.jsx", () => {
 		const webSocketEvent1 = {data: "event data 1"};
 		const webSocketEvent2 = {data: "event data 2"};
 		let webSocket;
-		td.when(dispatch(td.matchers.contains({type: START_FOLLOWING})))
+		td.when(dispatchMock(td.matchers.contains({type: START_FOLLOWING})))
 			.thenDo(action => {
 				webSocket = action.payload.webSocket;
 			});
-		startFollowing(logName)(dispatch);
+		startFollowing(logName)(dispatchMock);
 
 		// when
 		webSocket.onmessage(webSocketEvent1);
 
 		// then
-		td.verify(dispatch({
+		td.verify(dispatchMock({
 			type: LOG_EVENT,
 			payload: webSocketEvent1
 		}));
@@ -81,7 +81,7 @@ describe("logActions.spec.jsx", () => {
 		webSocket.onmessage(webSocketEvent2);
 
 		// then
-		td.verify(dispatch({
+		td.verify(dispatchMock({
 			type: LOG_EVENT,
 			payload: webSocketEvent2
 		}));
