@@ -5,9 +5,9 @@ import scroll from "react-scroll";
 import LogEntry from "./LogEntry";
 import {
 	startFollowing,
-	stopFollowing,
-	fetchInputDetails
+	stopFollowing
 } from "./logActions";
+import {fetchInputDetails} from "../input/inputDetailsActions";
 import filterEvents from "./eventsFilter";
 import "./log.scss";
 
