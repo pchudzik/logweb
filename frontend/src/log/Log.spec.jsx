@@ -33,9 +33,9 @@ describe("Log.spec.jsx", () => {
 	});
 
 	describe("log following toggle", () => {
-		it("should follow toggle by default", () => {
+		it("should toggle follow by default", () => {
 			// given
-			const options = {events: []};
+			const options = {events: [], isFollowingActive: true};
 			const element = createElement(options);
 
 			// when
@@ -48,7 +48,7 @@ describe("Log.spec.jsx", () => {
 
 		it("should stop scrolling to bottom when follow is disabled", () => {
 			// given
-			const options = {events: []};
+			const options = {events: [], isFollowingActive: false};
 			const element = createElement(options);
 
 			// when
@@ -127,6 +127,7 @@ describe("Log.spec.jsx", () => {
 				dispatch={options.dispatch || noop}
 				events={options.events || []}
 				webSocket={options.webSocket || {ws: "any websocket"}}
+				isFollowingActive={options.isFollowingActive || false}
 				params={params}/>, {lifecycleExperimental: true}
 		);
 	}

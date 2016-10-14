@@ -2,6 +2,7 @@ import {expect} from "chai";
 import {
 	START_FOLLOWING,
 	STOP_FOLLOWING,
+	TOGGLE_FOLLOW_LOG,
 	LOG_EVENT
 } from "./logActions";
 import logReducer from "./logReducer";
@@ -23,7 +24,8 @@ describe("logreducer.spec.jsx", () => {
 				logName: null,
 				webSocket: null,
 				events: [],
-				filter: emptyFilter
+				filter: emptyFilter,
+				isFollowingActive: false
 			}
 		);
 	});
@@ -71,7 +73,8 @@ describe("logreducer.spec.jsx", () => {
 				events: [],
 				logName,
 				webSocket,
-				filter: emptyFilter
+				filter: emptyFilter,
+				isFollowingActive: true
 			}
 		);
 	});
@@ -89,7 +92,8 @@ describe("logreducer.spec.jsx", () => {
 					payload: {
 						logName,
 						webSocket: null,
-						filter: anyFilter
+						filter: anyFilter,
+						isFollowingActive: true
 					}
 				}
 			)
@@ -98,7 +102,8 @@ describe("logreducer.spec.jsx", () => {
 				logName: null,
 				webSocket: null,
 				events: [],
-				filter: emptyFilter
+				filter: emptyFilter,
+				isFollowingActive: false
 			}
 		);
 	});
@@ -117,7 +122,8 @@ describe("logreducer.spec.jsx", () => {
 					logName,
 					webSocket,
 					events: [existingEvent],
-					filter: anyFilter
+					filter: anyFilter,
+					isFollowingActive: "any value"
 				},
 				{
 					type: LOG_EVENT,
@@ -128,7 +134,34 @@ describe("logreducer.spec.jsx", () => {
 			logName,
 			webSocket,
 			events: [existingEvent, event],
-			filter: anyFilter
+			filter: anyFilter,
+			isFollowingActive: "any value"
+		});
+	});
+
+	[true, false].forEach(isFollowing => {
+		const isStart = isFollowing ? "stop" : "start";
+		it(`should ${isStart} log pursuit on ${TOGGLE_FOLLOW_LOG} action when isFollowing = ${isFollowing}`, () => {
+			const logName = "any log name";
+			const webSocket = "any web socket";
+			const events = [{timestamp: 1234, message: "message"}];
+
+			expect(
+				logReducer(
+					{
+						logName,
+						webSocket,
+						events,
+						isFollowingActive: isFollowing
+					},
+					{type: TOGGLE_FOLLOW_LOG}
+				)
+			).to.eql({
+				logName,
+				webSocket,
+				events,
+				isFollowingActive: !isFollowing
+			});
 		});
 	});
 });

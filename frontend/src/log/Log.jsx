@@ -5,7 +5,8 @@ import scroll from "react-scroll";
 import LogEntry from "./LogEntry";
 import {
 	startFollowing,
-	stopFollowing
+	stopFollowing,
+	toggleFollowLog
 } from "./logActions";
 import {fetchInputDetails} from "../input/inputDetailsActions";
 import filterEvents from "./eventsFilter";
@@ -15,7 +16,6 @@ export class Log extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {followingActive: true};
 		this.getLogName = this.getLogName.bind(this);
 		this.toggleFollow = this.toggleFollow.bind(this);
 	}
@@ -26,7 +26,7 @@ export class Log extends React.Component {
 	}
 
 	componentDidUpdate() {
-		if (this.state.followingActive) {
+		if (this.props.isFollowingActive) {
 			scroll.animateScroll.scrollToBottom({
 				duration: 500
 			});
@@ -46,9 +46,7 @@ export class Log extends React.Component {
 	}
 
 	toggleFollow() {
-		this.setState({
-			followingActive: !this.state.followingActive
-		});
+		this.props.dispatch(toggleFollowLog());
 	}
 
 	render() {
@@ -58,7 +56,7 @@ export class Log extends React.Component {
 			<div>
 				<div className="toggle-follow">
 					<button
-						className={classnames("btn", "btn-default", {active: this.state.followingActive})}
+						className={classnames("btn", "btn-default", {active: this.props.isFollowingActive})}
 						onClick={this.toggleFollow}>
 						Toggle follow
 					</button>
@@ -74,11 +72,13 @@ export class Log extends React.Component {
 		);
 	}
 }
+
 Log.propTypes = {
 	dispatch: React.PropTypes.func,
 	params: React.PropTypes.shape({
 		logName: React.PropTypes.string
 	}),
+	isFollowingActive: React.PropTypes.bool,
 	events: React.PropTypes.arrayOf(React.PropTypes.shape({
 		data: React.PropTypes.string,
 		timestamp: React.PropTypes.number,

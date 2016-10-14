@@ -1,6 +1,7 @@
 import {
 	START_FOLLOWING,
 	STOP_FOLLOWING,
+	TOGGLE_FOLLOW_LOG,
 	LOG_EVENT
 } from "./logActions";
 
@@ -10,6 +11,7 @@ const emptyFilter = {
 const defaultLog = {
 	logName: null,
 	webSocket: null,
+	isFollowingActive: false,
 	events: [],
 	filter: emptyFilter
 };
@@ -19,6 +21,7 @@ export default function logReducer(state = defaultLog, action) {
 		case START_FOLLOWING:
 			return {
 				events: [],
+				isFollowingActive: true,
 				logName: action.payload.logName,
 				webSocket: action.payload.webSocket,
 				filter: emptyFilter
@@ -27,9 +30,17 @@ export default function logReducer(state = defaultLog, action) {
 			return {
 				events: [],
 				logName: null,
+				isFollowingActive: false,
 				webSocket: null,
 				filter: emptyFilter
 			};
+		case TOGGLE_FOLLOW_LOG: {
+			return {
+				...state,
+				isFollowingActive: !state.isFollowingActive
+			};
+
+		}
 		case LOG_EVENT: {
 			return {
 				...state,
