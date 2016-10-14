@@ -1,23 +1,20 @@
 import React from "react";
 import {connect} from "react-redux";
-import classnames from "classnames";
 import scroll from "react-scroll";
 import LogEntry from "./LogEntry";
 import {
 	startFollowing,
-	stopFollowing,
-	toggleFollowLog
+	stopFollowing
 } from "./logActions";
 import {fetchInputDetails} from "../input/inputDetailsActions";
 import filterEvents from "./eventsFilter";
-import "./log.scss";
+import LogActionsPanel from "./LogActionsPanel";
 
 export class Log extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.getLogName = this.getLogName.bind(this);
-		this.toggleFollow = this.toggleFollow.bind(this);
 	}
 
 	componentWillMount() {
@@ -45,22 +42,12 @@ export class Log extends React.Component {
 		return this.props.webSocket;
 	}
 
-	toggleFollow() {
-		this.props.dispatch(toggleFollowLog());
-	}
-
 	render() {
 		const events = this.props.events
 			.map((event, index) => <LogEntry key={`${event.timestamp}-${index}`} logMessage={event.data}/>);
 		return (
 			<div>
-				<div className="toggle-follow">
-					<button
-						className={classnames("btn", "btn-default", {active: this.props.isFollowingActive})}
-						onClick={this.toggleFollow}>
-						Toggle follow
-					</button>
-				</div>
+				<LogActionsPanel/>
 				<div className="log-data">
 					{events}
 				</div>

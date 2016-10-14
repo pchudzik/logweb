@@ -43,7 +43,6 @@ describe("Log.spec.jsx", () => {
 
 			// then
 			td.verify(scroll(), {ignoreExtraArgs: true});
-			expect(element.find("button")).to.have.className("active");
 		});
 
 		it("should stop scrolling to bottom when follow is disabled", () => {
@@ -52,12 +51,11 @@ describe("Log.spec.jsx", () => {
 			const element = createElement(options);
 
 			// when
-			element.find("button").simulate("click");
+			element.setProps({isFollowingActive: false});
 			element.setProps({events: [createEvent("first")]});
 
 			// then
 			td.verify(scroll(), {ignoreExtraArgs: true, times: 0});
-			expect(element.find("button")).not.to.have.className("active");
 		});
 	});
 

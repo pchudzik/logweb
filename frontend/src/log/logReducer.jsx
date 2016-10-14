@@ -34,13 +34,11 @@ export default function logReducer(state = defaultLog, action) {
 				webSocket: null,
 				filter: emptyFilter
 			};
-		case TOGGLE_FOLLOW_LOG: {
+		case TOGGLE_FOLLOW_LOG:
 			return {
 				...state,
 				isFollowingActive: !state.isFollowingActive
 			};
-
-		}
 		case LOG_EVENT: {
 			return {
 				...state,
