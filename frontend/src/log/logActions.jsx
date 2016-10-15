@@ -4,12 +4,20 @@ import {
 } from "./hostHelper";
 
 export const TOGGLE_FOLLOW_LOG = "TOGGLE_FOLLOW_LOG";
+export const TOGGLE_PROVIDR_FILTER = "TOGGLE_PROVIDER_FILTER";
 export const START_FOLLOWING = "START_FOLLOWING";
 export const STOP_FOLLOWING = "STOP_FOLLOWING";
 export const LOG_EVENT = "LOG_EVENT";
 
 export function toggleFollowLog() {
 	return {type: TOGGLE_FOLLOW_LOG};
+}
+
+export function toggleProviderFilter(providerName) {
+	return {
+		type: TOGGLE_PROVIDR_FILTER,
+		payload: providerName
+	};
 }
 
 export function stopFollowing(logName, webSocket) {

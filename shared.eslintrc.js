@@ -6,6 +6,7 @@ module.exports = {
 	},
 	rules: {
 		"no-tabs": "off",
+		"yoda": "off",
 		"no-use-before-define": ["error", {"functions": false}],
 		"indent": ["error", "tab", {"SwitchCase": 1}],
 		"quotes": ["error", "double"],

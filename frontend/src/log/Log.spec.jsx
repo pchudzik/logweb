@@ -72,19 +72,6 @@ describe("Log.spec.jsx", () => {
 		td.verify(dispatch(startFollowingAction));
 	});
 
-	it("should fetch input details on component mount", () => {
-		// given
-		const logName = "log-to-follow";
-		const fetchInputDetailsActions = "fetch input details";
-		td.when(fetchInputDetails(logName)).thenReturn(fetchInputDetailsActions);
-
-		// when
-		createElement({dispatch, logName});
-
-		// then
-		td.verify(dispatch(fetchInputDetailsActions));
-	});
-
 	it("should dispatch stop watching event on component unmount", () => {
 		// given
 		const logName = "following log name";
@@ -126,7 +113,8 @@ describe("Log.spec.jsx", () => {
 				events={options.events || []}
 				webSocket={options.webSocket || {ws: "any websocket"}}
 				isFollowingActive={options.isFollowingActive || false}
-				params={params}/>, {lifecycleExperimental: true}
+				params={params}/>,
+			{lifecycleExperimental: true}
 		);
 	}
 

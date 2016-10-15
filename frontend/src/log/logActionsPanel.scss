@@ -3,6 +3,32 @@
 }
 
 .log-actions {
+  opacity: 0.6;
   position: fixed;
   right: 0;
+  text-align: right;
+  margin: 5px;
+
+  .btn-toggle-follow {
+    width: 100%;
+
+    &:not(.active) .fa {
+      display: none;
+    }
+  }
+
+  .btn-toggle-provider {
+    min-width: 10em;
+    .fa {
+      margin-right: 5px;
+    }
+
+    &:not(.active) .fa {
+      display: none;
+    }
+  }
+
+  div {
+    margin: 5px;
+  }
 }

@@ -3,6 +3,7 @@ import {
 	START_FOLLOWING,
 	STOP_FOLLOWING,
 	TOGGLE_FOLLOW_LOG,
+	TOGGLE_PROVIDR_FILTER,
 	LOG_EVENT
 } from "./logActions";
 import logReducer from "./logReducer";
@@ -70,10 +71,8 @@ describe("logreducer.spec.jsx", () => {
 			)
 		).to.eql(
 			{
-				events: [],
 				logName,
 				webSocket,
-				filter: emptyFilter,
 				isFollowingActive: true
 			}
 		);
@@ -136,6 +135,53 @@ describe("logreducer.spec.jsx", () => {
 			events: [existingEvent, event],
 			filter: anyFilter,
 			isFollowingActive: "any value"
+		});
+	});
+
+	it("should add provider to filter if not yet filtering by it", () => {
+		// given
+		const oldFilters = ["provider1"];
+		const newFilter = "provider2";
+
+		expect(
+			logReducer(
+				{
+					filter: {
+						providers: oldFilters
+					}
+				},
+				{
+					type: TOGGLE_PROVIDR_FILTER,
+					payload: {name: newFilter}
+				}
+			)
+		).to.eql({
+			filter: {
+				providers: [...oldFilters, newFilter]
+			}
+		});
+	});
+
+	it("should remove provider from filter if already filtering by it", () => {
+		// given
+		const provider = "provider";
+
+		expect(
+			logReducer(
+				{
+					filter: {
+						providers: [provider]
+					}
+				},
+				{
+					type: TOGGLE_PROVIDR_FILTER,
+					payload: {name: provider}
+				}
+			)
+		).to.eql({
+			filter: {
+				providers: []
+			}
 		});
 	});
 

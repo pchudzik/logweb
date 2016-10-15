@@ -6,7 +6,6 @@ import {
 	startFollowing,
 	stopFollowing
 } from "./logActions";
-import {fetchInputDetails} from "../input/inputDetailsActions";
 import filterEvents from "./eventsFilter";
 import LogActionsPanel from "./LogActionsPanel";
 
@@ -19,7 +18,6 @@ export class Log extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(startFollowing(this.getLogName()));
-		this.props.dispatch(fetchInputDetails(this.getLogName()));
 	}
 
 	componentDidUpdate() {
