@@ -1,7 +1,7 @@
 const proxyquire = require("proxyquire");
 const expect = require("chai").expect;
 
-describe("configurationParser.spec.js", () => {
+describe("configuration.spec.js", () => {
 	describe("provider inputs spec", () => {
 		it("should execute user command with /bin/sh as default shell when passed as string", () => {
 			// given
@@ -113,8 +113,9 @@ describe("configurationParser.spec.js", () => {
 	});
 
 	function createConfigurationWithConfig(config) {
+		config["@noCallThru"] = true;	// eslint-disable-line no-param-reassign
 		return proxyquire("./configuration", {
-			"../logweb": config
+			"./configurationLoader": config
 		});
 	}
 });

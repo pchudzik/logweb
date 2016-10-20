@@ -1,6 +1,5 @@
 const _ = require("lodash");
-
-const config = require("../logweb");
+const config = require("./configurationLoader");
 
 module.exports = {
 	getInputs,
