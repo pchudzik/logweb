@@ -30,3 +30,7 @@ Frontend will display data from websocket exposed by backend.
 Frontend it's react + redux with webpack as module bundler. Frontend is built with command ```npm run dist```. This will compile all the files and put them in /backend/public folder. Development mode can be triggered by ```npm run dev```
 
 Backend is plain nodejs application (node v6). Start it with ```npm start``` (remember to dist frontend first). 
+
+## How to run
+1. Build frontend ```(cd frontend && npm run dist)```
+2. Start backend ```(cd backend && node index.js logweb.example.js)```
