@@ -15,7 +15,15 @@ const commonPlugins = [
 		inject: false,
 		template: htmlTemplate,
 		appMountId: "app",
-		title: "Logweb"
+		title: "Logweb",
+		links: [
+			{
+				href: "/src/favicon-code.ico",
+				rel: "icon",
+				sizes: "16x16",
+				type: "image/ico"
+			}
+		]
 	})
 ];
 
