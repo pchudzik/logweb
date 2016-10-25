@@ -1,6 +1,6 @@
 const Observable = require("rxjs").Observable;
 const Subject = require("rxjs").Subject;
-const rxHelper = require("./rxjs.spec-helper");
+const rxHelper = require("../rxjs.spec-helper");
 const td = require("testdouble");
 const proxyquire = require("proxyquire");
 

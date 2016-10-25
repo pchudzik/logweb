@@ -1,7 +1,7 @@
 const Observable = require("rxjs").Observable;
 const Subject = require("rxjs").Subject;
 const BufferingObservable = require("./BufferingObservable");
-const rxHelper = require("./rxjs.spec-helper");
+const rxHelper = require("../rxjs.spec-helper");
 const expect = require("chai").expect;
 
 describe("BufferingObservable.spec.js", () => {

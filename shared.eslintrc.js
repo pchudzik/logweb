@@ -12,6 +12,7 @@ module.exports = {
 		"quotes": ["error", "double"],
 		"comma-dangle": ["error", "never"],
 		"arrow-parens": ["error", "as-needed"],
+		"no-plusplus": ["error", {allowForLoopAfterthoughts: true}],
 		"object-curly-spacing": ["error", "never"],
 		"prefer-template": "off",
 		"consistent-return": "off",
