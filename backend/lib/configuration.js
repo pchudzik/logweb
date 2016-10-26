@@ -28,8 +28,26 @@ function resolveProviders(singleInput) {
 	const providers = _.flatten([singleInput.providers]);
 	return providers.map(provider => ({
 		name: provider.name,
-		cmd: resolveInputCmd(provider.cmd)
+		cmd: resolveInputCmd(provider.cmd),
+		log: resolveLogCmd(provider.log)
 	}));
+}
+
+function resolveLogCmd(maybeLogConfiguration) {
+	const logAppendTimeout = 300;
+	const newLineRegexp = /\n/;
+
+	if (!maybeLogConfiguration) {
+		return {
+			logAppendTimeout,
+			newLineRegexp
+		};
+	}
+
+	return {
+		logAppendTimeout: maybeLogConfiguration.logAppendTimeout || logAppendTimeout,
+		newLineRegexp: maybeLogConfiguration.newLineRegexp || newLineRegexp
+	};
 }
 
 function resolveInputCmd(cmd) {

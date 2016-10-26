@@ -86,11 +86,94 @@ describe("configuration.spec.js", () => {
 					name: "multi",
 					bufferSize: 123,
 					providers: [
-						{name: "echo", cmd: ["/bin/sh", "-c", "echo 1"]},
-						{name: "bash", cmd: ["/bin/bash", "-c", "echo 2"]}
+						{
+							name: "echo",
+							cmd: ["/bin/sh", "-c", "echo 1"],
+							log: defaultLogConfiguration()
+						},
+						{
+							name: "bash",
+							cmd: ["/bin/bash", "-c", "echo 2"],
+							log: defaultLogConfiguration()
+						}
 					]
 				}
 			]);
+		});
+
+		describe("provider log configuration should be resolved", () => {
+			[
+				{},
+				null,
+				undefined
+			].forEach(providerConfigurationObject => {
+				it("should use default values when log not configured", () => {
+					// given
+					const configuration = providerWithLogConfiguration(providerConfigurationObject);
+
+					// when
+					const providerConfig = getSingleProviderConfiguration(configuration);
+
+					// then
+					expect(asString(providerConfig.log)).to.eq(asString(defaultLogConfiguration()));
+				});
+			});
+
+			it("should use default logAppendTimeout when not provided", () => {
+				// given
+				const configuration = providerWithLogConfiguration({
+					newLineRegexp: /(?=LOG:)/
+				});
+
+				// when
+				const providerConfig = getSingleProviderConfiguration(configuration);
+
+				// then
+				expect(providerConfig.log).to.eql(Object.assign(
+					defaultLogConfiguration(),
+					{newLineRegexp: /(?=LOG:)/})
+				);
+			});
+
+			it("should use default newLineRegexp pattern if no regexp provided", () => {
+				// given
+				const configuration = providerWithLogConfiguration({
+					logAppendTimeout: 10
+				});
+
+				// when
+				const providerConfig = getSingleProviderConfiguration(configuration);
+
+				// then
+				expect(providerConfig.log).to.eql(Object.assign(
+					defaultLogConfiguration(),
+					{logAppendTimeout: 10})
+				);
+			});
+
+			function asString(object) {
+				return JSON.stringify(object, null, 2);
+			}
+
+			function getSingleProviderConfiguration(configuration) {
+				return configuration.getInputs()[0].providers[0];
+			}
+
+			function providerWithLogConfiguration(logConfiguration) {
+				return createConfigurationWithConfig({
+					inputs: [{
+						name: "multi",
+						bufferSize: 123,
+						providers: [
+							{
+								cmd: "echo 1",
+								name: "echo",
+								log: logConfiguration
+							}
+						]
+					}]
+				});
+			}
 		});
 	});
 
@@ -117,5 +200,12 @@ describe("configuration.spec.js", () => {
 		return proxyquire("./configuration", {
 			"./configurationLoader": config
 		});
+	}
+
+	function defaultLogConfiguration() {
+		return {
+			logAppendTimeout: 300,
+			newLineRegexp: /\n/
+		};
 	}
 });

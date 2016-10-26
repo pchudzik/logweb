@@ -38,7 +38,18 @@ module.exports = {
 					name: "node1",
 
 					// command to execute for this provider. Same as inputs[0].cmd
-					cmd: ["./random.sh", "node1 logger"]
+					cmd: ["./random.sh", "node1 logger"],
+
+					// detailed provider configuration which allows to detailed log processing and filtering
+					log: {
+						// single log entry message is detected based on this pattern. Default pattern new line
+						// it must be RegExp object
+						newLineRegexp: /(?=\d{4}-\d{2}-\d{2} \d{2}:\d{2}\d{2})/,
+
+						// if message can be flushed in multiple chunks how long to wait before
+						// flushing message for further processing
+						logAppendTimeout: 1500
+					}
 				},
 				{
 					name: "node2",

@@ -3,7 +3,8 @@ const BufferedObservable = require("./BufferingObservable");
 const Input = require("./Input");
 
 module.exports = function inputFactory(inputConfiguration) {
-	const providers = inputConfiguration.providers.map(provider => new Input(provider));
+	const providers = inputConfiguration.providers
+		.map(providerConfiguration => new Input(providerConfiguration));
 
 	return {
 		name: inputConfiguration.name,
