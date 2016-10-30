@@ -1,0 +1,507 @@
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+org.datalift.fwk.project.PersistenceException: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:276)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:155)
+	at org.datalift.core.project.DefaultProjectManager.findProject(DefaultProjectManager.java:179)
+	at org.datalift.converter.BaseConverterModule.getProject(BaseConverterModule.java:242)
+	at org.datalift.converter.RdfTransformer.convertRdfSource(RdfTransformer.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+	at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$ResponseOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:205)
+	at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+	at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:288)
+	at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+	at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+	at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1469)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1400)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1349)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1339)
+	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:537)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:895)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:843)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:804)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.ResponseHeaderFilter.doFilter(ResponseHeaderFilter.java:102)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.RequestLifecycleFilter.doFilter(RequestLifecycleFilter.java:97)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.log.web.LogContextFilter.doFilter(LogContextFilter.java:145)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.i18n.web.PreferredLocalesFilter.doFilter(PreferredLocalesFilter.java:138)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:135)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:399)
+	at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:766)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:450)
+	at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152)
+	at org.mortbay.jetty.Server.handle(Server.java:326)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.content(HttpConnection.java:945)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:756)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
+	at org.mortbay.jetty.bio.SocketConnector$Connection.run(SocketConnector.java:228)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)
+2013-09-14 13:12:23,557|ERROR|0.211||ContainerResponse|Mapped exception to response: 500 (Internal Server Error)
+2016-09-12 10:21:19,765 INFO [MLog-Init-Reporter] com.mchange.v2.log.MLog - MLog clients using slf4j logging.
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2016-09-12 10:21:20,301 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2wdv739j86j2veuofs51|45c2194d, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceUseNamedDriverClass -> false, identityToken -> 2wdv739j86j2veuofs51|45c2194d, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:oracle:thin:@() (CONNECT_DATA = ())), maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2016-09-12 10:21:20,681 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.dbsupport.DbSupportFactory - Database: jdbc:oracle:thin:@() (Oracle 11.2)
+2016-09-12 10:21:20,991 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.command.DbValidate - Successfully validated 23 migrations (execution time 00:00.048s
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2016-09-12 10:21:20,301 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2wdv739j86j2veuofs51|45c2194d, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceUseNamedDriverClass -> false, identityToken -> 2wdv739j86j2veuofs51|45c2194d, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:oracle:thin:@() (CONNECT_DATA = ())), maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2016-09-12 10:21:20,681 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.dbsupport.DbSupportFactory - Database: jdbc:oracle:thin:@() (Oracle 11.2)
+2016-09-12 10:21:20,991 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.command.DbValidate - Successfully validated 23 migrations (execution time 00:00.048s
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2016-09-12 10:21:20,301 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2wdv739j86j2veuofs51|45c2194d, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceUseNamedDriverClass -> false, identityToken -> 2wdv739j86j2veuofs51|45c2194d, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:oracle:thin:@() (CONNECT_DATA = ())), maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2016-09-12 10:21:20,681 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.dbsupport.DbSupportFactory - Database: jdbc:oracle:thin:@() (Oracle 11.2)
+2016-09-12 10:21:20,991 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.command.DbValidate - Successfully validated 23 migrations (execution time 00:00.048s
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2016-09-12 10:21:20,301 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2wdv739j86j2veuofs51|45c2194d, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceUseNamedDriverClass -> false, identityToken -> 2wdv739j86j2veuofs51|45c2194d, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:oracle:thin:@() (CONNECT_DATA = ())), maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2016-09-12 10:21:20,681 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.dbsupport.DbSupportFactory - Database: jdbc:oracle:thin:@() (Oracle 11.2)
+2016-09-12 10:21:20,991 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.command.DbValidate - Successfully validated 23 migrations (execution time 00:00.048s
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+org.datalift.fwk.project.PersistenceException: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:276)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:155)
+	at org.datalift.core.project.DefaultProjectManager.findProject(DefaultProjectManager.java:179)
+	at org.datalift.converter.BaseConverterModule.getProject(BaseConverterModule.java:242)
+	at org.datalift.converter.RdfTransformer.convertRdfSource(RdfTransformer.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+	at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$ResponseOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:205)
+	at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+	at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:288)
+	at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+	at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+	at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1469)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1400)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1349)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1339)
+	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:537)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:895)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:843)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:804)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.ResponseHeaderFilter.doFilter(ResponseHeaderFilter.java:102)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.RequestLifecycleFilter.doFilter(RequestLifecycleFilter.java:97)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.log.web.LogContextFilter.doFilter(LogContextFilter.java:145)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.i18n.web.PreferredLocalesFilter.doFilter(PreferredLocalesFilter.java:138)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:135)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:399)
+	at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:766)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:450)
+	at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152)
+	at org.mortbay.jetty.Server.handle(Server.java:326)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.content(HttpConnection.java:945)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:756)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
+	at org.mortbay.jetty.bio.SocketConnector$Connection.run(SocketConnector.java:228)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)
+Caused by: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:667)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:270)
+	... 50 more
+Caused by: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:253)
+	at com.clarkparsia.empire.ds.DataSourceUtil.exists(DataSourceUtil.java:193)
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:652)
+	... 51 more
+Caused by: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:45)
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:246)
+	... 53 more
+Caused by: org.openrdf.repository.RepositoryException: Java heap space
+	at org.openrdf.http.client.HTTPClient.getBoolean(HTTPClient.java:1294)
+	at org.openrdf.http.client.HTTPClient.sendBooleanQuery(HTTPClient.java:546)
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:38)
+	... 54 more
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] sample application xml response
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header>
+    <ns1:RequestHeader
+         soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next"
+         soapenv:mustUnderstand="0"
+         xmlns:ns1="https://www.google.com/apis/ads/publisher/v201605">
+      <ns1:networkCode>123456</ns1:networkCode>
+      <ns1:applicationName>DfpApi-Java-2.1.0-dfp_test</ns1:applicationName>
+    </ns1:RequestHeader>
+  </soapenv:Header>
+  <soapenv:Body>
+    <getAdUnitsByStatement xmlns="https://www.google.com/apis/ads/publisher/v201605">
+      <filterStatement>
+        <query>WHERE parentId IS NULL LIMIT 500</query>
+      </filterStatement>
+    </getAdUnitsByStatement>
+  </soapenv:Body>
+</soapenv:Envelope>
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+org.datalift.fwk.project.PersistenceException: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:276)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:155)
+	at org.datalift.core.project.DefaultProjectManager.findProject(DefaultProjectManager.java:179)
+	at org.datalift.converter.BaseConverterModule.getProject(BaseConverterModule.java:242)
+	at org.datalift.converter.RdfTransformer.convertRdfSource(RdfTransformer.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+	at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$ResponseOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:205)
+	at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+	at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:288)
+	at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+	at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+	at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1469)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1400)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1349)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1339)
+	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:537)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:895)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:843)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:804)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.ResponseHeaderFilter.doFilter(ResponseHeaderFilter.java:102)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.RequestLifecycleFilter.doFilter(RequestLifecycleFilter.java:97)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.log.web.LogContextFilter.doFilter(LogContextFilter.java:145)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.i18n.web.PreferredLocalesFilter.doFilter(PreferredLocalesFilter.java:138)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:135)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:399)
+	at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:766)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:450)
+	at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152)
+	at org.mortbay.jetty.Server.handle(Server.java:326)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.content(HttpConnection.java:945)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:756)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
+	at org.mortbay.jetty.bio.SocketConnector$Connection.run(SocketConnector.java:228)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)
+Caused by: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:667)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:270)
+	... 50 more
+Caused by: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:253)
+	at com.clarkparsia.empire.ds.DataSourceUtil.exists(DataSourceUtil.java:193)
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:652)
+	... 51 more
+Caused by: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:45)
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:246)
+	... 53 more
+Caused by: org.openrdf.repository.RepositoryException: Java heap space
+	at org.openrdf.http.client.HTTPClient.getBoolean(HTTPClient.java:1294)
+	at org.openrdf.http.client.HTTPClient.sendBooleanQuery(HTTPClient.java:546)
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:38)
+	... 54 more
+2016-09-12 10:21:19,765 INFO [MLog-Init-Reporter] com.mchange.v2.log.MLog - MLog clients using slf4j logging.
+2016-09-12 10:22:18,176 INFO [ServerService Thread Pool -- 60] sample application xml request
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns="https://www.google.com/apis/ads/publisher/v201605">
+      <requestId>xxxxxxxxxxxxxxxxxxxx</requestId>
+      <responseTime>1063</responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <getAdUnitsByStatementResponse xmlns="https://www.google.com/apis/ads/publisher/v201605">
+      <rval>
+        <totalResultSetSize>1</totalResultSetSize>
+        <startIndex>0</startIndex>
+        <results>
+          <id>2372</id>
+          <name>RootAdUnit</name>
+          <description></description>
+          <targetWindow>TOP</targetWindow>
+          <status>ACTIVE</status>
+          <adUnitCode>1002372</adUnitCode>
+          <inheritedAdSenseSettings>
+            <value>
+              <adSenseEnabled>true</adSenseEnabled>
+              <borderColor>FFFFFF</borderColor>
+              <titleColor>0000FF</titleColor>
+              <backgroundColor>FFFFFF</backgroundColor>
+              <textColor>000000</textColor>
+              <urlColor>008000</urlColor>
+              <adType>TEXT_AND_IMAGE</adType>
+              <borderStyle>DEFAULT</borderStyle>
+              <fontFamily>DEFAULT</fontFamily>
+              <fontSize>DEFAULT</fontSize>
+            </value>
+          </inheritedAdSenseSettings>
+        </results>
+      </rval>
+    </getAdUnitsByStatementResponse>
+  </soap:Body>
+</soap:Envelope>
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2013-09-14 13:12:23,551 FATAL [BaseConverterModule] javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+org.datalift.fwk.project.PersistenceException: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:276)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:155)
+	at org.datalift.core.project.DefaultProjectManager.findProject(DefaultProjectManager.java:179)
+	at org.datalift.converter.BaseConverterModule.getProject(BaseConverterModule.java:242)
+	at org.datalift.converter.RdfTransformer.convertRdfSource(RdfTransformer.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+	at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$ResponseOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:205)
+	at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+	at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:288)
+	at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+	at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+	at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1469)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1400)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1349)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1339)
+	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:537)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:895)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:843)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.doFilter(ServletContainer.java:804)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.ResponseHeaderFilter.doFilter(ResponseHeaderFilter.java:102)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.RequestLifecycleFilter.doFilter(RequestLifecycleFilter.java:97)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.log.web.LogContextFilter.doFilter(LogContextFilter.java:145)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.i18n.web.PreferredLocalesFilter.doFilter(PreferredLocalesFilter.java:138)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.datalift.core.util.web.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:135)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1212)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:399)
+	at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:766)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:450)
+	at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152)
+	at org.mortbay.jetty.Server.handle(Server.java:326)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.content(HttpConnection.java:945)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:756)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
+	at org.mortbay.jetty.bio.SocketConnector$Connection.run(SocketConnector.java:228)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)
+Caused by: javax.persistence.PersistenceException: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:667)
+	at org.datalift.core.project.GenericRdfJpaDao.find(GenericRdfJpaDao.java:270)
+	... 50 more
+Caused by: com.clarkparsia.empire.ds.QueryException: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:253)
+	at com.clarkparsia.empire.ds.DataSourceUtil.exists(DataSourceUtil.java:193)
+	at com.clarkparsia.empire.impl.EntityManagerImpl.find(EntityManagerImpl.java:652)
+	... 51 more
+Caused by: org.openrdf.repository.http.HTTPQueryEvaluationException: Java heap space
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:45)
+	at com.clarkparsia.empire.sesametwo.RepositoryDataSource.ask(RepositoryDataSource.java:246)
+	... 53 more
+Caused by: org.openrdf.repository.RepositoryException: Java heap space
+	at org.openrdf.http.client.HTTPClient.getBoolean(HTTPClient.java:1294)
+	at org.openrdf.http.client.HTTPClient.sendBooleanQuery(HTTPClient.java:546)
+	at org.openrdf.repository.http.HTTPBooleanQuery.evaluate(HTTPBooleanQuery.java:38)
+	... 54 more
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:21:19,831 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.5 [built 02-January-2015 13:25:04 -0500; debug? true; trace: 10]
+2016-09-12 10:22:33,176 INFO [ServerService Thread Pool -- 60] xml response
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:m="http://www.example.org/stock/Surya">
+  <soap:Header>
+  </soap:Header>
+  <soap:Body>
+    <m:GetStockPrice>
+      <m:StockName>IBM</m:StockName>
+    </m:GetStockPrice>
+  </soap:Body>
+</soap:Envelope>
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:21:17,168 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/scheduler.xml]
+2016-09-12 10:21:18,176 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 "javax.inject.Inject" annotation found and supported for autowiring
+2016-09-12 10:21:19,765 INFO [MLog-Init-Reporter] com.mchange.v2.log.MLog - MLog clients using slf4j logging.
+2016-09-12 10:23:33,176 WARN [ServerService Thread Pool -- 60] xml request
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <ns1:getIDPList
+          soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+          xmlns:ns1="https://localhost:9031/ssodir/services/SSODirectoryService"/>
+  </soapenv:Body>
+</soapenv:Envelope>
+2016-09-12 10:21:15,283 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016-09-12 10:21:15,288 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Sep 12 10:21:15 CEST 2016]; root of context hierarchy
+2016-09-12 10:21:15,369 INFO [ServerService Thread Pool -- 63] org.springframework.web.context.support.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.example.package.ContextScan]
+2016-09-12 10:21:16,857 INFO [ServerService Thread Pool -- 63] org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/persistence.xml]
+2016-09-12 10:24:23,176 WARN [ServerService Thread Pool -- 60] xml request with new lines
+<?xml version="1.0"?>
+
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2003/05/soap-envelope/"
+soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+2016-09-12 10:21:20,272 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.util.VersionPrinter - Flyway 4.0.3 by Boxfuse
+2016-09-12 10:21:20,301 INFO [ServerService Thread Pool -- 63] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2wdv739j86j2veuofs51|45c2194d, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceUseNamedDriverClass -> false, identityToken -> 2wdv739j86j2veuofs51|45c2194d, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:oracle:thin:@() (CONNECT_DATA = ())), maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2016-09-12 10:21:20,681 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.dbsupport.DbSupportFactory - Database: jdbc:oracle:thin:@() (Oracle 11.2)
+2016-09-12 10:21:20,991 INFO [ServerService Thread Pool -- 63] org.flywaydb.core.internal.command.DbValidate - Successfully validated 23 migrations (execution time 00:00.048s
+2016-09-12 10:24:33,176 WARN [ServerService Thread Pool -- 60] xml response with new lines
+<?xml version="1.0"?>
+
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope/"
+    soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPriceResponse>
+    <m:Price>34.5</m:Price>
+  </m:GetStockPriceResponse>
+</soap:Body>
+
+</soap:Envelope>
+2016-09-18 14:23:36,892 ERROR [org.jboss.modcluster] (ContainerBackgroundProcessor[StandardEngine[jboss.web]]) Whatever: Failed to send STATUS to example.com/11.22.33.44:80: java.net.SocketTimeoutException: connect timed out
+	at java.net.PlainSocketImpl.socketConnect(Native Method) [rt.jar:1.8.0_65]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) [rt.jar:1.8.0_65]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) [rt.jar:1.8.0_65]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) [rt.jar:1.8.0_65]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) [rt.jar:1.8.0_65]
+	at java.net.Socket.connect(Socket.java:589) [rt.jar:1.8.0_65]
+	at org.jboss.modcluster.mcmp.impl.DefaultMCMPHandler$Proxy.getConnection(DefaultMCMPHandler.java:835)
+	at org.jboss.modcluster.mcmp.impl.DefaultMCMPHandler$Proxy.getConnectionWriter(DefaultMCMPHandler.java:858)
+	at org.jboss.modcluster.mcmp.impl.DefaultMCMPHandler.sendRequest(DefaultMCMPHandler.java:499)
+	at org.jboss.modcluster.mcmp.impl.DefaultMCMPHandler.sendRequest(DefaultMCMPHandler.java:600)
+	at org.jboss.modcluster.mcmp.impl.DefaultMCMPHandler.sendRequest(DefaultMCMPHandler.java:414)
+	at org.jboss.modcluster.ModClusterService.status(ModClusterService.java:468)
+	at org.jboss.modcluster.container.catalina.CatalinaEventHandlerAdapter.lifecycleEvent(CatalinaEventHandlerAdapter.java:249)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:115) [jbossweb-7.5.11.Final-redhat-1.jar:7.5.11.Final-redhat-1]
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1323) [jbossweb-7.5.11.Final-redhat-1.jar:7.5.11.Final-redhat-1]
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1588) [jbossweb-7.5.11.Final-redhat-1.jar:7.5.11.Final-redhat-1]
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1574) [jbossweb-7.5.11.Final-redhat-1.jar:7.5.11.Final-redhat-1]
+	at java.lang.Thread.run(Thread.java:745) [rt.jar:1.8.0_65]
