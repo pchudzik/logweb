@@ -21,7 +21,8 @@ function getInputs() {
 function resolveProviders(singleInput) {
 	if (singleInput.cmd) {
 		return [{
-			cmd: resolveInputCmd(singleInput.cmd)
+			cmd: resolveInputCmd(singleInput.cmd),
+			log: resolveLogCmd()
 		}];
 	}
 

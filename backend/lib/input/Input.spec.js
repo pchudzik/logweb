@@ -2,6 +2,7 @@ const _ = require("lodash");
 const expect = require("chai").expect;
 const proxyquire = require("proxyquire");
 const EventEmitter = require("events");
+const Subject = require("rxjs").Subject;
 
 class RespawnMock extends EventEmitter {
 	start() {
@@ -20,11 +21,11 @@ describe("Input.spec.js", () => {
 		respawnMock = new RespawnMock();
 
 		Input = proxyquire("./Input", {
+			"../parse/logProcessorFactory": logProcessorFactoryMock,
 			respawn() {
 				return respawnMock;
 			}
-		}
-		);
+		});
 	});
 
 	it("should send event to data listener", done => {
@@ -59,4 +60,12 @@ describe("Input.spec.js", () => {
 		input.data.stdout
 			.subscribe(_.noop, _.noop, done);
 	});
+
+	function logProcessorFactoryMock() {
+		const observable = new Subject();
+		return {
+			appendText: data => observable.next(data),
+			observable
+		};
+	}
 });

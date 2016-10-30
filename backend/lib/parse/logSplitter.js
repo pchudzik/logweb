@@ -12,7 +12,7 @@ module.exports = function LogSplitter(newLineRegexp, logAppendTimeout) {
 	};
 
 	function appendText(logData) {
-		const dataParts = logData.split(newLineRegexp);
+		const dataParts = logData.toString().split(newLineRegexp);
 		const firstItem = 0;
 		const lastItem = dataParts.length - 1;
 
@@ -47,7 +47,7 @@ module.exports = function LogSplitter(newLineRegexp, logAppendTimeout) {
 	}
 
 	function flushBuffer() {
-		observable.next(dataBuffer.trim());
+		observable.next(dataBuffer.trim() + "\n");
 		dataBuffer = "";
 	}
 

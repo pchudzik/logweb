@@ -24,7 +24,16 @@ module.exports = {
 			providers: [
 				{
 					name: "node2",
-					cmd: "node sample-log/logGenerator.js sample-log/java.log 500 1500"
+					cmd: "node sample-log/logGenerator.js sample-log/java.log 2000 5500",
+					log: {
+						// single log entry message is detected based on this pattern. Default pattern new line
+						// it must be RegExp object
+						newLineRegexp: /(?=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/,
+
+						// if message can be flushed in multiple chunks how long to wait before
+						// flushing message for further processing
+						logAppendTimeout: 6000
+					}
 				}
 			]
 		},
@@ -38,22 +47,11 @@ module.exports = {
 					name: "node1",
 
 					// command to execute for this provider. Same as inputs[0].cmd
-					cmd: ["node sample-log/randomLog.js", "node1 logger"],
-
-					// detailed provider configuration which allows to detailed log processing and filtering
-					log: {
-						// single log entry message is detected based on this pattern. Default pattern new line
-						// it must be RegExp object
-						newLineRegexp: /(?=\d{4}-\d{2}-\d{2} \d{2}:\d{2}\d{2})/,
-
-						// if message can be flushed in multiple chunks how long to wait before
-						// flushing message for further processing
-						logAppendTimeout: 1500
-					}
+					cmd: ["node", "sample-log/randomLog.js", "node1 logger"]
 				},
 				{
 					name: "node2",
-					cmd: ["node sample-log/randomLog.js", "node2 logger"]
+					cmd: ["node", "sample-log/randomLog.js", "node2 logger"]
 				}
 			]
 		}

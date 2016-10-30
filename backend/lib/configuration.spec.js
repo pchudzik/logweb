@@ -19,7 +19,10 @@ describe("configuration.spec.js", () => {
 			expect(inputs).to.eql([{
 				name: undefined,
 				bufferSize: 100,
-				providers: [{cmd: ["/bin/sh", "-c", cmd]}]
+				providers: [{
+					cmd: ["/bin/sh", "-c", cmd],
+					log: defaultLogConfiguration()
+				}]
 			}]);
 		});
 
@@ -55,12 +58,18 @@ describe("configuration.spec.js", () => {
 				{
 					name: "first",
 					bufferSize: 100,
-					providers: [{cmd: ["/bin/sh", "-c", "echo 1"]}]
+					providers: [{
+						cmd: ["/bin/sh", "-c", "echo 1"],
+						log: defaultLogConfiguration()
+					}]
 				},
 				{
 					name: "second",
 					bufferSize: 100,
-					providers: [{cmd: ["/bin/sh", "-c", "echo 2"]}]
+					providers: [{
+						cmd: ["/bin/sh", "-c", "echo 2"],
+						log: defaultLogConfiguration()
+					}]
 				}
 			]);
 		});

@@ -1,13 +1,18 @@
 const respawn = require("respawn");
 const InputEvent = require("./InputEvent");
+const logProcessorFactory = require("../parse/logProcessorFactory");
 const Subject = require("rxjs").Subject;
 
-module.exports = function Input(providerConfigration) {
+module.exports = function Input(providerConfiguration) {
+	const logProcessor = logProcessorFactory(providerConfiguration);
 	const dataObservable = new Subject();
-	const processMonitor = respawn(providerConfigration.cmd, {
-		sleep: providerConfigration.restartTimeout || 100
+	const processMonitor = respawn(providerConfiguration.cmd, {
+		sleep: providerConfiguration.restartTimeout || 100
 	});
-	processMonitor.on("stdout", processInput);
+
+	logProcessor.observable.subscribe(processInput);
+
+	processMonitor.on("stdout", logProcessor.appendText);
 
 	this.data = {
 		stdout: dataObservable
@@ -24,9 +29,9 @@ module.exports = function Input(providerConfigration) {
 		dataObservable.complete();
 	};
 
-	function processInput(rawInputDataBuffer) {
-		const input = rawInputDataBuffer.toString();
-		const inputEvent = new InputEvent(providerConfigration.name, input);
+	function processInput(inputLog) {
+		const input = inputLog.toString();
+		const inputEvent = new InputEvent(providerConfiguration.name, input);
 		dataObservable.next(inputEvent);
 	}
 };

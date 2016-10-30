@@ -16,7 +16,7 @@ describe("logSplitter.spec.js", () => {
 		waitForEventsInOrder(
 			done,
 			splitter.observable,
-			message1, message2, message3
+			message1 + "\n", message2 + "\n", message3 + "\n"
 		);
 
 		// when
@@ -35,7 +35,7 @@ describe("logSplitter.spec.js", () => {
 		waitForEventsInOrder(
 			done,
 			splitter.observable,
-			newLogMessage(message1 + message2 + message3));
+			newLogMessage(message1 + message2 + message3) + "\n");
 
 		// when
 		splitter.appendText(newLogMessage(""));
@@ -55,7 +55,7 @@ describe("logSplitter.spec.js", () => {
 		waitForEventsInOrder(
 			done,
 			splitter.observable,
-			pendingMessage, newMessage);
+			pendingMessage + "\n", newMessage + "\n");
 
 		// when
 		splitter.appendText(pendingMessage);
