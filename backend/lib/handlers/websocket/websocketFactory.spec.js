@@ -41,10 +41,8 @@ describe("websocketFactory.spec.js", () => {
 	it("should send all events to new client", done => {
 		// given
 		const observable = Observable.of(
-			new InputEvent("first1", "provider1"),
-			new InputEvent("second1", "provider1"),
-			new InputEvent("first2", "provider2"),
-			new InputEvent("second2", "provider2"));
+			[new InputEvent("first1", "provider1"), new InputEvent("second1", "provider1")],
+			[new InputEvent("first2", "provider2"), new InputEvent("second2", "provider2")]);
 
 		websocketServer = websocketFactory(
 			{server: httpServer, path: "/ws"},
@@ -55,10 +53,8 @@ describe("websocketFactory.spec.js", () => {
 
 		// then
 		expectEvents(websocketClient, done,
-			"{\"data\":\"first1\",\"providerName\":\"provider1\"}",
-			"{\"data\":\"second1\",\"providerName\":\"provider1\"}",
-			"{\"data\":\"first2\",\"providerName\":\"provider2\"}",
-			"{\"data\":\"second2\",\"providerName\":\"provider2\"}");
+			"[{\"data\":\"first1\",\"providerName\":\"provider1\"},{\"data\":\"second1\",\"providerName\":\"provider1\"}]",
+			"[{\"data\":\"first2\",\"providerName\":\"provider2\"},{\"data\":\"second2\",\"providerName\":\"provider2\"}]");
 	});
 
 	it("should not fail when clients disconnects", done => {
@@ -92,8 +88,8 @@ describe("websocketFactory.spec.js", () => {
 		websocketClient = ws.createConnection(`ws://localhost:${serverPort}/ws`, () => {
 			// then
 			expectEvents(websocketClient, done,
-				"{\"data\":\"first\"}",
-				"{\"data\":\"second\"}");
+				"[{\"data\":\"first\"}]",
+				"[{\"data\":\"second\"}]");
 
 			// when
 			observable.next(new InputEvent("first"));

@@ -21,7 +21,7 @@ describe("Input.spec.js", () => {
 		respawnMock = new RespawnMock();
 
 		Input = proxyquire("./Input", {
-			"../parse/logProcessorFactory": logProcessorFactoryMock,
+			"../process/logProcessorFactory": logProcessorFactoryMock,
 			respawn() {
 				return respawnMock;
 			}

@@ -19,11 +19,7 @@ function subscribeClientToObservable(client, input) {
 
 function sendEventsToClient(client, events) {
 	const eventsArray = _.flatten([events]);
-	eventsArray.forEach(event => sendEvent(client, event));
-}
-
-function sendEvent(client, event) {
-	client.send(JSON.stringify(event), ackError);
+	client.send(JSON.stringify(eventsArray), ackError);
 }
 
 function ackError(err) {

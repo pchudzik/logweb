@@ -3,8 +3,13 @@ const config = require("./configurationLoader");
 
 module.exports = {
 	getInputs,
-	getPort
+	getPort,
+	getFlushInterval
 };
+
+function getFlushInterval() {
+	return config.flushInterval || 500;
+}
 
 function getPort() {
 	return config.port || 8008;

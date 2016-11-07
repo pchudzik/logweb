@@ -204,6 +204,24 @@ describe("configuration.spec.js", () => {
 		});
 	});
 
+	describe("flush interval spec", () => {
+		it("should return default flush interval when missing", () => {
+			// when
+			const configuration = createConfigurationWithConfig({});
+
+			// then
+			expect(configuration.getFlushInterval()).to.eql(500);
+		});
+
+		it("should use configuration flush interval when provided", () => {
+			// when
+			const configuration = createConfigurationWithConfig({flushInterval: 123});
+
+			// then
+			expect(configuration.getFlushInterval()).to.eql(123);
+		});
+	});
+
 	function createConfigurationWithConfig(config) {
 		config["@noCallThru"] = true;	// eslint-disable-line no-param-reassign
 		return proxyquire("./configuration", {

@@ -1,4 +1,7 @@
 module.exports = {
+	// number of ms between data flush to frontend (to avoid sending 1 event every 1ms)
+	flushInterval: 2000,
+
 	// port on which backend will be exposed
 	port: 8008,
 

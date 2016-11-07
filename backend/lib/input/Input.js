@@ -1,6 +1,6 @@
 const respawn = require("respawn");
 const InputEvent = require("./InputEvent");
-const logProcessorFactory = require("../parse/logProcessorFactory");
+const logProcessorFactory = require("../process/logProcessorFactory");
 const Subject = require("rxjs").Subject;
 
 module.exports = function Input(providerConfiguration) {
