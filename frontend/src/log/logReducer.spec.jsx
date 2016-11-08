@@ -107,12 +107,13 @@ describe("logreducer.spec.jsx", () => {
 		);
 	});
 
-	it(`should add new event on ${LOG_EVENT}`, () => {
+	it(`should add new events on ${LOG_EVENT}`, () => {
 		// given
 		const logName = "any log name";
 		const webSocket = "any web socket";
 		const existingEvent = [{timestamp: 1234, message: "msg1"}];
-		const event = {timestamp: 4566, message: "msg2"};
+		const event1 = {timestamp: 45661, message: "msg21"};
+		const event2 = {timestamp: 45662, message: "msg22"};
 
 		// expect
 		expect(
@@ -126,13 +127,13 @@ describe("logreducer.spec.jsx", () => {
 				},
 				{
 					type: LOG_EVENT,
-					payload: {data: JSON.stringify(event)}
+					payload: {data: JSON.stringify([event1, event2])}
 				}
 			)
 		).to.eql({
 			logName,
 			webSocket,
-			events: [existingEvent, event],
+			events: [existingEvent, event1, event2],
 			filter: anyFilter,
 			isFollowingActive: "any value"
 		});

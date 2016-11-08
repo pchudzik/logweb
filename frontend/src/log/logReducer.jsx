@@ -49,7 +49,7 @@ export default function logReducer(state = defaultLog, action) {
 		case LOG_EVENT: {
 			return {
 				...state,
-				events: [...state.events, JSON.parse(action.payload.data)]
+				events: state.events.concat(JSON.parse(action.payload.data))
 			};
 		}
 		default:
