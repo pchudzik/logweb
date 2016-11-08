@@ -30,7 +30,7 @@ describe("Input.spec.js", () => {
 
 	it("should send event to data listener", done => {
 		// given
-		const processResult = "process result";
+		const processResult = ["process result 1", "another output"];
 		const providerName = "provider 1";
 		const input = new Input({name: providerName});
 
@@ -39,10 +39,15 @@ describe("Input.spec.js", () => {
 
 		// then
 		input.data.stdout
-			.subscribe(inputEvent => {
-				expect(inputEvent.timestamp).to.be.number;	// eslint-disable-line no-unused-expressions
-				expect(inputEvent.data).to.eql(processResult);
-				expect(inputEvent.providerName).to.eql(providerName);
+			.subscribe(inputEvents => {
+				[0, 1].forEach(index => {
+					const event = inputEvents[index];
+
+					expect(event.timestamp).to.be.number; // eslint-disable-line no-unused-expressions
+					expect(event.data).to.eql(processResult[index]);
+					expect(event.providerName).to.eql(providerName);
+				});
+
 				done();
 			});
 

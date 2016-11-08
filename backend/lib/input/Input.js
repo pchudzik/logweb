@@ -29,9 +29,7 @@ module.exports = function Input(providerConfiguration) {
 		dataObservable.complete();
 	};
 
-	function processInput(inputLog) {
-		const input = inputLog.toString();
-		const inputEvent = new InputEvent(providerConfiguration.name, input);
-		dataObservable.next(inputEvent);
+	function processInput(inputLogs) {
+		dataObservable.next(inputLogs.map(input => new InputEvent(providerConfiguration.name, input)));
 	}
 };
