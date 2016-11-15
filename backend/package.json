@@ -27,22 +27,22 @@
     "CBuffer": "2.0.0",
     "body-parser": "1.15.2",
     "express": "4.14.0",
-    "lodash": "4.16.6",
+    "lodash": "4.17.1",
     "respawn": "2.4.1",
-    "rxjs": "5.0.0-rc.2",
+    "rxjs": "5.0.0-rc.3",
     "ws": "1.1.1"
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "eslint": "3.9.1",
+    "eslint": "3.10.1",
     "eslint-config-airbnb": "13.0.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
-    "eslint-plugin-react": "6.6.0",
+    "eslint-plugin-react": "6.7.1",
     "mocha": "3.1.2",
     "nodemon": "1.11.0",
     "proxyquire": "1.7.10",
-    "shx": "0.1.4",
+    "shx": "0.2.0",
     "supertest": "2.0.1",
     "testdouble": "1.9.0"
   }
