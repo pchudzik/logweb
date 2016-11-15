@@ -1,11 +1,16 @@
 const http = require("http");
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const configuration = require("./configuration");
 const setupHttpHandlers = require("./handlers/setupHttpHandlers");
 const setupStaticContentHandlers = require("./handlers/setupStaticContentHandlers");
 const setupWebSocketsHandlers = require("./handlers/setupWebsocketHandlers");
 
 const expressApp = express();
+
+expressApp.use(bodyParser.json());
+
 const httpServer = http.createServer(expressApp);
 
 setupHttpHandlers(expressApp);

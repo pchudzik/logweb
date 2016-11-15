@@ -1,14 +1,14 @@
 const express = require("express");
-const _ = require("lodash");
 
 const td = require("testdouble");
 const proxyquire = require("proxyquire");
 const request = require("supertest");
 
 describe("InputsHandler.spec.js", () => {
-	const configurationMock = {
+	const inputServiceMock = {
 		"@noCallThru": true,
-		getInputs: td.function()
+		getInputs: td.function(),
+		getInput: td.function()
 	};
 
 	let app;
@@ -16,7 +16,7 @@ describe("InputsHandler.spec.js", () => {
 	before(() => {
 		const InputsHandler = proxyquire(
 			"./InputsHandler",
-			{"../../configuration": configurationMock}
+			{"../../input/inputService": inputServiceMock}
 		);
 		const inputsHandler = new InputsHandler();
 		app = express();
@@ -27,58 +27,46 @@ describe("InputsHandler.spec.js", () => {
 
 	it("should list all inputs", done => {
 		// given
-		configurationMock.getInputs = _.constant([
-			{name: "first input", otherProperty: "value"},
-			{name: "second input", otherProperty: "value"}
-		]);
+		const inputs = [
+			{name: "first input", status: "WORKING"},
+			{name: "second input", status: "STOPPED"}
+		];
+		td.when(inputServiceMock.getInputs()).thenReturn(inputs);
 
 		// when
 		request(app).get("/api/inputs")
 
 		// then
 			.expect("Content-Type", /json/)
-			.expect(200, [
-				{name: "first input"},
-				{name: "second input"}
-			])
+			.expect(200, inputs)
 			.end(done);
 	});
 
 	it("should get input details", done => {
 		// given
 		const inputName = "input-to-find";
-		const otherProperty = "otherProperty";
-		configurationMock.getInputs = _.constant([
-			{name: "other"},
-			{
-				name: inputName,
-				otherProperty,
-				providers: [
-					{name: "provider1", otherProperty},
-					{name: "provider2", otherProperty}
-				]
-			}
-		]);
+		const inputItem = {
+			name: inputName,
+			providers: [
+				{name: "provider1"},
+				{name: "provider2"}
+			]
+		};
+		td.when(inputServiceMock.getInput(inputName)).thenReturn(inputItem);
 
 		// when
 		request(app).get(`/api/inputs/${inputName}`)
 
 		// then
 			.expect("Content-Type", /json/)
-			.expect(200, {
-				name: inputName,
-				providers: [
-					{name: "provider1"},
-					{name: "provider2"}
-				]
-			})
+			.expect(200, inputItem)
 			.end(done);
 	});
 
 	it("should return 404 status when input not found", done => {
 		// given
 		const nonExistingInput = "non-existing-input";
-		configurationMock.getInputs = () => [];
+		td.when(inputServiceMock.getInput(nonExistingInput)).thenReturn(null);
 
 		// when
 		request(app).get(`/api/inputs/${nonExistingInput}`)
