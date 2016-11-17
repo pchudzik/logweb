@@ -81,9 +81,10 @@ describe("inputService.spec.js", () => {
 	});
 
 	function createService() {
-		return proxyquire(
-			"./inputService",
+		const InputService = proxyquire(
+			"./InputService",
 			{"../configuration": configurationMock}
 		);
+		return new InputService();
 	}
 });

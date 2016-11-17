@@ -4,7 +4,7 @@ const rxHelper = require("../rxjs.spec-helper");
 const td = require("testdouble");
 const proxyquire = require("proxyquire");
 
-describe("inputFactory.spec.js", () => {
+describe("inputProcessFactory.spec.js", () => {
 	let InputMock;
 	let inputFactory;
 
@@ -12,8 +12,8 @@ describe("inputFactory.spec.js", () => {
 		InputMock = td.function();
 		InputMock["@noCallThru"] = true;
 
-		inputFactory = proxyquire("./inputFactory", {
-			"./Input": InputMock
+		inputFactory = proxyquire("./inputProcessFactory", {
+			"./InputProcess": InputMock
 		});
 	});
 

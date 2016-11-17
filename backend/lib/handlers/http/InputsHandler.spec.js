@@ -1,12 +1,11 @@
 const express = require("express");
-
 const td = require("testdouble");
-const proxyquire = require("proxyquire");
 const request = require("supertest");
+
+const InputsHandler = require("./InputsHandler");
 
 describe("InputsHandler.spec.js", () => {
 	const inputServiceMock = {
-		"@noCallThru": true,
 		getInputs: td.function(),
 		getInput: td.function()
 	};
@@ -14,11 +13,7 @@ describe("InputsHandler.spec.js", () => {
 	let app;
 
 	before(() => {
-		const InputsHandler = proxyquire(
-			"./InputsHandler",
-			{"../../input/inputService": inputServiceMock}
-		);
-		const inputsHandler = new InputsHandler();
+		const inputsHandler = new InputsHandler(inputServiceMock);
 		app = express();
 		inputsHandler.setup(app);
 	});

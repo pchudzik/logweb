@@ -1,14 +1,7 @@
 const configuration = require("../configuration");
 
-module.exports = (function inputServiceFactory() {
-	return {
-		startInput,
-		stopInput,
-		getInputs,
-		getInput
-	};
-
-	function getInput(inputName) {
+module.exports = function InputService() {
+	this.getInput = function getInput(inputName) {
 		const inputCollection = configuration
 			.getInputs()
 			.filter(input => input.name === inputName)
@@ -19,28 +12,28 @@ module.exports = (function inputServiceFactory() {
 			}));
 
 		return inputCollection[0] ? inputCollection[0] : null;
-	}
+	};
 
-	function getInputs() {
+	this.getInputs = function getInputs() {
 		return configuration
 			.getInputs()
 			.map(input => ({
 				name: input.name,
 				status: findInputStatus(input)
 			}));
-	}
+	};
 
-	function startInput(inputName) {
+	this.startInput = function startInput(inputName) {
 		console.log(`Trying to start input ${inputName}`);
 		return Promise.resolve("started");
-	}
+	};
 
-	function stopInput(inputName) {
+	this.stopInput = function stopInput(inputName) {
 		console.log(`Trying to stop input ${inputName}`);
 		return Promise.resolve("stopped");
-	}
+	};
 
 	function findInputStatus(/* input */) {
 		return "WORKING";
 	}
-}());
+};

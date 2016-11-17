@@ -12,7 +12,7 @@ class RespawnMock extends EventEmitter {
 	}
 }
 
-describe("Input.spec.js", () => {
+describe("InputProcess.spec.js", () => {
 	let respawnMock;
 
 	let Input;
@@ -20,7 +20,7 @@ describe("Input.spec.js", () => {
 	beforeEach(() => {
 		respawnMock = new RespawnMock();
 
-		Input = proxyquire("./Input", {
+		Input = proxyquire("./InputProcess", {
 			"../process/logProcessorFactory": logProcessorFactoryMock,
 			respawn() {
 				return respawnMock;

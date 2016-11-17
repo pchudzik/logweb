@@ -1,6 +1,6 @@
 const Observable = require("rxjs").Observable;
 const BufferedObservable = require("./BufferingObservable");
-const Input = require("./Input");
+const Input = require("./InputProcess");
 
 module.exports = function inputFactory(inputConfiguration) {
 	const providers = inputConfiguration.providers

@@ -1,7 +1,6 @@
 const InputsHandler = require("./http/InputsHandler");
 
-module.exports = function setupHandlers(expressApp) {
-	[
-		new InputsHandler()
-	].forEach(handler => handler.setup(expressApp));
+module.exports = function setupHandlers(expressApp, inputService) {
+	[new InputsHandler(inputService)]
+		.forEach(handler => handler.setup(expressApp));
 };

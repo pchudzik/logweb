@@ -3,7 +3,7 @@ const InputEvent = require("./InputEvent");
 const logProcessorFactory = require("../process/logProcessorFactory");
 const Subject = require("rxjs").Subject;
 
-module.exports = function Input(providerConfiguration) {
+module.exports = function InputProcess(providerConfiguration) {
 	const logProcessor = logProcessorFactory(providerConfiguration);
 	const dataObservable = new Subject();
 	const processMonitor = respawn(providerConfiguration.cmd, {
