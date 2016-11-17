@@ -1,39 +1,58 @@
 const configuration = require("../configuration");
+const inputProcessFactory = require("./inputProcessFactory");
+const webscoketFactory = require("./websocket/websocketFactory");
 
-module.exports = function InputService() {
+module.exports = function InputService(httpServer) {
+	const inputProcesses = configuration.getInputs().map(input => {
+		const process = inputProcessFactory(input);
+		return {
+			input,
+			process,
+			websocket: null
+		};
+	});
+
+	this.startAll = function initialize() {
+		inputProcesses.forEach(inputProcess => this.startInput(inputProcess.input.name), this);
+	};
+
 	this.getInput = function getInput(inputName) {
-		const inputCollection = configuration
-			.getInputs()
-			.filter(input => input.name === inputName)
-			.map(input => ({
-				name: input.name,
-				providers: input.providers.map(provider => ({name: provider.name})),
-				status: findInputStatus(input)
-			}));
-
-		return inputCollection[0] ? inputCollection[0] : null;
+		const {input} = loadInputByName(inputName);
+		return {
+			name: input.name,
+			providers: input.providers.map(provider => ({name: provider.name}))
+		};
 	};
 
 	this.getInputs = function getInputs() {
-		return configuration
-			.getInputs()
-			.map(input => ({
-				name: input.name,
-				status: findInputStatus(input)
+		return inputProcesses
+			.map(inputProcess => ({
+				name: inputProcess.input.name
 			}));
 	};
 
 	this.startInput = function startInput(inputName) {
-		console.log(`Trying to start input ${inputName}`);
-		return Promise.resolve("started");
+		const inputProcess = loadInputByName(inputName);
+		inputProcess.process.start();
+		inputProcess.websocket = webscoketFactory(
+			{server: httpServer, path: `/api/ws/${inputProcess.input.name}`},
+			inputProcess.process);
 	};
 
 	this.stopInput = function stopInput(inputName) {
-		console.log(`Trying to stop input ${inputName}`);
-		return Promise.resolve("stopped");
+		const inputProcess = loadInputByName(inputName);
+		inputProcess.process.stop();
+		inputProcess.websocket.close();
 	};
 
-	function findInputStatus(/* input */) {
-		return "WORKING";
+	function loadInputByName(inputName) {
+		const result = inputProcesses
+			.find(inputProcess => inputProcess.input.name === inputName);
+
+		if (!result) {
+			throw new Error(`No input with name ${inputName}`);
+		}
+
+		return result;
 	}
 };

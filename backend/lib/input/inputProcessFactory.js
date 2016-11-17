@@ -10,6 +10,7 @@ module.exports = function inputFactory(inputConfiguration) {
 		name: inputConfiguration.name,
 		start: startAll,
 		stop: stopAll,
+		status,
 		createDataObservable: createObservable(providers)
 	};
 
@@ -19,6 +20,13 @@ module.exports = function inputFactory(inputConfiguration) {
 
 	function stopAll() {
 		providers.forEach(provider => provider.stop());
+	}
+
+	function status() {
+		return providers.map(provider => ({
+			name: provider.name,
+			status: provider.status()
+		}));
 	}
 
 	function createObservable(inputProviders) {

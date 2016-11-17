@@ -14,6 +14,7 @@ module.exports = function InputProcess(providerConfiguration) {
 
 	processMonitor.on("stdout", logProcessor.appendText);
 
+	this.name = providerConfiguration.name;
 	this.data = {
 		stdout: dataObservable
 	};
@@ -27,6 +28,10 @@ module.exports = function InputProcess(providerConfiguration) {
 	this.stop = function stopProcessMonitor() {
 		processMonitor.stop();
 		dataObservable.complete();
+	};
+
+	this.status = function processStatus() {
+		return processMonitor.status;
 	};
 
 	function processInput(inputLogs) {

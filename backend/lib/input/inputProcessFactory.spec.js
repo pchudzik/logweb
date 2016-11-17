@@ -1,8 +1,9 @@
 const Observable = require("rxjs").Observable;
 const Subject = require("rxjs").Subject;
-const rxHelper = require("../rxjs.spec-helper");
 const td = require("testdouble");
 const proxyquire = require("proxyquire");
+const expect = require("chai").expect;
+const rxHelper = require("../rxjs.spec-helper");
 
 describe("inputProcessFactory.spec.js", () => {
 	let InputMock;
@@ -86,7 +87,7 @@ describe("inputProcessFactory.spec.js", () => {
 		});
 	});
 
-	describe("process monitors start/stop", () => {
+	describe("process monitors", () => {
 		let provider1;
 		let provider2;
 		let inputProcess1;
@@ -118,20 +119,42 @@ describe("inputProcessFactory.spec.js", () => {
 			td.verify(inputProcess1.stop(), {times: 1});
 			td.verify(inputProcess2.stop(), {times: 1});
 		});
+
+		it("should return status of all process providers", () => {
+			// when
+			td.when(inputProcess1.status()).thenReturn("running");
+			td.when(inputProcess2.status()).thenReturn("crashed");
+
+			// expect
+			expect(
+				input.status()
+			).to.eql([
+				{
+					name: provider1.name,
+					status: "running"
+				},
+				{
+					name: provider2.name,
+					status: "crashed"
+				}
+			]);
+		});
 	});
 
 	function mockInputWithObservable(provider, observable) {
-		const resultInputProcess = inputMockCreator(observable);
+		const resultInputProcess = inputMockCreator(provider, observable);
 
 		td.when(InputMock(provider)).thenReturn(resultInputProcess);	// eslint-disable-line new-cap
 
 		return resultInputProcess;
 	}
 
-	function inputMockCreator(observable) {
+	function inputMockCreator(provider, observable) {
 		return {
+			name: provider.name,
 			start: td.function(),
 			stop: td.function(),
+			status: td.function(),
 			data: {
 				stdout: observable
 			}
@@ -139,8 +162,6 @@ describe("inputProcessFactory.spec.js", () => {
 	}
 
 	function createProvider(name) {
-		return {
-			name
-		};
+		return {name};
 	}
 });
