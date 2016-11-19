@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const configuration = require("./configuration");
+const configuration = require("./configuration/configuration");
 const setupHttpHandlers = require("./handlers/setupHttpHandlers");
 const setupStaticContentHandlers = require("./handlers/setupStaticContentHandlers");
 const InputService = require("./input/InputService");

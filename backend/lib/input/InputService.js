@@ -1,4 +1,4 @@
-const configuration = require("../configuration");
+const configuration = require("../configuration/configuration");
 const inputProcessFactory = require("./inputProcessFactory");
 const webscoketFactory = require("./websocket/websocketFactory");
 

@@ -208,7 +208,7 @@ describe("InputService.spec.js", () => {
 		const InputService = proxyquire(
 			"./InputService",
 			{
-				"../configuration": configurationMock,
+				"../configuration/configuration": configurationMock,
 				"./inputProcessFactory": inputProcessFactoryMock,
 				"./websocket/websocketFactory": websocketFactoryMock
 			}
