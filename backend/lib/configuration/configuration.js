@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const config = require("./configurationLoader");
+const config = require("./configurationRepository").loadConfiguration();
 
 module.exports = {
 	getInputs,
@@ -40,19 +40,23 @@ function resolveProviders(singleInput) {
 }
 
 function resolveLogCmd(maybeLogConfiguration) {
-	const logAppendTimeout = 300;
-	const newLineRegexp = /\n/;
+	const defaultLogAppendTimeout = 300;
+	const defaultNewLineRegexp = /\n/;
 
 	if (!maybeLogConfiguration) {
 		return {
-			logAppendTimeout,
-			newLineRegexp
+			logAppendTimeout: defaultLogAppendTimeout,
+			newLineRegexp: defaultNewLineRegexp
 		};
 	}
 
+	const newLineRegexp = maybeLogConfiguration.newLineRegexp
+		? new RegExp(maybeLogConfiguration.newLineRegexp)
+		: null;
+
 	return {
-		logAppendTimeout: maybeLogConfiguration.logAppendTimeout || logAppendTimeout,
-		newLineRegexp: maybeLogConfiguration.newLineRegexp || newLineRegexp
+		logAppendTimeout: maybeLogConfiguration.logAppendTimeout || defaultLogAppendTimeout,
+		newLineRegexp: newLineRegexp || defaultNewLineRegexp
 	};
 }
 

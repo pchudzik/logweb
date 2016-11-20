@@ -131,7 +131,7 @@ describe("configuration.spec.js", () => {
 			it("should use default logAppendTimeout when not provided", () => {
 				// given
 				const configuration = providerWithLogConfiguration({
-					newLineRegexp: /(?=LOG:)/
+					newLineRegexp: "(?=LOG:)"
 				});
 
 				// when
@@ -223,9 +223,10 @@ describe("configuration.spec.js", () => {
 	});
 
 	function createConfigurationWithConfig(config) {
-		config["@noCallThru"] = true;	// eslint-disable-line no-param-reassign
 		return proxyquire("./configuration", {
-			"./configurationLoader": config
+			"./configurationRepository": {
+				loadConfiguration: () => config
+			}
 		});
 	}
 
