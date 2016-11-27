@@ -1,19 +1,36 @@
 {
 	"flushInterval": 1000,
 	"port": 8008,
-	"defaultShell": ["sh", "-c"],
 	"inputs": [
 		{
 			"name": "syslog",
 			"cmd": "tail -f /var/log/syslog",
-			"buffer": 5000
+			"buffer": 5000,
+			"providers": [
+				{
+					"name": "default",
+					"shell": [
+						"/bin/sh",
+						"-c"
+					],
+					"cmd": [
+						"tail -f /var/log/syslog"
+					],
+					"log": {
+						"newLineRegexp": "\n",
+						"logAppendTimeout": 1000
+					}
+				}
+			]
 		},
 		{
 			"name": "example",
+			"buffer": 1000,
 			"providers": [
 				{
 					"name": "node2",
-					"cmd": "node sample-log/logGenerator.js sample-log/java.log 2000 5500",
+					"cmd": ["node sample-log/logGenerator.js sample-log/java.log 2000 5500"],
+					"shell": ["/bin/sh", "-c"],
 					"log": {
 						"newLineRegexp": "(?=\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})",
 						"logAppendTimeout": 6000
@@ -23,14 +40,39 @@
 		},
 		{
 			"name": "two-nodes",
+			"buffer": 4000,
 			"providers": [
 				{
 					"name": "node1",
-					"cmd": ["node", "sample-log/randomLog.js", "node1 logger"]
+					"cmd": [
+						"node",
+						"sample-log/randomLog.js",
+						"node1 logger"
+					],
+					"shell": [
+						"/bin/sh",
+						"-c"
+					],
+					"log": {
+						"newLineRegexp": "\n",
+						"logAppendTimeout": 1000
+					}
 				},
 				{
 					"name": "node2",
-					"cmd": ["node", "sample-log/randomLog.js", "node2 logger"]
+					"cmd": [
+						"node",
+						"sample-log/randomLog.js",
+						"node2 logger"
+					],
+					"shell": [
+						"/bin/sh",
+						"-c"
+					],
+					"log": {
+						"newLineRegexp": "\n",
+						"logAppendTimeout": 1000
+					}
 				}
 			]
 		}

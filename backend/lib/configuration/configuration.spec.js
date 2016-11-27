@@ -1,239 +1,428 @@
 const proxyquire = require("proxyquire");
+const td = require("testdouble");
 const expect = require("chai").expect;
 
 describe("configuration.spec.js", () => {
-	describe("provider inputs spec", () => {
-		it("should execute user command with /bin/sh as default shell when passed as string", () => {
+	let repositoryMock;
+
+	describe("global configuration failure", () => {
+		it("should fail on missing flush interval", () => {
 			// given
-			const cmd = "echo hello";
-			const configuration = createConfigurationWithConfig({
-				inputs: [{
-					cmd
-				}]
-			});
+			const config = createConfigurationWithConfig({port: 9000});
 
-			// when
-			const inputs = configuration.getInputs();
-
-			// then
-			expect(inputs).to.eql([{
-				name: undefined,
-				bufferSize: 100,
-				providers: [{
-					cmd: ["/bin/sh", "-c", cmd],
-					log: defaultLogConfiguration()
-				}]
-			}]);
+			// expect
+			expect(
+				() => config.getFlushInterval()
+			).to.throw(
+				Error, /missing flush interval/
+			);
 		});
 
-		it("should use config shell when provided", () => {
-			const cmd = "echo hello";
-			const shell = ["cmd", "/c"];
-			const configuration = createConfigurationWithConfig({
-				shell,
-				inputs: [{cmd}]
+		it("should fail on missing listen port", () => {
+			// given
+			const config = createConfigurationWithConfig({flushInterval: 1000});
+
+			// expect
+			expect(
+				() => config.getPort()
+			).to.throw(
+				Error, /missing port/
+			);
+		});
+	});
+
+	describe("provider inputs spec", () => {
+		describe("input configuration failure", () => {
+			const name = "any-name";
+			const shell = ["/bin/bash", "-c"];
+			const cmd = ["echo cmd"];
+			const log = {
+				newLineRegexp: "/n",
+				logAppendTimeout: 100
+			};
+			const buffer = 500;
+
+			it("should fail on missing input name", () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					inputs({})
+				));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing input name/
+				);
 			});
 
-			// when
-			const inputs = configuration.getInputs();
-
-			// then
-			expect(inputs[0].providers[0].cmd[0]).to.eql("cmd");
-			expect(inputs[0].providers[0].cmd[1]).to.eql("/c");
-		});
-
-		it("should parse all inputs", () => {
-			const configuration = createConfigurationWithConfig({
-				inputs: [
-					{cmd: "echo 1", name: "first"},
-					{cmd: "echo 2", name: "second"}
-				]
-			});
-
-			// when
-			const inputs = configuration.getInputs();
-
-			// then
-			expect(inputs).to.eql([
-				{
-					name: "first",
-					bufferSize: 100,
-					providers: [{
-						cmd: ["/bin/sh", "-c", "echo 1"],
-						log: defaultLogConfiguration()
-					}]
-				},
-				{
-					name: "second",
-					bufferSize: 100,
-					providers: [{
-						cmd: ["/bin/sh", "-c", "echo 2"],
-						log: defaultLogConfiguration()
-					}]
-				}
-			]);
-		});
-
-		it("should parse input with multiple providers fully configured", () => {
-			const configuration = createConfigurationWithConfig({
-				inputs: [{
-					name: "multi",
-					bufferSize: 123,
-					providers: [
-						{cmd: "echo 1", name: "echo"},
-						{cmd: ["/bin/bash", "-c", "echo 2"], name: "bash"}
-					]
-				}]
-			});
-
-			// when
-			const inputs = configuration.getInputs();
-
-			// then
-			expect(inputs).to.eql([
-				{
-					name: "multi",
-					bufferSize: 123,
-					providers: [
-						{
-							name: "echo",
-							cmd: ["/bin/sh", "-c", "echo 1"],
-							log: defaultLogConfiguration()
-						},
-						{
-							name: "bash",
-							cmd: ["/bin/bash", "-c", "echo 2"],
-							log: defaultLogConfiguration()
-						}
-					]
-				}
-			]);
-		});
-
-		describe("provider log configuration should be resolved", () => {
 			[
-				{},
+				null,
+				[],
+				undefined
+			].forEach(providers => it(`should fail when no provider provided [${providers}]`, () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					inputs({
+						name,
+						buffer,
+						providers
+					})));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing providers/
+				);
+			}));
+
+			it("should fail when provider name not provided", () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						cmd,
+						shell,
+						log
+					})
+				));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing provider name/
+				);
+			});
+
+			it("should fail when provider cmd not provided", () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						name,
+						shell,
+						log
+					})
+				));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing provider cmd/
+				);
+			});
+
+			it("should fail when provider shell not set", () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						name,
+						cmd,
+						log
+					})
+				));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing provider shell/
+				);
+			});
+
+			[
 				null,
 				undefined
-			].forEach(providerConfigurationObject => {
-				it("should use default values when log not configured", () => {
-					// given
-					const configuration = providerWithLogConfiguration(providerConfigurationObject);
-
-					// when
-					const providerConfig = getSingleProviderConfiguration(configuration);
-
-					// then
-					expect(asString(providerConfig.log)).to.eq(asString(defaultLogConfiguration()));
-				});
-			});
-
-			it("should use default logAppendTimeout when not provided", () => {
+			].forEach(logConfig => it("should fail when provider log missing", () => {
 				// given
-				const configuration = providerWithLogConfiguration({
-					newLineRegexp: "(?=LOG:)"
-				});
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						name,
+						cmd,
+						shell,
+						log: logConfig
+					})
+				));
 
-				// when
-				const providerConfig = getSingleProviderConfiguration(configuration);
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing provider log configuration/
+				);
+			}));
 
-				// then
-				expect(providerConfig.log).to.eql(Object.assign(
-					defaultLogConfiguration(),
-					{newLineRegexp: /(?=LOG:)/})
+			it("should fail when log newLineRegexp is missing", () => {
+				// given
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						name,
+						cmd,
+						shell,
+						log: {
+							logAppendTimeout: 100
+						}
+					})
+				));
+
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing log configuration new line regexp/
 				);
 			});
 
-			it("should use default newLineRegexp pattern if no regexp provided", () => {
+			it("should fail when log logAppendTimeout is missing", () => {
 				// given
-				const configuration = providerWithLogConfiguration({
-					logAppendTimeout: 10
-				});
+				const config = createConfigurationWithConfig(Object.assign(
+					rootConfiguration(),
+					anyInput({
+						name,
+						cmd,
+						shell,
+						log: {
+							newLineRegexp: "/n"
+						}
+					})
+				));
 
-				// when
-				const providerConfig = getSingleProviderConfiguration(configuration);
-
-				// then
-				expect(providerConfig.log).to.eql(Object.assign(
-					defaultLogConfiguration(),
-					{logAppendTimeout: 10})
+				// expect
+				expect(
+					() => config.getInputs()
+				).to.throw(
+					Error, /missing log configuration logAppendTimeout/
 				);
 			});
 
-			function asString(object) {
-				return JSON.stringify(object, null, 2);
+			function rootConfiguration() {
+				return {
+					port: 9000,
+					flushInterval: 100
+				};
 			}
 
-			function getSingleProviderConfiguration(configuration) {
-				return configuration.getInputs()[0].providers[0];
+			function anyInput(provider) {
+				return inputs({
+					name,
+					buffer,
+					providers: [provider]
+				});
 			}
 
-			function providerWithLogConfiguration(logConfiguration) {
-				return createConfigurationWithConfig({
-					inputs: [{
-						name: "multi",
-						bufferSize: 123,
-						providers: [
-							{
-								cmd: "echo 1",
-								name: "echo",
-								log: logConfiguration
-							}
+			function inputs(inputConfig) {
+				return {inputs: [inputConfig]};
+			}
+		});
+	});
+
+	it("should parse inputs", () => {
+		// given
+		const firstInput = {
+			name: "first",
+			buffer: 100,
+			providers: [
+				{
+					name: "first provider",
+					shell: ["/bin/bash", "-e"],
+					cmd: ["echo hello"],
+					log: {
+						newLineRegexp: "/n",
+						logAppendTimeout: 100
+					}
+				}
+			]
+		};
+		const secondInput = {
+			name: "second",
+			buffer: 50,
+			providers: [
+				{
+					name: "second",
+					shell: ["/bin/bash", "-s"],
+					cmd: ["echo hello2"],
+					log: {
+						newLineRegexp: ",",
+						logAppendTimeout: 200
+					}
+				}
+			]
+		};
+		const config = createConfigurationWithConfig({
+			port: 1,
+			flushInterval: 2,
+			inputs: [firstInput, secondInput]
+		});
+
+		// then
+		expect(
+			config.getInputs()
+		).to.eql(
+			[
+				firstInput,
+				secondInput
+			]
+		);
+	});
+
+	it("should get port", () => {
+		expect(
+			createConfigurationWithConfig({
+				port: 1234,
+				flushInterval: 10
+			}).getPort()
+		).to.eql(
+			1234
+		);
+	});
+
+	it("should get flush interval", () => {
+		expect(
+			createConfigurationWithConfig({
+				port: 1234,
+				flushInterval: 10
+			}).getFlushInterval()
+		).to.eql(
+			10
+		);
+	});
+
+	it("should delete input", () => {
+		// given
+		const firstInput = {
+			name: "first",
+			buffer: 10,
+			providers: [
+				{
+					name: "first provider",
+					shell: ["/bin/bash", "-e"],
+					cmd: ["echo hello"],
+					log: {
+						newLineRegexp: "/n",
+						logAppendTimeout: 100
+					}
+				}
+			]
+		};
+		const inputToDelete = {
+			name: "to-delete",
+			buffer: 200,
+			providers: [
+				{
+					name: "provider to delete",
+					shell: ["/bin/bash", "-s"],
+					cmd: ["echo delete me"],
+					log: {
+						newLineRegexp: ",",
+						logAppendTimeout: 200
+					}
+				}
+			]
+		};
+		const config = createConfigurationWithConfig({
+			port: 1,
+			flushInterval: 2,
+			inputs: [
+				firstInput,
+				inputToDelete
+			]
+		});
+
+		// when
+		config.deleteInput(inputToDelete.name);
+
+		// then
+		td.verify(
+			repositoryMock.saveConfiguration(
+				td.matchers.argThat(
+					savedConfig => expect(
+						savedConfig
+					).to.eql({
+						port: 1,
+						flushInterval: 2,
+						inputs: [firstInput]
+					})
+				)
+			)
+		);
+	});
+
+	it("should save input", () => {
+		// given
+		const firstInput = {
+			name: "first",
+			buffer: 100,
+			providers: [
+				{
+					name: "first provider",
+					shell: ["/bin/bash", "-e"],
+					cmd: ["echo hello"],
+					log: {
+						newLineRegexp: "/n",
+						logAppendTimeout: 100
+					}
+				}
+			]
+		};
+		const inputToSave = {
+			name: "to-save",
+			buffer: 50,
+			providers: [
+				{
+					name: "provider to save",
+					shell: ["/bin/bash", "-s"],
+					cmd: ["echo save me"],
+					log: {
+						newLineRegexp: ",",
+						logAppendTimeout: 200
+					}
+				}
+			]
+		};
+		const config = createConfigurationWithConfig({
+			port: 1,
+			flushInterval: 2,
+			inputs: [firstInput]
+		});
+
+		// when
+		config.saveInput(inputToSave);
+
+		// then
+		td.verify(
+			repositoryMock.saveConfiguration(
+				td.matchers.argThat(
+					savedConfig => expect(
+						savedConfig
+					).to.eql({
+						port: 1,
+						flushInterval: 2,
+						inputs: [
+							firstInput,
+							inputToSave
 						]
-					}]
-				});
-			}
-		});
-	});
-
-	describe("port spec", () => {
-		it("should return default port when not set", () => {
-			// when
-			const configuration = createConfigurationWithConfig({});
-
-			// then
-			expect(configuration.getPort()).to.eql(8008);
-		});
-
-		it("should use configuration port when provided", () => {
-			// when
-			const configuration = createConfigurationWithConfig({port: 1234});
-
-			// then
-			expect(configuration.getPort()).to.eql(1234);
-		});
-	});
-
-	describe("flush interval spec", () => {
-		it("should return default flush interval when missing", () => {
-			// when
-			const configuration = createConfigurationWithConfig({});
-
-			// then
-			expect(configuration.getFlushInterval()).to.eql(500);
-		});
-
-		it("should use configuration flush interval when provided", () => {
-			// when
-			const configuration = createConfigurationWithConfig({flushInterval: 123});
-
-			// then
-			expect(configuration.getFlushInterval()).to.eql(123);
-		});
+					})
+				)
+			)
+		);
 	});
 
 	function createConfigurationWithConfig(config) {
-		return proxyquire("./configuration", {
-			"./configurationRepository": {
-				loadConfiguration: () => config
-			}
-		});
-	}
-
-	function defaultLogConfiguration() {
-		return {
-			logAppendTimeout: 300,
-			newLineRegexp: /\n/
+		repositoryMock = {
+			loadConfiguration: () => config,
+			saveConfiguration: td.function()
 		};
+
+		return proxyquire("./configuration", {
+			"./configurationRepository": repositoryMock
+		});
 	}
 });

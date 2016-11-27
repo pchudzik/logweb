@@ -1,69 +1,82 @@
 const _ = require("lodash");
-const config = require("./configurationRepository").loadConfiguration();
+const configurationRepository = require("./configurationRepository");
+
+const config = configurationRepository.loadConfiguration();
+
+class ProviderLogConfiguration {
+	constructor(logConfig) {
+		this.logAppendTimeout = logConfig.logAppendTimeout || error("missing log configuration logAppendTimeout");
+		this.newLineRegexp = logConfig.newLineRegexp || error("missing log configuration new line regexp");
+	}
+
+	get lineBreakRegexp() {
+		return new RegExp(this.newLineRegexp);
+	}
+}
+
+class ProviderConfiguration {
+	constructor(providerConfig) {
+		this.name = providerConfig.name || error("missing provider name");
+		this.cmd = providerConfig.cmd || error("missing provider cmd");
+		this.shell = providerConfig.shell || error("missing provider shell");
+		this.log = new ProviderLogConfiguration(providerConfig.log || error("missing provider log configuration"));
+	}
+
+	get command() {
+		return this.shell.concat(this.cmd);
+	}
+}
+
+class InputConfiguration {
+	constructor(inputConfig) {
+		this.name = inputConfig.name || error("missing input name");
+		this.buffer = inputConfig.buffer || error("missing input buffer");
+		this.providers = (inputConfig.providers || error("missing providers"))
+			.map(providerConfig => new ProviderConfiguration(providerConfig));
+
+		if (this.providers.length === 0) {
+			error("missing providers");
+		}
+	}
+}
 
 module.exports = {
 	getInputs,
 	getPort,
-	getFlushInterval
+	getFlushInterval,
+	deleteInput,
+	saveInput
 };
 
 function getFlushInterval() {
-	return config.flushInterval || 500;
+	return config.flushInterval || error("missing flush interval");
 }
 
 function getPort() {
-	return config.port || 8008;
+	return config.port || error("missing port");
+}
+
+function saveInput(input) {
+	const inputs = getInputs().concat([input]);
+	return configurationRepository.saveConfiguration({
+		flushInterval: getFlushInterval(),
+		port: getPort(),
+		inputs
+	});
+}
+
+function deleteInput(inputName) {
+	return configurationRepository.saveConfiguration({
+		flushInterval: getFlushInterval(),
+		port: getPort(),
+		inputs: getInputs().filter(input => input.name !== inputName)
+	});
 }
 
 function getInputs() {
-	return _.map(config.inputs, singleInput => ({
-		name: singleInput.name,
-		bufferSize: parseInt(singleInput.bufferSize, 10) || 100,
-		providers: resolveProviders(singleInput)
-	}));
+	return _.map(config.inputs, singleInput => new InputConfiguration(singleInput));
 }
 
-function resolveProviders(singleInput) {
-	if (singleInput.cmd) {
-		return [{
-			cmd: resolveInputCmd(singleInput.cmd),
-			log: resolveLogCmd()
-		}];
-	}
-
-	const providers = _.flatten([singleInput.providers]);
-	return providers.map(provider => ({
-		name: provider.name,
-		cmd: resolveInputCmd(provider.cmd),
-		log: resolveLogCmd(provider.log)
-	}));
-}
-
-function resolveLogCmd(maybeLogConfiguration) {
-	const defaultLogAppendTimeout = 300;
-	const defaultNewLineRegexp = /\n/;
-
-	if (!maybeLogConfiguration) {
-		return {
-			logAppendTimeout: defaultLogAppendTimeout,
-			newLineRegexp: defaultNewLineRegexp
-		};
-	}
-
-	const newLineRegexp = maybeLogConfiguration.newLineRegexp
-		? new RegExp(maybeLogConfiguration.newLineRegexp)
-		: null;
-
-	return {
-		logAppendTimeout: maybeLogConfiguration.logAppendTimeout || defaultLogAppendTimeout,
-		newLineRegexp: newLineRegexp || defaultNewLineRegexp
-	};
-}
-
-function resolveInputCmd(cmd) {
-	if (_.isString(cmd)) {
-		const defaultShell = config.shell || ["/bin/sh", "-c"];
-		return _.flatten([defaultShell, cmd]);
-	}
-	return cmd;
+function error(message) {
+	throw new Error(message);
 }
