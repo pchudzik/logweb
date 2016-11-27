@@ -6,7 +6,7 @@ const Subject = require("rxjs").Subject;
 module.exports = function InputProcess(providerConfiguration) {
 	const logProcessor = logProcessorFactory(providerConfiguration);
 	const dataObservable = new Subject();
-	const processMonitor = respawn(providerConfiguration.cmd, {
+	const processMonitor = respawn(providerConfiguration.command, {
 		sleep: providerConfiguration.restartTimeout || 100
 	});
 

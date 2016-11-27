@@ -7,7 +7,7 @@ const InputsHandler = require("./InputsHandler");
 describe("InputsHandler.spec.js", () => {
 	const inputServiceMock = {
 		getInputs: td.function(),
-		getInput: td.function()
+		loadInput: td.function()
 	};
 
 	let app;
@@ -47,7 +47,7 @@ describe("InputsHandler.spec.js", () => {
 				{name: "provider2"}
 			]
 		};
-		td.when(inputServiceMock.getInput(inputName)).thenReturn(inputItem);
+		td.when(inputServiceMock.loadInput(inputName)).thenReturn(inputItem);
 
 		// when
 		request(app).get(`/api/inputs/${inputName}`)
@@ -61,7 +61,7 @@ describe("InputsHandler.spec.js", () => {
 	it("should return 404 status when input not found", done => {
 		// given
 		const nonExistingInput = "non-existing-input";
-		td.when(inputServiceMock.getInput(nonExistingInput)).thenReturn(null);
+		td.when(inputServiceMock.loadInput(nonExistingInput)).thenReturn(null);
 
 		// when
 		request(app).get(`/api/inputs/${nonExistingInput}`)

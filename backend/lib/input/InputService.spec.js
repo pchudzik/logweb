@@ -59,7 +59,7 @@ describe("InputService.spec.js", () => {
 			]);
 
 		// when
-		const foundInput = createService().getInput(inputToFind);
+		const foundInput = createService().loadInput(inputToFind);
 
 		// then
 		expect(foundInput).to.eql({
@@ -71,14 +71,24 @@ describe("InputService.spec.js", () => {
 		});
 	});
 
-	it("should throw error when can not find input by name", () => {
+	it("should throw error when can not load input by name", () => {
 		// given
 		td
 			.when(configurationMock.getInputs())
 			.thenReturn([]);
 
 		// expect
-		expect(() => createService().getInput("non existing input")).to.throw(Error);
+		expect(() => createService().loadInput("non existing input")).to.throw(Error);
+	});
+
+	it("should return undefined when can not find input by name", () => {
+		// given
+		td
+			.when(configurationMock.getInputs())
+			.thenReturn([]);
+
+		// expect
+		expect(createService().findInput("non existing input")).to.be.undefined; // eslint-disable-line no-unused-expressions
 	});
 
 	describe("input start/stop", () => {
@@ -140,14 +150,8 @@ describe("InputService.spec.js", () => {
 				createService().startAll();
 
 				// then
-				td.verify(websocketFactoryMock(
-					{server: httpServerMock, path: "/api/ws/a"},
-					aProcess
-				));
-				td.verify(websocketFactoryMock(
-					{server: httpServerMock, path: "/api/ws/b"},
-					bProcess
-				));
+				verifyWbServiceCreation(aInput, aProcess);
+				verifyWbServiceCreation(bInput, bProcess);
 			});
 
 			it("should create new websocket on input start", () => {
@@ -155,10 +159,7 @@ describe("InputService.spec.js", () => {
 				createService().startInput(bInput.name);
 
 				// then
-				td.verify(websocketFactoryMock(
-					{server: httpServerMock, path: "/api/ws/b"},
-					bProcess),
-					{times: 1});
+				verifyWbServiceCreation(bInput, bProcess, {times: 1});
 			});
 
 			it("should stop websocket on input stop", () => {
@@ -176,6 +177,15 @@ describe("InputService.spec.js", () => {
 				// then
 				td.verify(closeWS());
 			});
+
+			function verifyWbServiceCreation(input, process, maybeOpts) {
+				td.verify(
+					websocketFactoryMock(
+						{server: httpServerMock, path: `/api/ws/${input.name}`},
+						process
+					),
+					maybeOpts);
+			}
 		});
 
 		["startInput", "stopInput"]
@@ -190,19 +200,18 @@ describe("InputService.spec.js", () => {
 					// expect
 					expect(action).to.throw(Error);
 				}));
-
-		function mockProcess() {
-			return {
-				start: td.function(),
-				stop: td.function()
-			};
-		}
-
-		function mockInput(name) {
-			return {name};
-		}
 	});
 
+	function mockProcess() {
+		return {
+			start: td.function(),
+			stop: td.function()
+		};
+	}
+
+	function mockInput(name) {
+		return {name};
+	}
 
 	function createService() {
 		const InputService = proxyquire(

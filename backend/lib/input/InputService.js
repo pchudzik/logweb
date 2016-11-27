@@ -16,7 +16,7 @@ module.exports = function InputService(httpServer) {
 		inputProcesses.forEach(inputProcess => this.startInput(inputProcess.input.name), this);
 	};
 
-	this.getInput = function getInput(inputName) {
+	this.loadInput = function loadInput(inputName) {
 		const {input} = loadInputByName(inputName);
 		return {
 			name: input.name,
@@ -45,9 +45,15 @@ module.exports = function InputService(httpServer) {
 		inputProcess.websocket.close();
 	};
 
-	function loadInputByName(inputName) {
-		const result = inputProcesses
+	this.findInput = findInput;
+
+	function findInput(inputName) {
+		return inputProcesses
 			.find(inputProcess => inputProcess.input.name === inputName);
+	}
+
+	function loadInputByName(inputName) {
+		const result = findInput(inputName);
 
 		if (!result) {
 			throw new Error(`No input with name ${inputName}`);

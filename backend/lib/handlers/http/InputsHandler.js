@@ -14,7 +14,7 @@ module.exports = class InputsHandler {
 	}
 
 	getInput(req, resp) {
-		const input = this.inputService.getInput(req.params.inputName);
+		const input = this.inputService.loadInput(req.params.inputName);
 		if (!input) {
 			resp
 				.status(404)
